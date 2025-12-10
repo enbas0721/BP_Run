@@ -1,4 +1,4 @@
-＃ 概要
+# 概要
 
 Black Pomeranian’s 3D Run game.
 
