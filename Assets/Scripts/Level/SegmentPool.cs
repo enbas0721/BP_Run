@@ -1,10 +1,15 @@
+/*
+ * SegmentPool.cs
+ * セグメントオブジェクトをキューで保持。
+ */ 
+
 using UnityEngine;
 using System.Collections.Generic;
 
 public class SegmentPool : MonoBehaviour
 {
     public SegmentBase segmentPrefab;
-    public int poolSize = 5;
+    public int poolSize = 10;
 
     private Queue<SegmentBase> pool = new Queue<SegmentBase>();
 

@@ -458,6 +458,7 @@ GameObject:
   - component: {fileID: 1546475376}
   - component: {fileID: 1546475375}
   - component: {fileID: 1546475374}
+  - component: {fileID: 1546475377}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -479,7 +480,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SegmentSpawner
   player: {fileID: 1709669774}
   pool: {fileID: 1546475375}
-  initialSegments: 4
+  obstaclePlacer: {fileID: 1546475377}
+  aheadDistance: 120
+  initialSegments: 6
 --- !u!114 &1546475375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,8 +495,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ad47f85fba03c4caedf09979b11b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SegmentPool
-  segmentPrefab: {fileID: 8442288035190781104, guid: f8d38fcde52f41540a727f55209d546f, type: 3}
-  poolSize: 5
+  segmentPrefab: {fileID: 9210077277781647570, guid: f8d38fcde52f41540a727f55209d546f, type: 3}
+  poolSize: 10
 --- !u!4 &1546475376
 Transform:
   m_ObjectHideFlags: 0
@@ -509,31 +512,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1709669770 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2475954373315588330, guid: 676de07af4a64c1409a95a63d0b620df, type: 3}
-  m_PrefabInstance: {fileID: 501879128327923394}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1709669774 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6594959236885524735, guid: 676de07af4a64c1409a95a63d0b620df, type: 3}
-  m_PrefabInstance: {fileID: 501879128327923394}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1709669775
+--- !u!114 &1546475377
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1709669770}
+  m_GameObject: {fileID: 1546475373}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21066bb02728f2f4e82b875e826092cf, type: 3}
+  m_Script: {fileID: 11500000, guid: aeee688a0e914344ea56737f191c7c8d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RunnerController
-  forwardSpeed: 8
-  laneMoveSpeed: 10
-  laneWidth: 3
+  m_EditorClassIdentifier: Assembly-CSharp::ObstaclePlacer
+  obstaclePrefab: {fileID: 6370437689949321743, guid: a12e4933299320543a4f6ebf286b8d6c, type: 3}
+  spawnChance: 0.5
+--- !u!4 &1709669774 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6594959236885524735, guid: 676de07af4a64c1409a95a63d0b620df, type: 3}
+  m_PrefabInstance: {fileID: 501879128327923394}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &501879128327923394
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -556,7 +553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6594959236885524735, guid: 676de07af4a64c1409a95a63d0b620df, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6594959236885524735, guid: 676de07af4a64c1409a95a63d0b620df, type: 3}
       propertyPath: m_LocalRotation.w
@@ -589,10 +586,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2475954373315588330, guid: 676de07af4a64c1409a95a63d0b620df, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1709669775}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 676de07af4a64c1409a95a63d0b620df, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

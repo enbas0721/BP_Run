@@ -3,11 +3,27 @@ using UnityEngine;
 public class SegmentBase : MonoBehaviour
 {
     public Transform endPoint;
+    public Transform obstaclePoints;
 
-    // EndPoint の Z 位置が Segment の長さ
     public float SegmentLength => endPoint.localPosition.z;
 
-    // この Segment の世界座標での終端 Z 座標を返す（拡張用）
+    public void RebuildObstacles(ObstaclePlacer placer)
+    {
+        if (!obstaclePoints || !placer) return;
+
+        for (int i = obstaclePoints.childCount - 1; i >= 0; i--)
+        {
+            var child = obstaclePoints.GetChild(i);
+
+            if (child.GetComponent<ObstacleSpawnPoint>() != null) continue;
+
+            Destroy(child.gameObject);
+        }
+
+        /* 確率によって、セグメント内に障害物を配置するかどうかはPlacerが決める */
+        placer.Place(obstaclePoints);
+    }
+
     public float GetEndZ()
     {
         return transform.position.z + SegmentLength;

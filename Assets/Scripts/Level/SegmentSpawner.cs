@@ -1,24 +1,35 @@
+/*
+ * SegmentSpwner.cs
+ * セグメントの配置先や配置セグメントを管理・決定
+ */
+
 using UnityEngine;
 
 public class SegmentSpawner : MonoBehaviour
 {
     public Transform player;
     public SegmentPool pool;
+    public ObstaclePlacer obstaclePlacer;
+
+    [Header("Spawn Control")]
+    [Tooltip("プレイヤーの前方に確保したい床の距離")]
+    public float aheadDistance = 60f;
+
+    [Tooltip("初期に敷く最低枚数（見た目のため）")]
     public int initialSegments = 4;
 
     private float spawnZ = 0f;
 
     void Start()
     {
-        // 最初に数枚敷く
         for (int i = 0; i < initialSegments; i++)
             SpawnSegment();
     }
 
     void Update()
     {
-        // プレイヤーが前進したら次の Segment を追加
-        if (player.position.z > spawnZ - (initialSegments * 10f))
+        // プレイヤー前方の確保距離を満たすまで、必要枚数をまとめて生成
+        while (spawnZ < player.position.z + aheadDistance)
         {
             SpawnSegment();
         }
@@ -27,8 +38,11 @@ public class SegmentSpawner : MonoBehaviour
     void SpawnSegment()
     {
         var seg = pool.Get();
-
         seg.transform.position = new Vector3(0, 0, spawnZ);
+
+        /* セグメント内への障害物の破壊と生成はセグメントに任せる。 */
+        seg.RebuildObstacles(obstaclePlacer);
+
         spawnZ += seg.SegmentLength;
     }
 }
