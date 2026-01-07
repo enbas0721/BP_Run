@@ -211,23 +211,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1073418344 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6443354460898171820, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
-  m_PrefabInstance: {fileID: 835405833858499994}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1073418347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1073418344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ae2e5e7ec901674d89da03af87df524, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BPAnimManager
 --- !u!1 &1256929913
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,10 +393,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6443354460898171820, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1073418347}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
