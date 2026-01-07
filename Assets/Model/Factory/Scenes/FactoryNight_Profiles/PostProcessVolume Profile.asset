@@ -74,7 +74,7 @@ MonoBehaviour:
     overrideState: 0
     value: 0
   colorFilter:
-    overrideState: 0
+    overrideState: 1
     value: {r: 1, g: 1, b: 1, a: 1}
   hueShift:
     overrideState: 0
@@ -86,8 +86,8 @@ MonoBehaviour:
     overrideState: 0
     value: 0
   postExposure:
-    overrideState: 1
-    value: 2
+    overrideState: 0
+    value: 21.04
   contrast:
     overrideState: 0
     value: 0
@@ -1348,7 +1348,7 @@ MonoBehaviour:
     value: 10
   threshold:
     overrideState: 0
-    value: 1
+    value: 0
   softKnee:
     overrideState: 0
     value: 0.5
@@ -1363,7 +1363,7 @@ MonoBehaviour:
     value: 0
   color:
     overrideState: 0
-    value: {r: 1, g: 1, b: 1, a: 1}
+    value: {r: 1, g: 0, b: 0, a: 1}
   fastMode:
     overrideState: 0
     value: 0
@@ -1391,16 +1391,16 @@ MonoBehaviour:
     overrideState: 1
     value: 1
   mode:
-    overrideState: 0
+    overrideState: 1
     value: 1
   intensity:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: 1
   color:
-    overrideState: 0
-    value: {r: 0, g: 0, b: 0, a: 1}
+    overrideState: 1
+    value: {r: 0.9811321, g: 0.19900322, b: 0.19900322, a: 1}
   ambientOnly:
-    overrideState: 0
+    overrideState: 1
     value: 1
   noiseFilterTolerance:
     overrideState: 0
@@ -1412,13 +1412,13 @@ MonoBehaviour:
     overrideState: 0
     value: -12
   thicknessModifier:
-    overrideState: 0
+    overrideState: 1
     value: 1
   zBias:
-    overrideState: 0
+    overrideState: 1
     value: 0.0001
   directLightingStrength:
-    overrideState: 0
+    overrideState: 1
     value: 0
   radius:
     overrideState: 0
