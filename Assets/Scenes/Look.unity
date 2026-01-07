@@ -211,6 +211,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1073418344 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6443354460898171820, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
+  m_PrefabInstance: {fileID: 835405833858499994}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1073418347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073418344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ae2e5e7ec901674d89da03af87df524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BPAnimManager
 --- !u!1 &1256929913
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,7 +355,7 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
---- !u!1001 &3253448373395060708
+--- !u!1001 &835405833858499994
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -346,54 +363,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4702881954630328572, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
-      propertyPath: m_Name
-      value: BlackPomeranian_15000_anim
-      objectReference: {fileID: 0}
-    - target: {fileID: 5334564972295207494, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
+    - target: {fileID: 5917927903818137878, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.94486
+      value: 0.50262
       objectReference: {fileID: 0}
-    - target: {fileID: 5334564972295207494, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
+    - target: {fileID: 5917927903818137878, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5334564972295207494, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
+    - target: {fileID: 5917927903818137878, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.84863
+      value: -0.88985
       objectReference: {fileID: 0}
-    - target: {fileID: 5334564972295207494, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
+    - target: {fileID: 5917927903818137878, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5334564972295207494, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
+    - target: {fileID: 5917927903818137878, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5334564972295207494, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
+    - target: {fileID: 5917927903818137878, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5334564972295207494, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
+    - target: {fileID: 5917927903818137878, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5334564972295207494, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
+    - target: {fileID: 5917927903818137878, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5334564972295207494, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
+    - target: {fileID: 5917927903818137878, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5334564972295207494, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
+    - target: {fileID: 5917927903818137878, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6443354460898171820, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
+      propertyPath: m_Name
+      value: BlackPomeranian_15000_anim
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6443354460898171820, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1073418347}
   m_SourcePrefab: {fileID: 100100000, guid: f870fdef3ec48f846807daa65ba92b77, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -401,4 +421,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 658011905}
   - {fileID: 1256929915}
-  - {fileID: 3253448373395060708}
+  - {fileID: 835405833858499994}

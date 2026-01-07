@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5585193516526001581
+--- !u!1001 &6172761012069902077
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: b7a51ab9e35002d40b18d60d99825235, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.94486
+      value: 0.50262
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b7a51ab9e35002d40b18d60d99825235, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b7a51ab9e35002d40b18d60d99825235, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.84863
+      value: -0.88985
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b7a51ab9e35002d40b18d60d99825235, type: 3}
       propertyPath: m_LocalRotation.w
@@ -66,25 +66,22 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b7a51ab9e35002d40b18d60d99825235, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -2076274246255105826}
+      addedObject: {fileID: 4351115613974421949}
   m_SourcePrefab: {fileID: 100100000, guid: b7a51ab9e35002d40b18d60d99825235, type: 3}
---- !u!1 &4702881954630328572 stripped
+--- !u!1 &6443354460898171820 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b7a51ab9e35002d40b18d60d99825235, type: 3}
-  m_PrefabInstance: {fileID: 5585193516526001581}
+  m_PrefabInstance: {fileID: 6172761012069902077}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-2076274246255105826
+--- !u!114 &4351115613974421949
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4702881954630328572}
+  m_GameObject: {fileID: 6443354460898171820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21066bb02728f2f4e82b875e826092cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ae2e5e7ec901674d89da03af87df524, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RunnerController
-  forwardSpeed: 8
-  laneMoveSpeed: 10
-  laneWidth: 3
+  m_EditorClassIdentifier: Assembly-CSharp::BPAnimManager
