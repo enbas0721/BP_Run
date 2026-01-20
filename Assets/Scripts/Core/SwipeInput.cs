@@ -1,38 +1,80 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SwipeInput : MonoBehaviour
 {
-    public RunnerController runner;
+    [SerializeField] private RunnerController runner;
+
+    [Header("Swipe")]
+    [SerializeField] private float minSwipePixels = 60f;
 
     private Vector2 startPos;
-    private float minSwipe = 50f;
+    private bool tracking;
+
+    private void Awake()
+    {
+        if (!runner) runner = GetComponent<RunnerController>();
+        if (!runner) runner = FindFirstObjectByType<RunnerController>();
+    }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-            startPos = Input.mousePosition;
+        var mouse = Mouse.current;
+        var touch = Touchscreen.current;
 
-        if (Input.GetMouseButtonUp(0))
+        // Touch優先
+        if (touch != null && touch.primaryTouch.press.isPressed)
         {
-            Vector2 endPos = Input.mousePosition;
-            Vector2 delta = endPos - startPos;
+            var pos = touch.primaryTouch.position.ReadValue();
 
-            if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
+            if (!tracking)
             {
-                if (Mathf.Abs(delta.x) > minSwipe)
-                {
-                    if (delta.x > 0) runner.MoveLane(+1);
-                    else runner.MoveLane(-1);
-                }
+                tracking = true;
+                startPos = pos;
             }
-            else
-            {
-                if (Mathf.Abs(delta.y) > minSwipe)
-                {
-                    if (delta.y > 0) runner.Jump();
-                    else runner.Slide();
-                }
-            }
+        }
+
+        // Touch修了時
+        if (tracking && touch != null && !touch.primaryTouch.press.isPressed)
+        {
+            tracking = false;
+            var endPos = touch.primaryTouch.position.ReadValue();
+            HandleSwipe(endPos - startPos);
+            return;
+        }
+
+        // Editor/PC用(マウス)
+        if (mouse == null) return;
+
+        if (mouse.leftButton.wasPressedThisFrame)
+        {
+            tracking = true;
+            startPos = mouse.position.ReadValue();
+        }
+
+        if (tracking && mouse.leftButton.wasReleasedThisFrame)
+        {
+            tracking = false;
+            var endPos = mouse.position.ReadValue();
+            HandleSwipe(endPos - startPos);
+        }
+    }
+
+    private void HandleSwipe(Vector2 delta)
+    {
+        if (delta.magnitude < minSwipePixels) return;
+
+        if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
+        {
+            /* 横方向スワイプ判定 */
+            if (delta.x > 0) runner.MoveLane(+1);
+            else runner.MoveLane(-1);
+        }
+        else
+        {
+            /* 縦方向スワイプ判定 */
+            if (delta.y > 0) runner.Jump();
+            else runner.Slide();
         }
     }
 }

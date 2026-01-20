@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &6991488 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 137914863254468417, guid: b0629385ab71d524f95157719c77b00b, type: 3}
+  m_PrefabInstance: {fileID: 1160277029}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaf81e43c7b1c1641bec6ac69be54a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  target: {fileID: 1709669774}
+  target: {fileID: 1160277030}
   offset: {x: 0, y: 5, z: -8}
 --- !u!1 &410087039
 GameObject:
@@ -447,6 +452,76 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1160277029
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -3543420369880566964, guid: b0629385ab71d524f95157719c77b00b, type: 3}
+      propertyPath: groundCheck
+      value: 
+      objectReference: {fileID: 6991488}
+    - target: {fileID: -3543420369880566964, guid: b0629385ab71d524f95157719c77b00b, type: 3}
+      propertyPath: groundMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 5917927903818137878, guid: b0629385ab71d524f95157719c77b00b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.6813
+      objectReference: {fileID: 0}
+    - target: {fileID: 5917927903818137878, guid: b0629385ab71d524f95157719c77b00b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5917927903818137878, guid: b0629385ab71d524f95157719c77b00b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.25924
+      objectReference: {fileID: 0}
+    - target: {fileID: 5917927903818137878, guid: b0629385ab71d524f95157719c77b00b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5917927903818137878, guid: b0629385ab71d524f95157719c77b00b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5917927903818137878, guid: b0629385ab71d524f95157719c77b00b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5917927903818137878, guid: b0629385ab71d524f95157719c77b00b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5917927903818137878, guid: b0629385ab71d524f95157719c77b00b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5917927903818137878, guid: b0629385ab71d524f95157719c77b00b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5917927903818137878, guid: b0629385ab71d524f95157719c77b00b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6443354460898171820, guid: b0629385ab71d524f95157719c77b00b, type: 3}
+      propertyPath: m_Name
+      value: BlackPomeranian
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b0629385ab71d524f95157719c77b00b, type: 3}
+--- !u!4 &1160277030 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5917927903818137878, guid: b0629385ab71d524f95157719c77b00b, type: 3}
+  m_PrefabInstance: {fileID: 1160277029}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1546475373
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,7 +553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d84ebe7b5bad0b4d87c9dbc8ea2cd4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SegmentSpawner
-  player: {fileID: 1709669774}
+  player: {fileID: 1160277030}
   pool: {fileID: 1546475375}
   obstaclePlacer: {fileID: 1546475377}
   aheadDistance: 120
@@ -526,11 +601,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ObstaclePlacer
   obstaclePrefab: {fileID: 6370437689949321743, guid: a12e4933299320543a4f6ebf286b8d6c, type: 3}
   spawnChance: 0.5
---- !u!4 &1709669774 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6594959236885524735, guid: 676de07af4a64c1409a95a63d0b620df, type: 3}
-  m_PrefabInstance: {fileID: 501879128327923394}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &501879128327923394
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -542,6 +612,10 @@ PrefabInstance:
     - target: {fileID: 2475954373315588330, guid: 676de07af4a64c1409a95a63d0b620df, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2475954373315588330, guid: 676de07af4a64c1409a95a63d0b620df, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6594959236885524735, guid: 676de07af4a64c1409a95a63d0b620df, type: 3}
       propertyPath: m_LocalPosition.x
@@ -596,4 +670,5 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 501879128327923394}
+  - {fileID: 1160277029}
   - {fileID: 1546475376}
