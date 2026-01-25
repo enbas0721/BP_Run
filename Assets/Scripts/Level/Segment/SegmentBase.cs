@@ -4,9 +4,9 @@ public class SegmentBase : MonoBehaviour
 {
     [SerializeField] private Transform endPoint;
 
-    [Header("Obstacle")]
-    [SerializeField] private Transform obstaclePoints;
-    [SerializeField] private Transform obstacleInstancesRoot;
+    /*[Header("Obstacle")]*/
+    /*[SerializeField] */private Transform obstaclePoints;
+    /*[SerializeField] */private Transform obstacleInstancesRoot;
 
     [Header("Item")]
     [SerializeField] private Transform itemPoints;
@@ -14,6 +14,8 @@ public class SegmentBase : MonoBehaviour
 
     public float SegmentLength => endPoint.localPosition.z;
 
+    /* 廃止 */
+    /* セグメントにランダムでオブジェクトを配置する必要が出た時に再利用 */
     public void RebuildObstacles(ObstaclePlacer placer)
     {
         if (!obstaclePoints || !placer  || !obstacleInstancesRoot) return;
@@ -23,8 +25,6 @@ public class SegmentBase : MonoBehaviour
             Destroy(obstacleInstancesRoot.GetChild(i).gameObject);
         }
 
-        /* [TODO] 他のSpawnPointでの配置状況を考慮していないため全レーンに配置されうる*/
-        /* 確率によって、セグメント内に障害物を配置するかどうかはPlacerが決める */
         placer.Place(obstaclePoints, obstacleInstancesRoot);
     }
 
