@@ -851,6 +851,7 @@ GameObject:
   - component: {fileID: 1546475375}
   - component: {fileID: 1546475374}
   - component: {fileID: 1546475377}
+  - component: {fileID: 1546475378}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -873,6 +874,7 @@ MonoBehaviour:
   player: {fileID: 1160277030}
   pool: {fileID: 1546475375}
   obstaclePlacer: {fileID: 1546475377}
+  itemPlacer: {fileID: 1546475378}
   aheadDistance: 120
   initialSegments: 6
 --- !u!114 &1546475375
@@ -917,6 +919,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObstaclePlacer
   obstaclePrefab: {fileID: 6370437689949321743, guid: a12e4933299320543a4f6ebf286b8d6c, type: 3}
+  spawnChance: 0.2
+--- !u!114 &1546475378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546475373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3fb87b2f3eb8bd44a8dd9b425222297, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemPlacer
+  itemPrefab: {fileID: 2539922263149783706, guid: 2cbf7b01e0a2cb14787b8255ff06667b, type: 3}
   spawnChance: 0.2
 --- !u!1 &1707479588
 GameObject:
