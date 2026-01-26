@@ -785,6 +785,10 @@ PrefabInstance:
       propertyPath: groundMask.m_Bits
       value: 64
       objectReference: {fileID: 0}
+    - target: {fileID: 1823204481679224441, guid: b0629385ab71d524f95157719c77b00b, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 5917927903818137878, guid: b0629385ab71d524f95157719c77b00b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -876,7 +880,7 @@ MonoBehaviour:
   itemPlacer: {fileID: 1546475378}
   aheadDistance: 120
   initialSegments: 6
-  behindDistance: 30
+  behindDistance: 10
 --- !u!114 &1546475375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -891,10 +895,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SegmentPool
   entries:
   - segmentPrefab: {fileID: 9210077277781647570, guid: f8d38fcde52f41540a727f55209d546f, type: 3}
-    warmCount: 6
-    weight: 0.8
+    warmCount: 3
+    weight: 0.6
   - segmentPrefab: {fileID: 9210077277781647570, guid: 376352faf9f458b49a4f135db2934818, type: 3}
-    warmCount: 6
+    warmCount: 3
+    weight: 0.3
+  - segmentPrefab: {fileID: 9210077277781647570, guid: 25c82553088cc794dafc037b9108b76a, type: 3}
+    warmCount: 3
     weight: 0.3
   avoidSameAsLast: 0
 --- !u!4 &1546475376

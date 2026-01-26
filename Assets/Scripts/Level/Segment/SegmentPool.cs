@@ -12,8 +12,9 @@ public class SegmentPool : MonoBehaviour
     public class Entry
     { 
         public SegmentBase segmentPrefab;
+        [Tooltip("最初にプールしておくセグメントの数。<br>発生確率が低いものは小さくしておくとリソース削減できる。かも。")]
         public int warmCount = 3;
-        [Tooltip("Probability [0f~1f]")]
+        [Tooltip("生成確率 [0f~1f]")]
         [Min(0f)] public float weight = 1f;
     }
 
@@ -71,10 +72,8 @@ public class SegmentPool : MonoBehaviour
     {
         if (seg == null) return;
 
-        var ps = seg.GetComponent<PooledSegment>();
-        if (ps == null || ps.PoolIndex < 0 || ps.PoolIndex >= pools.Count)
+        if (!seg.TryGetComponent<PooledSegment>(out var ps) || ps.PoolIndex < 0 || ps.PoolIndex >= pools.Count)
         {
-            /* どこにも属さないなら破棄 */
             Destroy(seg.gameObject);
             return;
         }
@@ -98,6 +97,9 @@ public class SegmentPool : MonoBehaviour
         return seg;
     }
 
+    /// <Summary>
+    /// ret < 0 の場合エラー
+    /// </Summary>
     private int PickIndexWeighted(bool avoidSameAsLast)
     {
         var cand = new List<int>();
@@ -107,7 +109,6 @@ public class SegmentPool : MonoBehaviour
         {
             var e = entries[i];
             if (e.segmentPrefab == null) continue;
-            if (pools[i].Count == 0) continue;
             if (e.weight <= 0f) continue;
             if (avoidSameAsLast && i == lastIndex && entries.Count > 1) continue;
 
@@ -117,19 +118,16 @@ public class SegmentPool : MonoBehaviour
 
         if (cand.Count == 0)
         {
-            for (int i = 0; i < entries.Count; i++)
+            if (avoidSameAsLast && lastIndex >= 0)
             {
-                var e = entries[i];
-                if (e.segmentPrefab == null) continue;
-                if (pools[i].Count == 0) continue;
-                if (e.weight <= 0f) continue;
-
-                cand.Add(i);
-                total += e.weight;
+                /* avoidSameAsLast有効時候補がなかったならlastIndexが唯一の候補 */
+                return lastIndex;
+            }
+            else
+            {
+                return -1;
             }
         }
-
-        if (cand.Count == 0) return -1;
 
         float r = Random.value * total;
         float acc = 0f;

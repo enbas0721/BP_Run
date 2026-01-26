@@ -34,24 +34,34 @@ public class SegmentSpawner : MonoBehaviour
     void Start()
     {
         for (int i = 0; i < initialSegments; i++)
+        {
             SpawnSegment();
+        }
     }
 
     void Update()
     {
         // プレイヤー前方の確保距離を満たすまで、必要枚数をまとめて生成
-        while (spawnZ < player.position.z + aheadDistance)
+        while (spawnZ <= player.position.z + aheadDistance)
         {
-            SpawnSegment();
+            if (!SpawnSegment())
+            {
+                /* Segmentが生成できなかったらbreak(Editorのフリーズ回避) */
+                break;
+            }
         }
 
-        ReleasedOldSegments();
+        ReleaseOldSegments();
     }
 
-    void SpawnSegment()
+    private bool SpawnSegment()
     {
         var seg = pool.Get();
-        if (seg == null) return;
+        if (seg == null)
+        {
+            Debug.LogError("SpawnSegment failed: pool.Get() returned null");
+            return false;
+        }
 
         seg.transform.position = new Vector3(0, 0, spawnZ);
 
@@ -63,8 +73,10 @@ public class SegmentSpawner : MonoBehaviour
 
         activeSegments.Enqueue(seg);
         spawnZ += seg.SegmentLength;
+
+        return true;
     }
-    void ReleasedOldSegments()
+    private void ReleaseOldSegments()
     {
         while (activeSegments.Count > 0)
         {
