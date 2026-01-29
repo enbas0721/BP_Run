@@ -897,12 +897,6 @@ MonoBehaviour:
   - segmentPrefab: {fileID: 9210077277781647570, guid: f8d38fcde52f41540a727f55209d546f, type: 3}
     warmCount: 3
     weight: 0.6
-  - segmentPrefab: {fileID: 9210077277781647570, guid: 376352faf9f458b49a4f135db2934818, type: 3}
-    warmCount: 3
-    weight: 0.3
-  - segmentPrefab: {fileID: 9210077277781647570, guid: 25c82553088cc794dafc037b9108b76a, type: 3}
-    warmCount: 3
-    weight: 0.3
   avoidSameAsLast: 0
 --- !u!4 &1546475376
 Transform:
@@ -944,9 +938,15 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3fb87b2f3eb8bd44a8dd9b425222297, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ItemPlacer
+  m_EditorClassIdentifier: Assembly-CSharp::ItemLanePlacer
   itemPrefab: {fileID: 2539922263149783706, guid: 2cbf7b01e0a2cb14787b8255ff06667b, type: 3}
-  spawnChance: 0.2
+  laneWidth: 3
+  itemSpacing: 1
+  verticalStep: 0.5
+  defaultRangeLengthZ: 10
+  patterns:
+  - {fileID: 11400000, guid: 937e50e45b620f34892382b3cc2bba70, type: 2}
+  - {fileID: 11400000, guid: c58e017bea920f547b90a27d86547ab6, type: 2}
 --- !u!1 &1707479588
 GameObject:
   m_ObjectHideFlags: 0
@@ -999,9 +999,9 @@ SceneRoots:
   m_Roots:
   - {fileID: 330585546}
   - {fileID: 410087041}
-  - {fileID: 832575519}
-  - {fileID: 1546475376}
-  - {fileID: 1707479589}
-  - {fileID: 1160277029}
   - {fileID: 727740651}
   - {fileID: 170232143}
+  - {fileID: 832575519}
+  - {fileID: 1160277029}
+  - {fileID: 1707479589}
+  - {fileID: 1546475376}

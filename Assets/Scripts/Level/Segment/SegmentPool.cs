@@ -14,7 +14,7 @@ public class SegmentPool : MonoBehaviour
         public SegmentBase segmentPrefab;
         [Tooltip("最初にプールしておくセグメントの数。<br>発生確率が低いものは小さくしておくとリソース削減できる。かも。")]
         public int warmCount = 3;
-        [Tooltip("生成確率 [0f~1f]")]
+        [Tooltip("生成の相対的な重み （他より大きいほど選ばれやすい）")]
         [Min(0f)] public float weight = 1f;
     }
 
@@ -25,6 +25,7 @@ public class SegmentPool : MonoBehaviour
     [SerializeField] private bool avoidSameAsLast = false;
 
     private readonly List<Queue<SegmentBase>> pools = new List<Queue<SegmentBase>>();
+    private readonly List<int> cand = new List<int>(32);
     private int lastIndex = -1;
 
     private void Awake()
@@ -102,8 +103,8 @@ public class SegmentPool : MonoBehaviour
     /// </Summary>
     private int PickIndexWeighted(bool avoidSameAsLast)
     {
-        var cand = new List<int>();
         float total = 0f;
+        cand.Clear();
 
         for (int i = 0; i < entries.Count; i++)
         {

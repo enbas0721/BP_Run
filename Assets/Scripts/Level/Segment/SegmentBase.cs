@@ -5,8 +5,8 @@ public class SegmentBase : MonoBehaviour
     [SerializeField] private Transform endPoint;
 
     /*[Header("Obstacle")]*/
-    /*[SerializeField] */private Transform obstaclePoints;
-    /*[SerializeField] */private Transform obstacleInstancesRoot;
+    /*[SerializeField] private Transform obstaclePoints; */
+    /*[SerializeField] private Transform obstacleInstancesRoot; */
 
     [Header("Item")]
     [SerializeField] private Transform itemPoints;
@@ -16,7 +16,7 @@ public class SegmentBase : MonoBehaviour
 
     /* 廃止 */
     /* セグメントにランダムでオブジェクトを配置する必要が出た時に再利用 */
-    public void RebuildObstacles(ObstaclePlacer placer)
+    /*public void RebuildObstacles(ObstaclePlacer placer)
     {
         if (!obstaclePoints || !placer  || !obstacleInstancesRoot) return;
 
@@ -26,9 +26,9 @@ public class SegmentBase : MonoBehaviour
         }
 
         placer.Place(obstaclePoints, obstacleInstancesRoot);
-    }
+    }*/
 
-    public void RebuildItems(ItemPlacer placer)
+    public void RebuildItems(ItemLanePlacer placer)
     {
         if (!placer || !itemPoints || !itemInstancesRoot) return;
 

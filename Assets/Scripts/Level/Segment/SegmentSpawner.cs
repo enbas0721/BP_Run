@@ -16,7 +16,7 @@ public class SegmentSpawner : MonoBehaviour
     /* [SerializeField] private ObstaclePlacer obstaclePlacer; */
 
     [Header("Item")]
-    [SerializeField] private ItemPlacer itemPlacer;
+    [SerializeField] private ItemLanePlacer itemPlacer;
 
     [Header("Spawn Control")]
     [Tooltip("プレイヤーの前方に確保したい床の距離")]
