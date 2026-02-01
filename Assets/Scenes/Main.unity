@@ -785,9 +785,13 @@ PrefabInstance:
       propertyPath: groundMask.m_Bits
       value: 64
       objectReference: {fileID: 0}
+    - target: {fileID: 1823204481679224441, guid: b0629385ab71d524f95157719c77b00b, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 5917927903818137878, guid: b0629385ab71d524f95157719c77b00b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.6813
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5917927903818137878, guid: b0629385ab71d524f95157719c77b00b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -795,7 +799,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5917927903818137878, guid: b0629385ab71d524f95157719c77b00b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.25924
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5917927903818137878, guid: b0629385ab71d524f95157719c77b00b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -851,6 +855,7 @@ GameObject:
   - component: {fileID: 1546475375}
   - component: {fileID: 1546475374}
   - component: {fileID: 1546475377}
+  - component: {fileID: 1546475378}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -872,9 +877,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SegmentSpawner
   player: {fileID: 1160277030}
   pool: {fileID: 1546475375}
-  obstaclePlacer: {fileID: 1546475377}
+  itemPlacer: {fileID: 1546475378}
   aheadDistance: 120
   initialSegments: 6
+  behindDistance: 10
 --- !u!114 &1546475375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -887,8 +893,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ad47f85fba03c4caedf09979b11b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SegmentPool
-  segmentPrefab: {fileID: 9210077277781647570, guid: f8d38fcde52f41540a727f55209d546f, type: 3}
-  poolSize: 10
+  entries:
+  - segmentPrefab: {fileID: 9210077277781647570, guid: f8d38fcde52f41540a727f55209d546f, type: 3}
+    warmCount: 3
+    weight: 0.2
+  - segmentPrefab: {fileID: 9210077277781647570, guid: d9f2b2bf72c4c3c478b55d5574ba1b65, type: 3}
+    warmCount: 3
+    weight: 1
+  - segmentPrefab: {fileID: 9210077277781647570, guid: c2571fa03b51bde4cb9a0d65963f793d, type: 3}
+    warmCount: 3
+    weight: 0.8
+  avoidSameAsLast: 0
 --- !u!4 &1546475376
 Transform:
   m_ObjectHideFlags: 0
@@ -911,13 +926,27 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1546475373}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aeee688a0e914344ea56737f191c7c8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObstaclePlacer
   obstaclePrefab: {fileID: 6370437689949321743, guid: a12e4933299320543a4f6ebf286b8d6c, type: 3}
   spawnChance: 0.2
+--- !u!114 &1546475378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546475373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3fb87b2f3eb8bd44a8dd9b425222297, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemLanePlacer
+  itemPrefab: {fileID: 2539922263149783706, guid: 2cbf7b01e0a2cb14787b8255ff06667b, type: 3}
+  settings: {fileID: 11400000, guid: 35fe69be750142a4c9f57839d6591879, type: 2}
 --- !u!1 &1707479588
 GameObject:
   m_ObjectHideFlags: 0
@@ -970,9 +999,9 @@ SceneRoots:
   m_Roots:
   - {fileID: 330585546}
   - {fileID: 410087041}
-  - {fileID: 832575519}
-  - {fileID: 1546475376}
-  - {fileID: 1707479589}
-  - {fileID: 1160277029}
   - {fileID: 727740651}
   - {fileID: 170232143}
+  - {fileID: 832575519}
+  - {fileID: 1160277029}
+  - {fileID: 1707479589}
+  - {fileID: 1546475376}

@@ -201,6 +201,14 @@ MonoBehaviour:
   forwardSpeed: 10
   laneMoveSpeed: 16
   laneWidth: 3
+  jumpVelocity: 7
+  groundCheck: {fileID: 0}
+  groundCheckRadius: 0.2
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
+  coyoteTime: 0.08
+  jumpBufferTime: 0.1
 --- !u!114 &8235329975902488796
 MonoBehaviour:
   m_ObjectHideFlags: 0
