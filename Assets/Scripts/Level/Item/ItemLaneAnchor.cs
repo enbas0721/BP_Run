@@ -42,8 +42,6 @@ public class ItemLaneAnchor : MonoBehaviour
 
         if (_samples.Count == 0) return;
 
-        DrawLaneGuides();
-
         int currentLine = -1;
         Vector3? prev = null;
 
@@ -64,30 +62,6 @@ public class ItemLaneAnchor : MonoBehaviour
                 Gizmos.DrawLine(prev.Value, s.worldPos);
 
             prev = s.worldPos;
-        }
-    }
-
-    private void DrawLaneGuides()
-    {
-        if (settings == null) return;
-
-        Transform basis = transform.parent != null ? transform.parent : transform;
-        Vector3 basePos = (startMarker ? startMarker.position : transform.position);
-
-        Vector3 sLocal = basis.InverseTransformPoint(basePos);
-
-        Gizmos.color = new Color(0.8f, 0.8f, 0.8f, 0.6f);
-
-        float[] lanes = { -1f, 0f, 1f };
-        float z0 = sLocal.z;
-        float z1 = z0 + 20f;
-
-        for (int i = 0; i < lanes.Length; i++)
-        {
-            float x = sLocal.x + lanes[i] * settings.laneWidth;
-            Vector3 a = basis.TransformPoint(new Vector3(x, sLocal.y, z0));
-            Vector3 b = basis.TransformPoint(new Vector3(x, sLocal.y, z1));
-            Gizmos.DrawLine(a, b);
         }
     }
 }

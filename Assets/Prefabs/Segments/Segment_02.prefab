@@ -131,6 +131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9017996283554546461}
+  - component: {fileID: 1174597147103545165}
   m_Layer: 0
   m_Name: ItemAnchors
   m_TagString: Untagged
@@ -159,6 +160,20 @@ Transform:
   - {fileID: 4865260902023470913}
   m_Father: {fileID: 9055409129770679449}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1174597147103545165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039225581200126211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5dc16073c1904042906e9fa41fc4cc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DrawLaneLine
+  settings: {fileID: 11400000, guid: 35fe69be750142a4c9f57839d6591879, type: 2}
+  endPos: {fileID: 3714472079123078418}
 --- !u!1 &1049324836420682652
 GameObject:
   m_ObjectHideFlags: 0
