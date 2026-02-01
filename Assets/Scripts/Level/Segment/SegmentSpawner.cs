@@ -65,10 +65,9 @@ public class SegmentSpawner : MonoBehaviour
 
         seg.transform.position = new Vector3(0, 0, spawnZ);
 
-        /* 障害物はセグメントに手動追加するので自動生成は無効化 */
+        /* 障害物はセグメントに手動配置しておくので自動生成は無効化 */
         /* seg.RebuildObstacles(obstaclePlacer); */
-        
-        /* [TODO] アイテム列の破壊と生成をセグメントに任せる。 */
+
         seg.RebuildItems(itemPlacer);
 
         activeSegments.Enqueue(seg);

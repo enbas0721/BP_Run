@@ -2,37 +2,27 @@ using UnityEngine;
 
 public class ItemLaneAnchor : MonoBehaviour
 {
-    [Range(0f, 1f)] public float spawnChance = 1f;
-    public LineTag[] allowedTags;
+    [Tooltip("Anchor抽選の相対重み(大きいほど選ばれやすい)")]
+    [Min(0f)] public float spawnWeight = 1f;
+    [Tooltip("Anchorのアイテム配置パターン")]
+    public ItemLanePattern pattern;
 
     [Header("Local-Z Range")]
     public Transform startMarker;
     public Transform endMarker;
 
-    [Header("Gizmo Preview (Editor)")]
+    [Header("Gizmo Preview")]
     public bool drawPreviewGizmo = true;
-
-    [Tooltip("プレビューしたいパターン（ScriptableObject）")]
-    public ItemLanePattern previewPattern;
-
     [Tooltip("表示する点の大きさ")]
-    public float gizmoPointRadius = 0.12f;
-
+    public float gizmoPointRadius = 0.4f;
     [Tooltip("点を線で結ぶ")]
     public bool drawPolyline = true;
 
-    [Header("Preview Tuning (match ItemLanePlacer)")]
-    [Tooltip("隣レーン中心間距離")]
-    public float laneWidth = 1.5f;
+    [Header("共有設定")]
+    public ItemLaneSettings settings;
 
-    [Tooltip("アイテム間隔（Z方向）")]
-    public float itemSpacing = 1.0f;
-
-    [Tooltip("上下方向の1ステップ距離")]
-    public float verticalStep = 0.5f;
-
-    [Tooltip("endMarker未指定時の既定Z長")]
-    public float defaultRangeLengthZ = 10f;
+    private static readonly System.Collections.Generic.List<ItemLaneSampling.Sample> _samples
+        = new System.Collections.Generic.List<ItemLaneSampling.Sample>(256);
 
     private void OnDrawGizmos()
     {
@@ -44,87 +34,59 @@ public class ItemLaneAnchor : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         if (!drawPreviewGizmo) return;
-        if (previewPattern == null) return;
+        if (settings == null) return;
+        if (pattern == null) return;
 
-        Transform basis = transform.parent != null ? transform.parent : transform;
+        ItemLaneSampling.SamplePositionsLocalZ(
+            transform, startMarker, endMarker, pattern, settings, _samples);
 
-        Transform sTr = startMarker ? startMarker : transform;
-        Transform eTr = endMarker ? endMarker : null;
+        if (_samples.Count == 0) return;
 
-        Vector3 sLocal = basis.InverseTransformPoint(sTr.position);
-        Vector3 eLocal = eTr ? basis.InverseTransformPoint(eTr.position)
-                             : (sLocal + Vector3.forward * defaultRangeLengthZ);
+        DrawLaneGuides();
 
-        float z0 = sLocal.z;
-        float z1 = eLocal.z;
-        if (Mathf.Approximately(z0, z1)) return;
+        int currentLine = -1;
+        Vector3? prev = null;
 
-        float zMin = Mathf.Min(z0, z1);
-        float zMax = Mathf.Max(z0, z1);
-        float lengthZ = zMax - zMin;
-        if (lengthZ <= 0.001f) return;
-
-        int count = Mathf.Max(1, Mathf.FloorToInt(lengthZ / Mathf.Max(0.001f, itemSpacing)) + 1);
-
-        bool forward = (z1 >= z0);
-        float zStart = forward ? zMin : zMax;
-        float zEnd = forward ? zMax : zMin;
-
-        Gizmos.color = new Color(1f, 0.7f, 0.2f, 1f);
-        Vector3 wStart = basis.TransformPoint(new Vector3(sLocal.x, sLocal.y, zStart));
-        Vector3 wEnd = basis.TransformPoint(new Vector3(sLocal.x, sLocal.y, zEnd));
-        Gizmos.DrawLine(wStart, wEnd);
-
-        DrawLaneGuides(basis, sLocal, zStart, zEnd);
-
-        for (int li = 0; li < previewPattern.lines.Count; li++)
+        for (int i = 0; i < _samples.Count; i++)
         {
-            var line = previewPattern.lines[li];
-            if (line == null) continue;
+            var s = _samples[i];
 
-            Gizmos.color = (li % 2 == 0) ? Color.magenta : Color.cyan;
-
-            Vector3? prev = null;
-
-            for (int i = 0; i < count; i++)
+            if (s.lineIndex != currentLine)
             {
-                float t = (count == 1) ? 0f : (float)i / (count - 1);
-
-                float laneF = line.lane.Evaluate(t);
-                int lane = Mathf.Clamp(Mathf.RoundToInt(laneF), -1, 1);
-
-                float y = line.y.Evaluate(t) * verticalStep;
-                float z = Mathf.Lerp(zStart, zEnd, t);
-
-                Vector3 localPos = new Vector3(
-                    sLocal.x + lane * laneWidth,
-                    sLocal.y + y,
-                    z
-                );
-
-                Vector3 worldPos = basis.TransformPoint(localPos);
-
-                Gizmos.DrawWireSphere(worldPos, gizmoPointRadius);
-
-                if (drawPolyline && prev.HasValue)
-                    Gizmos.DrawLine(prev.Value, worldPos);
-
-                prev = worldPos;
+                currentLine = s.lineIndex;
+                Gizmos.color = (currentLine % 2 == 0) ? Color.magenta : Color.cyan;
+                prev = null;
             }
+
+            Gizmos.DrawWireSphere(s.worldPos, gizmoPointRadius);
+
+            if (drawPolyline && prev.HasValue)
+                Gizmos.DrawLine(prev.Value, s.worldPos);
+
+            prev = s.worldPos;
         }
     }
 
-    private void DrawLaneGuides(Transform basis, Vector3 sLocal, float zStart, float zEnd)
+    private void DrawLaneGuides()
     {
+        if (settings == null) return;
+
+        Transform basis = transform.parent != null ? transform.parent : transform;
+        Vector3 basePos = (startMarker ? startMarker.position : transform.position);
+
+        Vector3 sLocal = basis.InverseTransformPoint(basePos);
+
         Gizmos.color = new Color(0.8f, 0.8f, 0.8f, 0.6f);
 
         float[] lanes = { -1f, 0f, 1f };
+        float z0 = sLocal.z;
+        float z1 = z0 + 20f;
+
         for (int i = 0; i < lanes.Length; i++)
         {
-            float x = sLocal.x + lanes[i] * laneWidth;
-
-            Vector3 a = basis.TransformPoint(new Vector3(x, sLocal.y, zStart));
-            Vector3 b = basis.TransformPoint(new Vector3(x, sLocal.y, zEnd));
+            float x = sLocal.x + lanes[i] * settings.laneWidth;
+            Vector3 a = basis.TransformPoint(new Vector3(x, sLocal.y, z0));
+            Vector3 b = basis.TransformPoint(new Vector3(x, sLocal.y, z1));
             Gizmos.DrawLine(a, b);
         }
     }
