@@ -8,9 +8,9 @@ public class ScoreUpItem : MonoBehaviour
     {
         if (other.GetComponentInParent<RunnerController>() == null) return;
 
-        if (ScoreManager.Instance != null)
+        if (GameManager.Instance != null)
         {
-            ScoreManager.Instance.AddScore(amount);
+            GameManager.Instance.AddScore(amount);
         }
 
         Destroy(gameObject);

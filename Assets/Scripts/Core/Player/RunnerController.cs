@@ -76,7 +76,7 @@ public class RunnerController : MonoBehaviour
 
     public void Slide()
     {
-        // 後で実装（コライダー縮める等）
+        // [MEMO] 追加予定なし
     }
 
     private void DoJump()

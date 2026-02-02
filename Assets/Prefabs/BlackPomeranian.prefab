@@ -155,7 +155,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6443354460898171820}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -172,7 +172,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &4351115613974421949
 MonoBehaviour:
@@ -202,11 +202,11 @@ MonoBehaviour:
   laneMoveSpeed: 16
   laneWidth: 3
   jumpVelocity: 7
-  groundCheck: {fileID: 0}
+  groundCheck: {fileID: 137914863254468417}
   groundCheckRadius: 0.2
   groundMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   coyoteTime: 0.08
   jumpBufferTime: 0.1
 --- !u!114 &8235329975902488796
