@@ -11,6 +11,24 @@ public enum GameState
 
 public class GameManager : MonoBehaviour
 {
+
+    [Header("Debug / Cheat")]
+    [SerializeField] private bool debugInvincible = false;
+
+    public bool DebugInvincible => debugInvincible;
+
+    private float invincibleUntil = -1f;
+
+    public bool IsInvincible
+    {
+        get
+        {
+            if (debugInvincible) return true;
+            if (invincibleUntil < 0f) return false;
+            return Time.time < invincibleUntil;
+        }
+    }
+
     public static GameManager Instance { get; private set; }
 
     [Header("Score Settings")]
@@ -75,9 +93,28 @@ public class GameManager : MonoBehaviour
 
     public void ResetRun()
     {
+        ClearInvincible();
         ScoreSystem.Reset();
         OnScoreChanged?.Invoke(ScoreSystem.Score);
         SetState(GameState.Playing);
+    }
+
+    /// <summary>
+    ///  ˆê’èŠÔA–³“G‚É‚·‚é
+    /// </summary>
+    public void SetInvincibleFor(float seconds)
+    {
+        if (seconds <= 0f) return;
+
+        float until = Time.time + seconds;
+        invincibleUntil = Mathf.Max(invincibleUntil, until);
+    }
+    /// <summary>
+    /// –³“G‰ğœ
+    /// </summary>
+    public void ClearInvincible()
+    {
+        invincibleUntil = -1f;
     }
 
     public void AddScore(int amount)

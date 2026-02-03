@@ -579,6 +579,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &817271745 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6443354460898171820, guid: b0629385ab71d524f95157719c77b00b, type: 3}
+  m_PrefabInstance: {fileID: 1160277029}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,7 +779,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -3543420369880566964, guid: b0629385ab71d524f95157719c77b00b, type: 3}
       propertyPath: forwardSpeed
-      value: 15
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: -3543420369880566964, guid: b0629385ab71d524f95157719c77b00b, type: 3}
       propertyPath: jumpVelocity
@@ -827,13 +832,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6443354460898171820, guid: b0629385ab71d524f95157719c77b00b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1160277037}
   m_SourcePrefab: {fileID: 100100000, guid: b0629385ab71d524f95157719c77b00b, type: 3}
 --- !u!4 &1160277030 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5917927903818137878, guid: b0629385ab71d524f95157719c77b00b, type: 3}
   m_PrefabInstance: {fileID: 1160277029}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1160277037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817271745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a598232a68d9bfc46b35eb468f608bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RunnerGameOverTrigger
+  disableGameOver: 0
+  logOnBlocked: 1
+  obstacleTag: Obstacle
+  fallY: -3
 --- !u!1 &1546475373
 GameObject:
   m_ObjectHideFlags: 0

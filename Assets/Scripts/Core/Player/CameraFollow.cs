@@ -8,6 +8,13 @@ public class CameraFollow : MonoBehaviour
     private void LateUpdate()
     {
         if (!target) return;
+
+        if (GameManager.Instance != null &&
+            GameManager.Instance.State != GameState.Playing)
+        {
+            return;
+        }
+
         transform.position = target.position + offset;
     }
 }

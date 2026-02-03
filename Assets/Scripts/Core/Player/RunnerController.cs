@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class RunnerController : MonoBehaviour
 {
     [Header("Move")]
@@ -15,23 +16,27 @@ public class RunnerController : MonoBehaviour
     [SerializeField] private float coyoteTime = 0.08f;
     [SerializeField] private float jumpBufferTime = 0.10f;
 
-    private int currentLane = 0; // 0=center, -1=left, 1=right
-    private Vector3 targetPosition;
+    [Header("Debug")]
+    [SerializeField] private bool freezeRotation = true;
 
     private Rigidbody rb;
 
+    private int currentLane = 0; // 0=center, -1=left, 1=right
+
     private float lastGroundedTime = -999f;
     private float lastJumpPressedTime = -999f;
+
+    private bool jumpQueued;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        targetPosition = transform.position;
+        if (freezeRotation) rb.freezeRotation = true;
     }
 
     private void Update()
     {
-        ForwardMove();
-        LaneMove();
+        if (!IsPlaying()) return;
 
         if (IsGrounded())
         {
@@ -42,48 +47,54 @@ public class RunnerController : MonoBehaviour
         if (Time.time - lastJumpPressedTime <= jumpBufferTime &&
             Time.time - lastGroundedTime <= coyoteTime) 
         {
-            DoJump();
+            jumpQueued = true;
             lastJumpPressedTime = -999f;
             lastGroundedTime = -999f;
         }
     }
 
-    private void ForwardMove()
+    private void FixedUpdate()
     {
-        transform.Translate(Vector3.forward * forwardSpeed * Time.deltaTime);
-    }
+        if (!IsPlaying()) return;
 
-    private void LaneMove()
-    {
-        targetPosition.x = currentLane * laneWidth;
-        transform.position = Vector3.Lerp(
-            transform.position,
-            new Vector3(targetPosition.x, transform.position.y, transform.position.z),
-            Time.deltaTime * laneMoveSpeed
-        );
-    }
+        Vector3 pos = rb.position;
 
+        pos.z += forwardSpeed * Time.fixedDeltaTime;
+
+        float targetX = currentLane * laneWidth;
+        pos.x = Mathf.Lerp(pos.x, targetX, laneMoveSpeed * Time.fixedDeltaTime);
+
+        rb.MovePosition(pos);
+
+        if (jumpQueued)
+        {
+            jumpQueued = false;
+            DoJump();
+        }
+    }
     public void MoveLane(int direction)
     {
+        if (!IsPlaying()) return;
+        
         currentLane += direction;
         currentLane = Mathf.Clamp(currentLane, -1, 1);
     }
 
     public void Jump()
     {
+        if (!IsPlaying()) return;
         lastJumpPressedTime = Time.time;
     }
 
     public void Slide()
     {
+        if (!IsPlaying()) return;
         // [MEMO] ’Ç‰Á—\’è‚È‚µ
     }
 
     private void DoJump()
     {
-        if (!rb) return;
-
-        var v = rb.linearVelocity;
+        Vector3 v = rb.linearVelocity;
         if (v.y < 0f) v.y = 0f;
         rb.linearVelocity = v;
 
@@ -93,7 +104,18 @@ public class RunnerController : MonoBehaviour
     private bool IsGrounded()
     {
         if (!groundCheck) return false;
-        return Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundMask, QueryTriggerInteraction.Ignore);
+
+        return Physics.CheckSphere(
+            groundCheck.position,
+            groundCheckRadius,
+            groundMask,
+            QueryTriggerInteraction.Ignore
+            );
+    }
+    private bool IsPlaying()
+    {
+        if (GameManager.Instance == null) return true;
+        return GameManager.Instance.State == GameState.Playing;
     }
 
 #if UNITY_EDITOR
