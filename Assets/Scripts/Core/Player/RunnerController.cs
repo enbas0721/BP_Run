@@ -15,6 +15,8 @@ public class RunnerController : MonoBehaviour
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float coyoteTime = 0.08f;
     [SerializeField] private float jumpBufferTime = 0.10f;
+    [SerializeField] private float riseGravityMultiplier = 1.4f;
+    [SerializeField] private float fallGravityMultiplier = 2.6f;
 
     [Header("Debug")]
     [SerializeField] private bool freezeRotation = true;
@@ -65,6 +67,7 @@ public class RunnerController : MonoBehaviour
         pos.x = Mathf.Lerp(pos.x, targetX, laneMoveSpeed * Time.fixedDeltaTime);
 
         rb.MovePosition(pos);
+        ApplyExtraGravity();
 
         if (jumpQueued)
         {
@@ -116,6 +119,22 @@ public class RunnerController : MonoBehaviour
     {
         if (GameManager.Instance == null) return true;
         return GameManager.Instance.State == GameState.Playing;
+    }
+
+    private void ApplyExtraGravity()
+    {
+        var v = rb.linearVelocity;
+
+        if (v.y > 0.01f)
+        {
+            // è„è∏íÜÇÃâ¡ë¨ìxí«â¡
+            rb.AddForce(Physics.gravity * (riseGravityMultiplier - 1f), ForceMode.Acceleration);
+        }
+        else if (v.y < -0.01f)
+        {
+            // â¡çHíÜÇÃâ¡ë¨ìxí«â¡
+            rb.AddForce(Physics.gravity * (fallGravityMultiplier - 1f), ForceMode.Acceleration);
+        }
     }
 
 #if UNITY_EDITOR

@@ -113,6 +113,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b7a51ab9e35002d40b18d60d99825235, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8235329975902488796}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b7a51ab9e35002d40b18d60d99825235, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2352791603733036783}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b7a51ab9e35002d40b18d60d99825235, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8322690812817913881}
   m_SourcePrefab: {fileID: 100100000, guid: b7a51ab9e35002d40b18d60d99825235, type: 3}
 --- !u!4 &5917927903818137878 stripped
 Transform:
@@ -155,7 +161,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6443354460898171820}
   serializedVersion: 5
-  m_Mass: 100
+  m_Mass: 50
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -171,9 +177,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &4351115613974421949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,10 +204,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21066bb02728f2f4e82b875e826092cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RunnerController
-  forwardSpeed: 10
+  forwardSpeed: 13
   laneMoveSpeed: 16
   laneWidth: 3
-  jumpVelocity: 7
+  jumpVelocity: 10
   groundCheck: {fileID: 137914863254468417}
   groundCheckRadius: 0.2
   groundMask:
@@ -209,6 +215,9 @@ MonoBehaviour:
     m_Bits: 64
   coyoteTime: 0.08
   jumpBufferTime: 0.1
+  riseGravityMultiplier: 1.8
+  fallGravityMultiplier: 2.6
+  freezeRotation: 1
 --- !u!114 &8235329975902488796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,3 +232,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SwipeInput
   runner: {fileID: -3543420369880566964}
   minSwipePixels: 60
+--- !u!114 &2352791603733036783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6443354460898171820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a598232a68d9bfc46b35eb468f608bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RunnerGameOverTrigger
+  obstacleTag: Obstacle
+  fallY: -2
+  logOnBlocked: 1
+--- !u!114 &8322690812817913881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6443354460898171820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a598232a68d9bfc46b35eb468f608bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RunnerGameOverTrigger
+  obstacleTag: Obstacle
+  fallY: -2
+  logOnBlocked: 1

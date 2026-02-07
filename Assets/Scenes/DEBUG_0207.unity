@@ -991,17 +991,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 017777131f884ea4e944a740b40ab88c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  debugInvincible: 0
+  debugInvincible: 1
   scorePerSecond: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1707479589}
+  - {fileID: 1546475376}
   - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 727740651}
   - {fileID: 170232143}
   - {fileID: 832575519}
   - {fileID: 1160277029}
-  - {fileID: 1707479589}
-  - {fileID: 1546475376}
