@@ -19,6 +19,8 @@ public class SegmentSpawner : MonoBehaviour
     [SerializeField] private ItemLanePlacer itemPlacer;
 
     [Header("Spawn Control")]
+    [Tooltip("開始時点の前方オフセット（スタートセグメントの長さ分）")]
+    [SerializeField] private float initialAheadOffset = 20f;
     [Tooltip("プレイヤーの前方に確保したい床の距離")]
     [SerializeField] private float aheadDistance = 60f;
 
@@ -33,6 +35,7 @@ public class SegmentSpawner : MonoBehaviour
 
     void Start()
     {
+        spawnZ = initialAheadOffset;
         for (int i = 0; i < initialSegments; i++)
         {
             SpawnSegment();
