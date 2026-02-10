@@ -22,6 +22,8 @@ public class SwipeInput : MonoBehaviour
         var mouse = Mouse.current;
         var touch = Touchscreen.current;
 
+        if (GameManager.Instance != null && GameManager.Instance.State != GameState.Playing) return;
+
         // Touch—Dæ
         if (touch != null && touch.primaryTouch.press.isPressed)
         {
