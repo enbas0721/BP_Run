@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 949025891399662269}
-  - component: {fileID: 755701120011561014}
   m_Layer: 0
   m_Name: Lane_Center
   m_TagString: Untagged
@@ -32,19 +31,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 179640780449212087}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &755701120011561014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 567602715144321529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f414b13324919f0408ec8df02bca04af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObstacleSpawnPoint
-  lane: 0
 --- !u!1 &795767423869891485
 GameObject:
   m_ObjectHideFlags: 0
@@ -54,7 +40,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 266958586729188432}
-  - component: {fileID: 2283312016406409159}
   m_Layer: 0
   m_Name: Lane_Right
   m_TagString: Untagged
@@ -77,19 +62,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 179640780449212087}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2283312016406409159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 795767423869891485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f414b13324919f0408ec8df02bca04af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObstacleSpawnPoint
-  lane: 1
 --- !u!1 &1049324836420682652
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,7 +281,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5356095574831226142}
-  - component: {fileID: 2350347457804632314}
   m_Layer: 0
   m_Name: Lane_Left
   m_TagString: Untagged
@@ -332,16 +303,3 @@ Transform:
   m_Children: []
   m_Father: {fileID: 179640780449212087}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2350347457804632314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6720035438476409565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f414b13324919f0408ec8df02bca04af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObstacleSpawnPoint
-  lane: -1

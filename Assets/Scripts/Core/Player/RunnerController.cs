@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -21,14 +22,24 @@ public class RunnerController : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private bool freezeRotation = true;
 
+    public event Action<int, int> OnLaneChangeRequested;
+
     private Rigidbody rb;
 
+    // Lane System
     private int currentLane = 0; // 0=center, -1=left, 1=right
+    
+    private float laneSpeedMultiplier = 1f;
+    public void SetLaneSpeedMultiplier(float mul) => laneSpeedMultiplier = Mathf.Max(0.05f, mul);
+
+    private float forwardSpeedMultiplier = 1f;
+    public void SetForwardSpeedMultiplier(float mul) => forwardSpeedMultiplier = Mathf.Max(0f, mul);
 
     private float lastGroundedTime = -999f;
     private float lastJumpPressedTime = -999f;
 
     private bool jumpQueued;
+
 
     private void Awake()
     {
@@ -61,10 +72,10 @@ public class RunnerController : MonoBehaviour
 
         Vector3 pos = rb.position;
 
-        pos.z += forwardSpeed * Time.fixedDeltaTime;
+        pos.z += (forwardSpeed * forwardSpeedMultiplier) * Time.fixedDeltaTime;
 
         float targetX = currentLane * laneWidth;
-        pos.x = Mathf.Lerp(pos.x, targetX, laneMoveSpeed * Time.fixedDeltaTime);
+        pos.x = Mathf.Lerp(pos.x, targetX, (laneMoveSpeed * laneSpeedMultiplier )* Time.fixedDeltaTime);
 
         rb.MovePosition(pos);
         ApplyExtraGravity();
@@ -78,9 +89,18 @@ public class RunnerController : MonoBehaviour
     public void MoveLane(int direction)
     {
         if (!IsPlaying()) return;
-        
+
+        int from = currentLane;
+
         currentLane += direction;
         currentLane = Mathf.Clamp(currentLane, -1, 1);
+
+        int to = currentLane;
+
+        if (to != from)
+        {
+            OnLaneChangeRequested(from, to);
+        }
     }
 
     public void Jump()
