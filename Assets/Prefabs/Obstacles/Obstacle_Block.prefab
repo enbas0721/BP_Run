@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16b11e970de1a5e4eb7ec7b9e0af57a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NearMissZone
-  adrenalinePerSecond: 40
+  adrenalinePerSecond: 100
 --- !u!65 &7847845286907092533
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -155,7 +155,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2, y: 1, z: 3}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -1}
 --- !u!1 &6370437689949321743
 GameObject:
   m_ObjectHideFlags: 0
