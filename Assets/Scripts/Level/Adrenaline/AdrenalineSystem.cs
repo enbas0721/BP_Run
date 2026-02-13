@@ -17,6 +17,9 @@ public class AdrenalineSystem : MonoBehaviour
     [SerializeField] private float rushDuration = 5.0f;
     [SerializeField] private float rushForwardSpeedMultiplier = 2.0f;
 
+    public event System.Action<int> OnNearMissStarted;
+    public event System.Action OnNearMissEnded;
+
     public bool CanActivateRush => gauge >= gaugeMax && !rushActive;
 
     public float Gauge => gauge;
@@ -76,7 +79,8 @@ public class AdrenalineSystem : MonoBehaviour
         NearMissZone zone = GetBestZone();
         if (zone == null) return;
 
-        StartNearMiss(zone);
+        int dir = Mathf.Clamp(toLane - fromLane, -1, 1);
+        StartNearMiss(zone, dir);
     }
 
     private NearMissZone GetBestZone()
@@ -88,7 +92,7 @@ public class AdrenalineSystem : MonoBehaviour
         return null;
     }
 
-    private void StartNearMiss(NearMissZone zone)
+    private void StartNearMiss(NearMissZone zone, int direction)
     {
         nearMissActive = true;
         nearMissEndTime = Time.time + nearMissDuration;
@@ -99,9 +103,7 @@ public class AdrenalineSystem : MonoBehaviour
         /* [MEMO] レーン移動だけでいい？ */
         runner.SetLaneSpeedMultiplier(laneSlowMultiplier);
 
-        // 特殊モーション/演出
-        // var anim = GetComponentInChildren<Animator>();
-        // if (anim) anim.SetTrigger("NearMissLane");
+        OnNearMissStarted?.Invoke(direction);
     }
 
     private void EndNearMiss()
@@ -109,7 +111,8 @@ public class AdrenalineSystem : MonoBehaviour
         nearMissActive = false;
         gaugePerSec = 0f;
         runner.SetLaneSpeedMultiplier(1f);
-        Debug.Log("Adrenaline gauge: " + gauge);
+
+        OnNearMissEnded?.Invoke();
     }
 
     public void ActivateRush()

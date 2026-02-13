@@ -22,7 +22,11 @@ public class RunnerController : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private bool freezeRotation = true;
 
+    // Events
     public event Action<int, int> OnLaneChangeRequested;
+    public event Action OnJumped;
+    public event Action OnLanded;
+    public event Action<bool> OnGroundedChanged;
 
     private Rigidbody rb;
 
@@ -40,6 +44,8 @@ public class RunnerController : MonoBehaviour
 
     private bool jumpQueued;
 
+    private bool wasGrounded;
+
 
     private void Awake()
     {
@@ -49,9 +55,21 @@ public class RunnerController : MonoBehaviour
 
     private void Update()
     {
+        bool grounded = IsGrounded();
+
         if (!IsPlaying()) return;
 
-        if (IsGrounded())
+        if (grounded != wasGrounded)
+        {
+            OnGroundedChanged?.Invoke(grounded);
+
+            if (grounded)
+                OnLanded?.Invoke();
+
+            wasGrounded = grounded;
+        }
+
+        if (grounded)
         {
             lastGroundedTime = Time.time;
         }
@@ -99,7 +117,7 @@ public class RunnerController : MonoBehaviour
 
         if (to != from)
         {
-            OnLaneChangeRequested(from, to);
+            OnLaneChangeRequested?.Invoke(from, to);
         }
     }
 
@@ -122,6 +140,8 @@ public class RunnerController : MonoBehaviour
         rb.linearVelocity = v;
 
         rb.AddForce(Vector3.up * jumpVelocity, ForceMode.VelocityChange);
+
+        OnJumped?.Invoke();
     }
 
     private bool IsGrounded()
