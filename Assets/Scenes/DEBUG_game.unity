@@ -543,6 +543,10 @@ PrefabInstance:
       value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2620719305706279403, guid: b0629385ab71d524f95157719c77b00b, type: 3}
+      propertyPath: forwardSlowMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2620719305706279403, guid: b0629385ab71d524f95157719c77b00b, type: 3}
       propertyPath: rushForwardSpeedMultiplier
       value: 3
       objectReference: {fileID: 0}
