@@ -12,22 +12,29 @@ public class RunnerAnimatorController : MonoBehaviour
 {
     [Header("Refs")]
     [SerializeField] private RunnerController runner;
+    [SerializeField] private AdrenalineSystem adrenaline;
     [SerializeField] private Animator animator;
 
     private int moveStateHash;
     private int jumpHash;
     private int groundedHash;
     private int deathHash;
+    private int spinLeftHash;
+    private int spinRightHash;
 
     private void Awake()
     {
         if (!runner) runner = GetComponentInParent<RunnerController>();
+        if (!adrenaline) adrenaline = GetComponent<AdrenalineSystem>();
         if (!animator) animator = GetComponentInChildren<Animator>();
 
         moveStateHash = Animator.StringToHash("MoveState");
         jumpHash = Animator.StringToHash("Jump");
         groundedHash = Animator.StringToHash("IsGrounded");
         deathHash = Animator.StringToHash("Death");
+        spinLeftHash = Animator.StringToHash("SpinLeft");
+        spinRightHash = Animator.StringToHash("SpinRight");
+        
     }
 
     private void OnEnable()
@@ -36,6 +43,11 @@ public class RunnerAnimatorController : MonoBehaviour
         {
             runner.OnJumped += HandleJumped;
             runner.OnGroundedChanged += HandleGroundedChanged;
+        }
+
+        if (adrenaline)
+        {
+            adrenaline.OnNearMissStarted += HandleNearMissStarted;
         }
 
         if (GameManager.Instance)
@@ -50,6 +62,11 @@ public class RunnerAnimatorController : MonoBehaviour
         {
             runner.OnJumped -= HandleJumped;
             runner.OnGroundedChanged -= HandleGroundedChanged;
+        }
+
+        if (adrenaline)
+        {
+            adrenaline.OnNearMissStarted -= HandleNearMissStarted;
         }
 
         if (GameManager.Instance)
@@ -82,6 +99,14 @@ public class RunnerAnimatorController : MonoBehaviour
                 animator.SetTrigger(deathHash);
                 break;
         }
+    }
+
+    private void HandleNearMissStarted(int direction)
+    {
+        if (GameManager.Instance != null && GameManager.Instance.State != GameState.Playing) return;
+
+        if (direction < 0) animator.SetTrigger(spinLeftHash);
+        else if (direction > 0) animator.SetTrigger(spinRightHash);
     }
 
     private void SyncInitialState()

@@ -117,7 +117,7 @@ public class RunnerController : MonoBehaviour
 
         if (to != from)
         {
-            OnLaneChangeRequested(from, to);
+            OnLaneChangeRequested?.Invoke(from, to);
         }
     }
 
