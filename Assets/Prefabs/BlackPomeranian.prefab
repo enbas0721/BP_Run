@@ -4197,10 +4197,11 @@ MonoBehaviour:
   gaugeMax: 100
   gauge: 0
   nearMissDuration: 0.2
-  laneSlowMultiplier: 0.35
-  nearMissCooldown: 0.25
+  laneSlowMultiplier: 0.4
+  nearMissCooldown: 0.1
+  forwardSlowMultiplier: 0.5
   rushDuration: 5
-  rushForwardSpeedMultiplier: 2
+  rushForwardSpeedMultiplier: 3
 --- !u!114 &8235329975902488796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4228,6 +4229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RunnerAnimatorController
   runner: {fileID: -3543420369880566964}
+  adrenaline: {fileID: 0}
   animator: {fileID: 342441549798185836}
 --- !u!114 &2352791603733036783
 MonoBehaviour:

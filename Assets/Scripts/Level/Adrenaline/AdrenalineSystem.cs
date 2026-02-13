@@ -12,6 +12,7 @@ public class AdrenalineSystem : MonoBehaviour
     [SerializeField] private float nearMissDuration = 0.20f;
     [SerializeField] private float laneSlowMultiplier = 0.35f;
     [SerializeField] private float nearMissCooldown = 0.25f;
+    [SerializeField] private float forwardSlowMultiplier = 0.25f;
 
     [Header("Rush (Invincible + Fast)")]
     [SerializeField] private float rushDuration = 5.0f;
@@ -36,6 +37,8 @@ public class AdrenalineSystem : MonoBehaviour
 
     private bool rushActive = false;
     private float rushEndTime = -999f;
+
+    public bool IsRushActive => rushActive;
 
     private void Awake()
     {
@@ -73,6 +76,7 @@ public class AdrenalineSystem : MonoBehaviour
 
     private void HandleLaneChangeRequested(int fromLane, int toLane)
     {
+        if (rushActive) return;
         if (Time.time < cooldownUntil) return;
         if (nearMissActive) return;
 
@@ -100,8 +104,8 @@ public class AdrenalineSystem : MonoBehaviour
 
         gaugePerSec = zone.AdrenalinePerSecond;
 
-        /* [MEMO] レーン移動だけでいい？ */
         runner.SetLaneSpeedMultiplier(laneSlowMultiplier);
+        runner.SetForwardSpeedMultiplier(forwardSlowMultiplier);
 
         OnNearMissStarted?.Invoke(direction);
     }
@@ -110,7 +114,9 @@ public class AdrenalineSystem : MonoBehaviour
     {
         nearMissActive = false;
         gaugePerSec = 0f;
+        /* [TODO] ゲーム状況に応じてスピードをあげる場合は前回状態に戻す必要がある */
         runner.SetLaneSpeedMultiplier(1f);
+        runner.SetForwardSpeedMultiplier(1f);
 
         OnNearMissEnded?.Invoke();
     }
@@ -132,11 +138,12 @@ public class AdrenalineSystem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (rushActive) return;
+
         var zone = other.GetComponent<NearMissZone>();
         if (zone != null)
         {
             overlappedZones.Add(zone);
-            Debug.Log("NearMissEntered");
         }
     }
 
