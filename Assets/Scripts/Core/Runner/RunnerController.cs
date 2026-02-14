@@ -36,8 +36,8 @@ public class RunnerController : MonoBehaviour
     private float laneSpeedMultiplier = 1f;
     public void SetLaneSpeedMultiplier(float mul) => laneSpeedMultiplier = Mathf.Max(0.05f, mul);
 
-    private float forwardSpeedMultiplier = 1f;
-    public void SetForwardSpeedMultiplier(float mul) => forwardSpeedMultiplier = Mathf.Max(0f, mul);
+    private float baseForwardMultiplier = 1f;
+    private float rushForwardMultiplier = 1f;
 
     private float lastGroundedTime = -999f;
     private float lastJumpPressedTime = -999f;
@@ -90,7 +90,8 @@ public class RunnerController : MonoBehaviour
 
         Vector3 pos = rb.position;
 
-        pos.z += (forwardSpeed * forwardSpeedMultiplier) * Time.fixedDeltaTime;
+        float finalMul = baseForwardMultiplier * rushForwardMultiplier;
+        pos.z += (forwardSpeed * finalMul) * Time.fixedDeltaTime;
 
         float targetX = currentLane * laneWidth;
         pos.x = Mathf.Lerp(pos.x, targetX, (laneMoveSpeed * laneSpeedMultiplier )* Time.fixedDeltaTime);
@@ -175,6 +176,16 @@ public class RunnerController : MonoBehaviour
             // â¡çHíÜÇÃâ¡ë¨ìxí«â¡
             rb.AddForce(Physics.gravity * (fallGravityMultiplier - 1f), ForceMode.Acceleration);
         }
+    }
+
+    public void SetBaseForwardMultiplier(float mul)
+    {
+        baseForwardMultiplier = Mathf.Max(0f, mul);
+    }
+
+    public void SetRushForwardMultiplier(float mul)
+    {
+        rushForwardMultiplier = Mathf.Max(0f, mul);
     }
 
 #if UNITY_EDITOR

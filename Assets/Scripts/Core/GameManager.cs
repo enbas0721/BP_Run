@@ -12,9 +12,17 @@ public enum GameState
 public class GameManager : MonoBehaviour
 {
 
+    [Header("Difficulty / Speed Scaling")]
+    [SerializeField] private RunnerController runner;
+    [SerializeField] private float timeToMaxSpeed = 120f;
+    [SerializeField] private float maxBaseSpeedMultiplier = 2.0f;
+    [SerializeField] private AnimationCurve speedCurve =
+        AnimationCurve.EaseInOut(0, 0, 1, 1);
+
+    private float playTime = 0f;
+
     [Header("Debug / Cheat")]
     [SerializeField] private bool debugInvincible = false;
-
     public bool DebugInvincible => debugInvincible;
 
     private float invincibleUntil = -1f;
@@ -71,7 +79,16 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (State != GameState.Playing) return;
+        
         ScoreSystem.Tick(Time.deltaTime);
+
+        playTime += Time.deltaTime;
+
+        float t = Mathf.Clamp01(playTime / Mathf.Max(0.01f, timeToMaxSpeed));
+        float curve = speedCurve.Evaluate(t);
+        float baseMul = Mathf.Lerp(1f, maxBaseSpeedMultiplier, curve);
+
+        if (runner) runner.SetBaseForwardMultiplier(baseMul);
     }
 
     public void SetState(GameState next)
@@ -93,9 +110,15 @@ public class GameManager : MonoBehaviour
 
     public void ResetRun()
     {
+        playTime = 0f;
+        if (runner) runner.SetBaseForwardMultiplier(1f);
+
         ClearInvincible();
+
         ScoreSystem.Reset();
         OnScoreChanged?.Invoke(ScoreSystem.Score);
+
+        /* [MEMO] Resetではプレイにリセットする */
         SetState(GameState.Playing);
     }
 

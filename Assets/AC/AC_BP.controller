@@ -171,9 +171,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.08350554
   m_TransitionOffset: 0
-  m_ExitTime: 0.6
+  m_ExitTime: 0.76300097
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -244,9 +244,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
-  m_TransitionOffset: 0
-  m_ExitTime: 0.6
+  m_TransitionDuration: 0.07229021
+  m_TransitionOffset: 0.0041131275
+  m_ExitTime: 0.7894727
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -260,7 +260,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Dog|Dog_TurnLeft
-  m_Speed: 1.2
+  m_Speed: 1.8
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4294708189931392853}
@@ -441,7 +441,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Dog|Dog_TurnRight
-  m_Speed: 1.2
+  m_Speed: 1.8
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -2630897967183126860}
@@ -504,7 +504,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
-  m_ExitTime: 0.5714286
+  m_ExitTime: 0.45070422
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0

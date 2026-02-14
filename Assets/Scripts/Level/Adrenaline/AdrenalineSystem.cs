@@ -10,9 +10,10 @@ public class AdrenalineSystem : MonoBehaviour
 
     [Header("NearMiss (Lane Change Slow)")]
     [SerializeField] private float nearMissDuration = 0.20f;
-    [SerializeField] private float laneSlowMultiplier = 0.35f;
-    [SerializeField] private float nearMissCooldown = 0.25f;
-    [SerializeField] private float forwardSlowMultiplier = 0.25f;
+    [SerializeField] private float nearMissCooldown = 0.1f;
+    [SerializeField] private float nearMissTimeScale = 0.3f;
+
+    private float originalFixedDeltaTime;
 
     [Header("Rush (Invincible + Fast)")]
     [SerializeField] private float rushDuration = 5.0f;
@@ -43,6 +44,8 @@ public class AdrenalineSystem : MonoBehaviour
     private void Awake()
     {
         runner = GetComponent<RunnerController>();
+
+        originalFixedDeltaTime = Time.fixedDeltaTime;
     }
 
     private void OnEnable()
@@ -70,7 +73,7 @@ public class AdrenalineSystem : MonoBehaviour
         if (rushActive && Time.time >= rushEndTime)
         {
             rushActive = false;
-            runner.SetForwardSpeedMultiplier(1f);
+            runner.SetRushForwardMultiplier(1f);
         }
     }
 
@@ -104,8 +107,8 @@ public class AdrenalineSystem : MonoBehaviour
 
         gaugePerSec = zone.AdrenalinePerSecond;
 
-        runner.SetLaneSpeedMultiplier(laneSlowMultiplier);
-        runner.SetForwardSpeedMultiplier(forwardSlowMultiplier);
+        Time.timeScale = nearMissTimeScale;
+        Time.fixedDeltaTime = originalFixedDeltaTime * nearMissTimeScale;
 
         OnNearMissStarted?.Invoke(direction);
     }
@@ -114,9 +117,9 @@ public class AdrenalineSystem : MonoBehaviour
     {
         nearMissActive = false;
         gaugePerSec = 0f;
-        /* [TODO] ゲーム状況に応じてスピードをあげる場合は前回状態に戻す必要がある */
-        runner.SetLaneSpeedMultiplier(1f);
-        runner.SetForwardSpeedMultiplier(1f);
+
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = originalFixedDeltaTime;
 
         OnNearMissEnded?.Invoke();
     }
@@ -130,7 +133,7 @@ public class AdrenalineSystem : MonoBehaviour
         rushActive = true;
         rushEndTime = Time.time + rushDuration;
 
-        runner.SetForwardSpeedMultiplier(rushForwardSpeedMultiplier);
+        runner.SetRushForwardMultiplier(rushForwardSpeedMultiplier);
 
         if (GameManager.Instance != null)
             GameManager.Instance.SetInvincibleFor(rushDuration);

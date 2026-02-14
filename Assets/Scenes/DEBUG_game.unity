@@ -535,20 +535,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2620719305706279403, guid: b0629385ab71d524f95157719c77b00b, type: 3}
-      propertyPath: nearMissCooldown
-      value: 0.1
+      propertyPath: nearMissDuration
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2620719305706279403, guid: b0629385ab71d524f95157719c77b00b, type: 3}
-      propertyPath: laneSlowMultiplier
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2620719305706279403, guid: b0629385ab71d524f95157719c77b00b, type: 3}
-      propertyPath: forwardSlowMultiplier
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2620719305706279403, guid: b0629385ab71d524f95157719c77b00b, type: 3}
-      propertyPath: rushForwardSpeedMultiplier
-      value: 3
+      propertyPath: nearMissTimeScale
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 5917927903818137878, guid: b0629385ab71d524f95157719c77b00b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -824,6 +816,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 017777131f884ea4e944a740b40ab88c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  runner: {fileID: 0}
+  timeToMaxSpeed: 120
+  maxBaseSpeedMultiplier: 2
+  speedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   debugInvincible: 1
   scorePerSecond: 10
 --- !u!1001 &1767556688655160603
@@ -836,7 +855,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 182181475633779788, guid: 7274a0ccbf2abf24bae5608c457f76c6, type: 3}
       propertyPath: m_Name
-      value: Canvas
+      value: GameCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 1222736910688017017, guid: 7274a0ccbf2abf24bae5608c457f76c6, type: 3}
       propertyPath: adrenaline
