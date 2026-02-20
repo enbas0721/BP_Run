@@ -62,15 +62,17 @@ public class AdrenalineSystem : MonoBehaviour
     {
         if (GameManager.Instance != null && GameManager.Instance.State != GameState.Playing) return;
 
+        float now = Time.unscaledTime;
+
         if (nearMissActive)
         {
             gauge = Mathf.Clamp(gauge + gaugePerSec * Time.deltaTime, 0f, gaugeMax);
 
-            if (Time.time >= nearMissEndTime)
+            if (now >= nearMissEndTime)
                 EndNearMiss();
         }
 
-        if (rushActive && Time.time >= rushEndTime)
+        if (rushActive && now >= rushEndTime)
         {
             rushActive = false;
             runner.SetRushForwardMultiplier(1f);
@@ -80,7 +82,7 @@ public class AdrenalineSystem : MonoBehaviour
     private void HandleLaneChangeRequested(int fromLane, int toLane)
     {
         if (rushActive) return;
-        if (Time.time < cooldownUntil) return;
+        if (Time.unscaledTime < cooldownUntil) return;
         if (nearMissActive) return;
 
         NearMissZone zone = GetBestZone();
@@ -102,8 +104,8 @@ public class AdrenalineSystem : MonoBehaviour
     private void StartNearMiss(NearMissZone zone, int direction)
     {
         nearMissActive = true;
-        nearMissEndTime = Time.time + nearMissDuration;
-        cooldownUntil = Time.time + nearMissCooldown;
+        nearMissEndTime = Time.unscaledTime + nearMissDuration;
+        cooldownUntil = Time.unscaledTime + nearMissCooldown;
 
         gaugePerSec = zone.AdrenalinePerSecond;
 
@@ -131,12 +133,22 @@ public class AdrenalineSystem : MonoBehaviour
         gauge = 0f;
 
         rushActive = true;
-        rushEndTime = Time.time + rushDuration;
+        rushEndTime = Time.unscaledTime + rushDuration;
 
         runner.SetRushForwardMultiplier(rushForwardSpeedMultiplier);
 
         if (GameManager.Instance != null)
             GameManager.Instance.SetInvincibleFor(rushDuration);
+    }
+
+    public float RushRemaining01
+    {
+        get
+        {
+            if (!rushActive) return 0f;
+            float remain = rushEndTime - Time.unscaledTime;
+            return Mathf.Clamp01(remain / Mathf.Max(0.001f, rushDuration));
+        }
     }
 
     private void OnTriggerEnter(Collider other)

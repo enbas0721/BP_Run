@@ -16,19 +16,21 @@ public class AdrenalineGaugeUI : MonoBehaviour
     {
         if (!adrenaline || !fillImage) return;
 
-        float max = Mathf.Max(1f, adrenaline.GaugeMax);
-        float t = Mathf.Clamp01(adrenaline.Gauge / max);
+        float target;
 
-        fillImage.fillAmount = Mathf.Lerp(fillImage.fillAmount, t, 12f * Time.deltaTime);
-
-
-        if (adrenaline.CanActivateRush)
+        if (adrenaline.IsRushActive)
         {
+            target = adrenaline.RushRemaining01;
             fillImage.color = Color.yellow;
         }
         else
         {
-            fillImage.color = Color.blue;
+            float max = Mathf.Max(1f, adrenaline.GaugeMax);
+            target = Mathf.Clamp01(adrenaline.Gauge / max);
+
+            fillImage.color = adrenaline.CanActivateRush ? Color.yellow : Color.blue;
         }
+
+        fillImage.fillAmount = Mathf.Lerp(fillImage.fillAmount, target, 12f * Time.deltaTime);
     }
 }

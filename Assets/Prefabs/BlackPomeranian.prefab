@@ -4197,10 +4197,8 @@ MonoBehaviour:
   gaugeMax: 100
   gauge: 0
   nearMissDuration: 0.2
-  laneSlowMultiplier: 0.4
   nearMissCooldown: 0.1
-  forwardSlowMultiplier: 0.5
-  nearMissTimeScale: 0.5
+  nearMissTimeScale: 0.7
   rushDuration: 5
   rushForwardSpeedMultiplier: 3
 --- !u!114 &8235329975902488796
