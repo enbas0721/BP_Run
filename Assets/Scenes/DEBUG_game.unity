@@ -670,6 +670,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1546475376}
   - component: {fileID: 1546475375}
+  - component: {fileID: 1546475379}
   - component: {fileID: 1546475374}
   - component: {fileID: 1546475377}
   - component: {fileID: 1546475378}
@@ -699,6 +700,11 @@ MonoBehaviour:
   aheadDistance: 120
   initialSegments: 6
   behindDistance: 10
+  envPool: {fileID: 1546475379}
+  envInitialAheadOffset: 20
+  envAheadDistance: 80
+  envInitialSegment: 3
+  envBehindDistance: 40
 --- !u!114 &1546475375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -759,6 +765,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemLanePlacer
   itemPrefab: {fileID: 2539922263149783706, guid: 2cbf7b01e0a2cb14787b8255ff06667b, type: 3}
   settings: {fileID: 11400000, guid: 35fe69be750142a4c9f57839d6591879, type: 2}
+--- !u!114 &1546475379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546475373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b7e33ddfe3b94f4bbc1f393feb4a0b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnvSegmentPool
+  entries:
+  - segmentPrefab: {fileID: 563321854530824861, guid: 3f6f31a62ab282f4c9c7466d5719e094, type: 3}
+    warmCount: 6
+    weight: 1
+  avoidSameAsLast: 0
 --- !u!1 &1707479588
 GameObject:
   m_ObjectHideFlags: 0
