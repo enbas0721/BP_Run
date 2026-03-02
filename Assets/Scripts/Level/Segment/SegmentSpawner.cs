@@ -11,14 +11,14 @@ public class SegmentSpawner : MonoBehaviour
     [SerializeField] private Transform player;
 
     [Header("Game Segment (Road)")]
-    [SerializeField] private SegmentPool pool;
+    [SerializeField] private RoadSegmentPool roadPool;
     [SerializeField] private ItemLanePlacer itemPlacer;
     [Tooltip("開始時点の前方オフセット（スタートセグメントの長さ分）")]
-    [SerializeField] private float initialAheadOffset = 20f;
+    [SerializeField] private float roadInitialAheadOffset = 20f;
     [Tooltip("プレイヤーの前方に確保したい床の距離")]
     [SerializeField] private float aheadDistance = 60f;
     [Tooltip("初期に敷く最低枚数（見た目のため）")]
-    [SerializeField] private int initialSegments = 4;
+    [SerializeField] private int roadInitialSegments = 4;
     [Tooltip("プレイヤーの後方で回収する距離（セグメント終端がこの距離だけ後ろなら回収）")]
     [SerializeField] private float behindDistance = 30f;
 
@@ -36,27 +36,19 @@ public class SegmentSpawner : MonoBehaviour
     private float roadSpawnZ = 0f;
     private float envSpawnZ = 0f;
 
-    private readonly Queue<SegmentBase> activeSegments = new Queue<SegmentBase>();
+    private readonly Queue<RoadSegmentBase> activeRoadSegments = new Queue<RoadSegmentBase>();
     private readonly Queue<EnvSegmentBase> activeEnvSegments = new Queue<EnvSegmentBase>();
 
     void Start()
     {
-        roadSpawnZ = initialAheadOffset;
-        envSpawnZ = envInitialAheadOffset;
-
-        for (int i = 0; i < initialSegments; i++)
-        {
-            SpawnRoadSegment();
-        }
-
-        for (int i = 0; i < envInitialSegment; i++)
-        {
-            SpawnEnvSegment();
-        }
+        ResetSegments();
     }
 
     void Update()
     {
+        if (GameManager.Instance != null && GameManager.Instance.State != GameState.Playing)
+            return;
+
         // プレイヤー前方の確保距離を満たすまで、必要枚数をまとめて生成
         while (roadSpawnZ <= player.position.z + aheadDistance)
         {
@@ -79,12 +71,42 @@ public class SegmentSpawner : MonoBehaviour
         ReleaseOldEnvSegments();
     }
 
+    public void ResetSegments()
+    {
+        // 既存セグメントの回収
+        while (activeRoadSegments.Count > 0)
+        {
+            var seg = activeRoadSegments.Dequeue();
+            roadPool.Release(seg);
+        }
+
+        while (activeEnvSegments.Count > 0)
+        {
+            var env = activeEnvSegments.Dequeue();
+            envPool.Release(env);
+        }
+
+        // スポーン位置の初期化
+        roadSpawnZ = roadInitialAheadOffset;
+        envSpawnZ = envInitialAheadOffset;
+
+        // 初期セグメントの生成
+        for (int i = 0; i < roadInitialSegments; i++ )
+        {
+            if (!SpawnRoadSegment()) break;
+        }
+        for (int i = 0; i < envInitialSegment; i++)
+        {
+            if (!SpawnEnvSegment()) break;
+        }
+    }
+
     private bool SpawnRoadSegment()
     {
-        var seg = pool.Get();
+        var seg = roadPool.Get();
         if (seg == null)
         {
-            Debug.LogError("SpawnSegment failed: pool.Get() returned null");
+            Debug.LogError("SpawnSegment failed: roadPool.Get() returned null");
             return false;
         }
 
@@ -95,7 +117,7 @@ public class SegmentSpawner : MonoBehaviour
 
         seg.RebuildItems(itemPlacer);
 
-        activeSegments.Enqueue(seg);
+        activeRoadSegments.Enqueue(seg);
         roadSpawnZ += seg.SegmentLength;
 
         return true;
@@ -120,15 +142,15 @@ public class SegmentSpawner : MonoBehaviour
 
     private void ReleaseOldRoadSegments()
     {
-        while (activeSegments.Count > 0)
+        while (activeRoadSegments.Count > 0)
         {
-            var head = activeSegments.Peek();
+            var head = activeRoadSegments.Peek();
             float headEndZ = head.GetEndZ();
 
             if (headEndZ < player.position.z - behindDistance)
             {
-                activeSegments.Dequeue();
-                pool.Release(head);
+                activeRoadSegments.Dequeue();
+                roadPool.Release(head);
             }
             else
             {

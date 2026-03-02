@@ -12,9 +12,22 @@ public class RunnerGameOverTrigger : MonoBehaviour
 
     private bool dead = false;
 
-    public void Reset()
+    private void OnEnable()
     {
-        dead = false;
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnStateChanged += HandleState;
+        }
+    }
+    private void OnDisable()
+    {
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnStateChanged -= HandleState;
+    }
+
+    private void HandleState(GameState state)
+    {
+        if (state == GameState.Ready) dead = false;
     }
 
     private void Update()

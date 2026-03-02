@@ -957,8 +957,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1159023881160227887}
-  - component: {fileID: 563321854530824861}
   - component: {fileID: 2096385631076872366}
+  - component: {fileID: 8340358729443060135}
   m_Layer: 0
   m_Name: Environment_Seg
   m_TagString: Untagged
@@ -991,19 +991,6 @@ Transform:
   - {fileID: 5610028908355072879}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &563321854530824861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2588753228946516121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 800403a8026193449b65c972398788b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnvSegmentBase
-  endPoint: {fileID: 5610028908355072879}
 --- !u!114 &2096385631076872366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1016,6 +1003,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 924ad22fa03035a4591cb4999ed5a4db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PooledSegment
+--- !u!114 &8340358729443060135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2588753228946516121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 800403a8026193449b65c972398788b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnvRoadSegmentBase
+  endPoint: {fileID: 5610028908355072879}
 --- !u!1 &2751826993123873056
 GameObject:
   m_ObjectHideFlags: 0

@@ -58,6 +58,32 @@ public class AdrenalineSystem : MonoBehaviour
         runner.OnLaneChangeRequested -= HandleLaneChangeRequested;
     }
 
+    public void ResetSystem()
+    {
+        // 1) NearMiss 強制終了（TimeScaleを必ず戻す）
+        if (nearMissActive)
+        {
+            nearMissActive = false;
+            gaugePerSec = 0f;
+        }
+
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = originalFixedDeltaTime;
+
+        // 2) Rush 強制終了（速度倍率を戻す）
+        rushActive = false;
+        rushEndTime = -999f;
+        if (runner) runner.SetRushForwardMultiplier(1f);
+
+        // 3) ゲージとクールダウン
+        gauge = 0f;
+        nearMissEndTime = -999f;
+        cooldownUntil = -999f;
+
+        // 4) 接触ゾーン情報をクリア（次のランに持ち越さない）
+        overlappedZones.Clear();
+    }
+
     private void Update()
     {
         if (GameManager.Instance != null && GameManager.Instance.State != GameState.Playing) return;

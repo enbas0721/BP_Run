@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SegmentBase : MonoBehaviour
+public class RoadSegmentBase : MonoBehaviour
 {
     [SerializeField] private Transform endPoint;
 

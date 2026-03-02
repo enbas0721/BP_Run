@@ -152,8 +152,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9055409129770679449}
-  - component: {fileID: 9210077277781647570}
   - component: {fileID: -948709852794809054}
+  - component: {fileID: 4065237540404446330}
   m_Layer: 0
   m_Name: Segment_03
   m_TagString: Untagged
@@ -180,21 +180,6 @@ Transform:
   - {fileID: 9017996283554546461}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9210077277781647570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1049324836420682652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4702c77c0450ee6499f37a9df63a23d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SegmentBase
-  endPoint: {fileID: 3714472079123078418}
-  itemPoints: {fileID: 9017996283554546461}
-  itemInstancesRoot: {fileID: 4865260902023470913}
 --- !u!114 &-948709852794809054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,6 +192,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 924ad22fa03035a4591cb4999ed5a4db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PooledSegment
+--- !u!114 &4065237540404446330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049324836420682652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e517301404badaf41a6e25e6d6401b9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadSegmentBase
+  endPoint: {fileID: 3714472079123078418}
+  itemPoints: {fileID: 9017996283554546461}
+  itemInstancesRoot: {fileID: 4865260902023470913}
 --- !u!1 &1216396398304305299
 GameObject:
   m_ObjectHideFlags: 0

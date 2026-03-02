@@ -6,12 +6,12 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class SegmentPool : MonoBehaviour
+public class RoadSegmentPool : MonoBehaviour
 {
     [System.Serializable]
     public class Entry
     { 
-        public SegmentBase segmentPrefab;
+        public RoadSegmentBase segmentPrefab;
         [Tooltip("最初にプールしておくセグメントの数。<br>発生確率が低いものは小さくしておくとリソース削減できる。かも。")]
         public int warmCount = 3;
         [Tooltip("生成の相対的な重み （他より大きいほど選ばれやすい）")]
@@ -24,7 +24,7 @@ public class SegmentPool : MonoBehaviour
     [Header("Options")]
     [SerializeField] private bool avoidSameAsLast = false;
 
-    private readonly List<Queue<SegmentBase>> pools = new List<Queue<SegmentBase>>();
+    private readonly List<Queue<RoadSegmentBase>> pools = new List<Queue<RoadSegmentBase>>();
     private readonly List<int> cand = new List<int>(32);
     private int lastIndex = -1;
 
@@ -34,7 +34,7 @@ public class SegmentPool : MonoBehaviour
 
         for (int i = 0; i < entries.Count; i++)
         {
-            pools.Add(new Queue<SegmentBase>());
+            pools.Add(new Queue<RoadSegmentBase>());
 
             var e = entries[i];
             if (e.segmentPrefab == null || e.warmCount <= 0) continue;
@@ -47,13 +47,13 @@ public class SegmentPool : MonoBehaviour
         }
     }
 
-    public SegmentBase Get()
+    public RoadSegmentBase Get()
     {
         int idx = PickIndexWeighted(avoidSameAsLast);
         if (idx < 0) return null;
 
         var q = pools[idx];
-        SegmentBase seg;
+        RoadSegmentBase seg;
         
         if (q.Count > 0)
         {
@@ -69,7 +69,7 @@ public class SegmentPool : MonoBehaviour
         return seg;
     }
 
-    public void Release(SegmentBase seg)
+    public void Release(RoadSegmentBase seg)
     {
         if (seg == null) return;
 
@@ -84,7 +84,7 @@ public class SegmentPool : MonoBehaviour
         pools[ps.PoolIndex].Enqueue(seg);
     }
 
-    private SegmentBase CreateInstance(int poolIndex)
+    private RoadSegmentBase CreateInstance(int poolIndex)
     {
         var prefab = entries[poolIndex].segmentPrefab;
         var seg = Instantiate(prefab, transform);

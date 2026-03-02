@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AnimationCurve speedCurve =
         AnimationCurve.EaseInOut(0, 0, 1, 1);
 
+    [Header("Game System")]
+    [SerializeField] private SegmentSpawner segmentSpawner;
+    [SerializeField] private AdrenalineSystem adrenalineSystem;
+
     private float playTime = 0f;
 
     [Header("Debug / Cheat")]
@@ -65,8 +69,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        /* [TODO] ゲーム管理画面ができたらそこからステート変更  */
-        SetState(GameState.Playing);
+        SetState(GameState.Ready);
         OnScoreChanged?.Invoke(ScoreSystem.Score);
     }
     private void OnDestroy()
@@ -96,8 +99,8 @@ public class GameManager : MonoBehaviour
         if (State == next) return;
         State = next;
 
-        /* [MEMO] TimeScale変更で大丈夫？ */
-        Time.timeScale = (State == GameState.Paused) ? 0f : 1f;
+        /* [MEMO] Playing以外は止める */
+        /* Time.timeScale = (State == GameState.Playing) ? 1f : 0f; */
 
         OnStateChanged?.Invoke(State);
     }
@@ -108,7 +111,7 @@ public class GameManager : MonoBehaviour
         SetState(GameState.GameOver);
     }
 
-    public void ResetRun()
+    public void StartRun()
     {
         playTime = 0f;
         if (runner) runner.SetBaseForwardMultiplier(1f);
@@ -118,13 +121,41 @@ public class GameManager : MonoBehaviour
         ScoreSystem.Reset();
         OnScoreChanged?.Invoke(ScoreSystem.Score);
 
-        /* [MEMO] Resetではプレイにリセットする */
+
         SetState(GameState.Playing);
     }
 
-    /// <summary>
-    ///  一定時間、無敵にする
-    /// </summary>
+    public void ResetRun()
+    {
+        playTime = 0f;
+        // runnerのリセット
+        if (runner)
+        {
+            runner.ResetRunner();
+        }
+
+        // segmentSpawnerのリセット
+        if (segmentSpawner)
+        {
+            segmentSpawner.ResetSegments();
+        }
+
+        // adrenalineSystemのリセット
+        if (adrenalineSystem)
+        {
+            adrenalineSystem.ResetSystem();
+        }
+
+        // 無敵状態をクリア
+        ClearInvincible();
+
+        // スコアリセット
+        ScoreSystem.Reset();
+        OnScoreChanged?.Invoke(ScoreSystem.Score);
+
+        SetState(GameState.Ready);
+    }
+
     public void SetInvincibleFor(float seconds)
     {
         if (seconds <= 0f) return;
@@ -132,9 +163,7 @@ public class GameManager : MonoBehaviour
         float until = Time.time + seconds;
         invincibleUntil = Mathf.Max(invincibleUntil, until);
     }
-    /// <summary>
-    /// 無敵解除
-    /// </summary>
+
     public void ClearInvincible()
     {
         invincibleUntil = -1f;
