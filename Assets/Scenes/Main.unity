@@ -351,22 +351,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3309138622086827466, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
-      propertyPath: entries.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3309138622086827466, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
-      propertyPath: entries.Array.data[1].weight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3309138622086827466, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
-      propertyPath: entries.Array.data[1].warmCount
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3309138622086827466, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
-      propertyPath: entries.Array.data[1].segmentPrefab
-      value: 
-      objectReference: {fileID: 9210077277781647570, guid: c2571fa03b51bde4cb9a0d65963f793d, type: 3}
     - target: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
       propertyPath: player
       value: 
@@ -712,6 +696,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  segmentSpawner: {fileID: 0}
+  adrenalineSystem: {fileID: 0}
   debugInvincible: 0
   scorePerSecond: 10
 --- !u!1001 &1948756192

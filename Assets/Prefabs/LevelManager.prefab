@@ -49,7 +49,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SegmentPool
   entries:
-  - segmentPrefab: {fileID: 6030440987145421016, guid: 0000cd5d63ff6804b8983ff6c77fcd56, type: 3}
+  - segmentPrefab: {fileID: 1126375026918509926, guid: 0000cd5d63ff6804b8983ff6c77fcd56, type: 3}
+    warmCount: 6
+    weight: 1
+  - segmentPrefab: {fileID: 4065237540404446330, guid: c2571fa03b51bde4cb9a0d65963f793d, type: 3}
     warmCount: 6
     weight: 1
   avoidSameAsLast: 0
@@ -66,7 +69,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnvSegmentPool
   entries:
-  - segmentPrefab: {fileID: 563321854530824861, guid: 3f6f31a62ab282f4c9c7466d5719e094, type: 3}
+  - segmentPrefab: {fileID: 8340358729443060135, guid: 3f6f31a62ab282f4c9c7466d5719e094, type: 3}
     warmCount: 6
     weight: 1
   avoidSameAsLast: 0
@@ -83,11 +86,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SegmentSpawner
   player: {fileID: 0}
-  pool: {fileID: 3309138622086827466}
+  roadPool: {fileID: 3309138622086827466}
   itemPlacer: {fileID: 7054258023032897551}
-  initialAheadOffset: 19.5
+  roadInitialAheadOffset: 20
   aheadDistance: 120
-  initialSegments: 6
+  roadInitialSegments: 4
   behindDistance: 10
   envPool: {fileID: 8222377864733174166}
   envInitialAheadOffset: 19

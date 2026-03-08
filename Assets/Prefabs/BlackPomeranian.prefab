@@ -173,15 +173,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b7a51ab9e35002d40b18d60d99825235, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.000018114199
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b7a51ab9e35002d40b18d60d99825235, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.19117141
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b7a51ab9e35002d40b18d60d99825235, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.0016201735
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b7a51ab9e35002d40b18d60d99825235, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4181,7 +4181,6 @@ MonoBehaviour:
   jumpBufferTime: 0.1
   riseGravityMultiplier: 1.8
   fallGravityMultiplier: 2.6
-  freezeRotation: 1
 --- !u!114 &2620719305706279403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4197,7 +4196,7 @@ MonoBehaviour:
   gaugeMax: 100
   gauge: 0
   nearMissDuration: 0.2
-  nearMissCooldown: 0.1
+  nearMissCooldown: 0.05
   nearMissTimeScale: 0.7
   rushDuration: 5
   rushForwardSpeedMultiplier: 3
@@ -4214,7 +4213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwipeInput
   runner: {fileID: -3543420369880566964}
-  minSwipePixels: 10
+  minSwipePixels: 6
 --- !u!114 &8661294900957576629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4243,5 +4242,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RunnerGameOverTrigger
   obstacleTag: Obstacle
-  fallY: -2
+  fallY: -1
   logOnBlocked: 1
