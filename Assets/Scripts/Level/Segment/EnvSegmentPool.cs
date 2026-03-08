@@ -1,0 +1,143 @@
+/*
+ * SegmentPool.cs
+ * セグメントオブジェクトをキューで保持。
+ */ 
+
+using UnityEngine;
+using System.Collections.Generic;
+
+public class EnvSegmentPool : MonoBehaviour
+{
+    [System.Serializable]
+    public class Entry
+    { 
+        public EnvSegmentBase segmentPrefab;
+        [Tooltip("最初にプールしておくセグメントの数。<br>発生確率が低いものは小さくしておくとリソース削減できる。かも。")]
+        public int warmCount = 3;
+        [Tooltip("生成の相対的な重み （他より大きいほど選ばれやすい）")]
+        [Min(0f)] public float weight = 1f;
+    }
+
+    [Header("Segment Variants")]
+    public List<Entry> entries = new List<Entry>();
+
+    [Header("Options")]
+    [SerializeField] private bool avoidSameAsLast = false;
+
+    private readonly List<Queue<EnvSegmentBase>> pools = new List<Queue<EnvSegmentBase>>();
+    private readonly List<int> cand = new List<int>(32);
+    private int lastIndex = -1;
+
+    private void Awake()
+    {
+        pools.Clear();
+
+        for (int i = 0; i < entries.Count; i++)
+        {
+            pools.Add(new Queue<EnvSegmentBase>());
+
+            var e = entries[i];
+            if (e.segmentPrefab == null || e.warmCount <= 0) continue;
+
+            for (int n = 0; n < e.warmCount; n++)
+            {
+                var seg = CreateInstance(i);
+                Release(seg);
+            }
+        }
+    }
+
+    public EnvSegmentBase Get()
+    {
+        int idx = PickIndexWeighted(avoidSameAsLast);
+        if (idx < 0) return null;
+
+        var q = pools[idx];
+        EnvSegmentBase seg;
+        
+        if (q.Count > 0)
+        {
+            seg = q.Dequeue();
+        }
+        else
+        {
+            seg = CreateInstance(idx);
+        }
+
+        seg.gameObject.SetActive(true);
+        lastIndex = idx;
+        return seg;
+    }
+
+    public void Release(EnvSegmentBase seg)
+    {
+        if (seg == null) return;
+
+        if (!seg.TryGetComponent<PooledSegment>(out var ps) || ps.PoolIndex < 0 || ps.PoolIndex >= pools.Count)
+        {
+            Destroy(seg.gameObject);
+            return;
+        }
+
+        seg.gameObject.SetActive(false);
+        seg.transform.SetParent(transform, false);
+        pools[ps.PoolIndex].Enqueue(seg);
+    }
+
+    private EnvSegmentBase CreateInstance(int poolIndex)
+    {
+        var prefab = entries[poolIndex].segmentPrefab;
+        var seg = Instantiate(prefab, transform);
+
+        var ps = seg.GetComponent<PooledSegment>();
+        if (ps == null) ps = seg.gameObject.AddComponent<PooledSegment>();
+
+        ps.BindToPool(poolIndex);
+
+        seg.gameObject.SetActive(false);
+        return seg;
+    }
+
+    /// <Summary>
+    /// ret < 0 の場合エラー
+    /// </Summary>
+    private int PickIndexWeighted(bool avoidSameAsLast)
+    {
+        float total = 0f;
+        cand.Clear();
+
+        for (int i = 0; i < entries.Count; i++)
+        {
+            var e = entries[i];
+            if (e.segmentPrefab == null) continue;
+            if (e.weight <= 0f) continue;
+            if (avoidSameAsLast && i == lastIndex && entries.Count > 1) continue;
+
+            cand.Add(i);
+            total += e.weight;
+        }
+
+        if (cand.Count == 0)
+        {
+            if (avoidSameAsLast && lastIndex >= 0)
+            {
+                /* avoidSameAsLast有効時候補がなかったならlastIndexが唯一の候補 */
+                return lastIndex;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        float r = Random.value * total;
+        float acc = 0f;
+        foreach (var i in cand)
+        {
+            acc += entries[i].weight;
+            if (r <= acc) return i;
+        }
+
+        return cand[cand.Count - 1];
+    }
+}

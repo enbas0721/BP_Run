@@ -19,9 +19,6 @@ public class RunnerController : MonoBehaviour
     [SerializeField] private float riseGravityMultiplier = 1.4f;
     [SerializeField] private float fallGravityMultiplier = 2.6f;
 
-    [Header("Debug")]
-    [SerializeField] private bool freezeRotation = true;
-
     // Events
     public event Action<int, int> OnLaneChangeRequested;
     public event Action OnJumped;
@@ -30,14 +27,18 @@ public class RunnerController : MonoBehaviour
 
     private Rigidbody rb;
 
+    // For Reset
+    private Vector3 startPos;
+    private Quaternion startRot;
+
     // Lane System
     private int currentLane = 0; // 0=center, -1=left, 1=right
     
     private float laneSpeedMultiplier = 1f;
     public void SetLaneSpeedMultiplier(float mul) => laneSpeedMultiplier = Mathf.Max(0.05f, mul);
 
-    private float forwardSpeedMultiplier = 1f;
-    public void SetForwardSpeedMultiplier(float mul) => forwardSpeedMultiplier = Mathf.Max(0f, mul);
+    private float baseForwardMultiplier = 1f;
+    private float rushForwardMultiplier = 1f;
 
     private float lastGroundedTime = -999f;
     private float lastJumpPressedTime = -999f;
@@ -46,11 +47,43 @@ public class RunnerController : MonoBehaviour
 
     private bool wasGrounded;
 
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        if (freezeRotation) rb.freezeRotation = true;
+
+        startPos = this.transform.position;
+        startRot = this.transform.rotation;
+    }
+    public void ResetRunner()
+    {
+        currentLane = 0;
+
+        laneSpeedMultiplier = 1f;
+        baseForwardMultiplier = 1f;
+        rushForwardMultiplier = 1f;
+
+        lastGroundedTime = -999f;
+        lastJumpPressedTime = -999f;
+        jumpQueued = false;
+
+        // éüÇÃUpdateÇ≈GroundedChangedÇ™îÚÇ‘ÇΩÇﬂfalseÇ…ÇµÇƒÇ®Ç¢ÇƒêÿÇËë÷Ç¶Ç≥ÇπÇÈÅB
+        wasGrounded = false;
+
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        Vector3 p = startPos;
+
+        float x = 0f;
+        float y = p.y;
+        float z = p.z;
+
+        rb.position = new Vector3(x, y, z);
+        rb.rotation = startRot;
+        transform.SetPositionAndRotation(rb.position, rb.rotation);
+
+        /*rb.Sleep();
+        rb.WakeUp();*/
     }
 
     private void Update()
@@ -90,7 +123,8 @@ public class RunnerController : MonoBehaviour
 
         Vector3 pos = rb.position;
 
-        pos.z += (forwardSpeed * forwardSpeedMultiplier) * Time.fixedDeltaTime;
+        float finalMul = baseForwardMultiplier * rushForwardMultiplier;
+        pos.z += (forwardSpeed * finalMul) * Time.fixedDeltaTime;
 
         float targetX = currentLane * laneWidth;
         pos.x = Mathf.Lerp(pos.x, targetX, (laneMoveSpeed * laneSpeedMultiplier )* Time.fixedDeltaTime);
@@ -175,6 +209,16 @@ public class RunnerController : MonoBehaviour
             // â¡çHíÜÇÃâ¡ë¨ìxí«â¡
             rb.AddForce(Physics.gravity * (fallGravityMultiplier - 1f), ForceMode.Acceleration);
         }
+    }
+
+    public void SetBaseForwardMultiplier(float mul)
+    {
+        baseForwardMultiplier = Mathf.Max(0f, mul);
+    }
+
+    public void SetRushForwardMultiplier(float mul)
+    {
+        rushForwardMultiplier = Mathf.Max(0f, mul);
     }
 
 #if UNITY_EDITOR

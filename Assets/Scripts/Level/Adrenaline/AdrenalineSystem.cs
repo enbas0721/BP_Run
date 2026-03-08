@@ -10,9 +10,10 @@ public class AdrenalineSystem : MonoBehaviour
 
     [Header("NearMiss (Lane Change Slow)")]
     [SerializeField] private float nearMissDuration = 0.20f;
-    [SerializeField] private float laneSlowMultiplier = 0.35f;
-    [SerializeField] private float nearMissCooldown = 0.25f;
-    [SerializeField] private float forwardSlowMultiplier = 0.25f;
+    [SerializeField] private float nearMissCooldown = 0.1f;
+    [SerializeField] private float nearMissTimeScale = 0.3f;
+
+    private float originalFixedDeltaTime;
 
     [Header("Rush (Invincible + Fast)")]
     [SerializeField] private float rushDuration = 5.0f;
@@ -43,6 +44,8 @@ public class AdrenalineSystem : MonoBehaviour
     private void Awake()
     {
         runner = GetComponent<RunnerController>();
+
+        originalFixedDeltaTime = Time.fixedDeltaTime;
     }
 
     private void OnEnable()
@@ -55,29 +58,57 @@ public class AdrenalineSystem : MonoBehaviour
         runner.OnLaneChangeRequested -= HandleLaneChangeRequested;
     }
 
+    public void ResetSystem()
+    {
+        // 1) NearMiss 強制終了（TimeScaleを必ず戻す）
+        if (nearMissActive)
+        {
+            nearMissActive = false;
+            gaugePerSec = 0f;
+        }
+
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = originalFixedDeltaTime;
+
+        // 2) Rush 強制終了（速度倍率を戻す）
+        rushActive = false;
+        rushEndTime = -999f;
+        if (runner) runner.SetRushForwardMultiplier(1f);
+
+        // 3) ゲージとクールダウン
+        gauge = 0f;
+        nearMissEndTime = -999f;
+        cooldownUntil = -999f;
+
+        // 4) 接触ゾーン情報をクリア（次のランに持ち越さない）
+        overlappedZones.Clear();
+    }
+
     private void Update()
     {
         if (GameManager.Instance != null && GameManager.Instance.State != GameState.Playing) return;
+
+        float now = Time.unscaledTime;
 
         if (nearMissActive)
         {
             gauge = Mathf.Clamp(gauge + gaugePerSec * Time.deltaTime, 0f, gaugeMax);
 
-            if (Time.time >= nearMissEndTime)
+            if (now >= nearMissEndTime)
                 EndNearMiss();
         }
 
-        if (rushActive && Time.time >= rushEndTime)
+        if (rushActive && now >= rushEndTime)
         {
             rushActive = false;
-            runner.SetForwardSpeedMultiplier(1f);
+            runner.SetRushForwardMultiplier(1f);
         }
     }
 
     private void HandleLaneChangeRequested(int fromLane, int toLane)
     {
         if (rushActive) return;
-        if (Time.time < cooldownUntil) return;
+        if (Time.unscaledTime < cooldownUntil) return;
         if (nearMissActive) return;
 
         NearMissZone zone = GetBestZone();
@@ -99,13 +130,13 @@ public class AdrenalineSystem : MonoBehaviour
     private void StartNearMiss(NearMissZone zone, int direction)
     {
         nearMissActive = true;
-        nearMissEndTime = Time.time + nearMissDuration;
-        cooldownUntil = Time.time + nearMissCooldown;
+        nearMissEndTime = Time.unscaledTime + nearMissDuration;
+        cooldownUntil = Time.unscaledTime + nearMissCooldown;
 
         gaugePerSec = zone.AdrenalinePerSecond;
 
-        runner.SetLaneSpeedMultiplier(laneSlowMultiplier);
-        runner.SetForwardSpeedMultiplier(forwardSlowMultiplier);
+        Time.timeScale = nearMissTimeScale;
+        Time.fixedDeltaTime = originalFixedDeltaTime * nearMissTimeScale;
 
         OnNearMissStarted?.Invoke(direction);
     }
@@ -114,9 +145,9 @@ public class AdrenalineSystem : MonoBehaviour
     {
         nearMissActive = false;
         gaugePerSec = 0f;
-        /* [TODO] ゲーム状況に応じてスピードをあげる場合は前回状態に戻す必要がある */
-        runner.SetLaneSpeedMultiplier(1f);
-        runner.SetForwardSpeedMultiplier(1f);
+
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = originalFixedDeltaTime;
 
         OnNearMissEnded?.Invoke();
     }
@@ -128,12 +159,22 @@ public class AdrenalineSystem : MonoBehaviour
         gauge = 0f;
 
         rushActive = true;
-        rushEndTime = Time.time + rushDuration;
+        rushEndTime = Time.unscaledTime + rushDuration;
 
-        runner.SetForwardSpeedMultiplier(rushForwardSpeedMultiplier);
+        runner.SetRushForwardMultiplier(rushForwardSpeedMultiplier);
 
         if (GameManager.Instance != null)
             GameManager.Instance.SetInvincibleFor(rushDuration);
+    }
+
+    public float RushRemaining01
+    {
+        get
+        {
+            if (!rushActive) return 0f;
+            float remain = rushEndTime - Time.unscaledTime;
+            return Mathf.Clamp01(remain / Mathf.Max(0.001f, rushDuration));
+        }
     }
 
     private void OnTriggerEnter(Collider other)

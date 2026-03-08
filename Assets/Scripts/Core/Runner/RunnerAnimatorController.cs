@@ -97,6 +97,7 @@ public class RunnerAnimatorController : MonoBehaviour
 
             case GameState.GameOver:
                 animator.SetTrigger(deathHash);
+                animator.SetInteger(moveStateHash, (int)RunnerAnimMoveState.Stand);
                 break;
         }
     }
