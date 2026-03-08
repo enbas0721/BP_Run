@@ -64,7 +64,7 @@ ModelImporter:
       takeName: Dog|Dog_Death
       internalID: 6864985547599502549
       firstFrame: 0
-      lastFrame: 32
+      lastFrame: 31
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -89,11 +89,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Dog|Dog_Death_2
-      takeName: Dog|Dog_Death_2
-      internalID: 4393436865513984209
+      name: Dog|Dog_Death_old
+      takeName: Dog|Dog_Death_old
+      internalID: -3417321884270170977
       firstFrame: 0
-      lastFrame: 31
+      lastFrame: 32
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
