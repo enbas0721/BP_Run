@@ -17,15 +17,25 @@ public class SwipeInput : MonoBehaviour
         if (!runner) runner = FindFirstObjectByType<RunnerController>();
     }
 
+    public void ResetInputState()
+    {
+        tracking = false;
+        startPos = Vector2.zero;
+    }
+
     private void Update()
     {
         var mouse = Mouse.current;
         var touch = Touchscreen.current;
 
-        if (GameManager.Instance != null && GameManager.Instance.State != GameState.Playing) return;
+        if (GameManager.Instance != null && GameManager.Instance.State != GameState.Playing)
+        {
+            tracking = false;
+            return;
+        }
 
-        // TouchóDêÊ
-        if (touch != null && touch.primaryTouch.press.isPressed)
+            // TouchóDêÊ
+            if (touch != null && touch.primaryTouch.press.isPressed)
         {
             var pos = touch.primaryTouch.position.ReadValue();
 

@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     [Header("Game System")]
     [SerializeField] private SegmentSpawner segmentSpawner;
     [SerializeField] private AdrenalineSystem adrenalineSystem;
+    [SerializeField] private SwipeInput swipeInput;
 
     private float playTime = 0f;
 
@@ -144,6 +145,12 @@ public class GameManager : MonoBehaviour
         if (adrenalineSystem)
         {
             adrenalineSystem.ResetSystem();
+        }
+
+        // SwipeInputのリセット
+        if (swipeInput)
+        {
+            swipeInput.ResetInputState();
         }
 
         // 無敵状態をクリア

@@ -360,6 +360,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
+--- !u!114 &424769311 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
+  m_PrefabInstance: {fileID: 424769310}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d84ebe7b5bad0b4d87c9dbc8ea2cd4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SegmentSpawner
 --- !u!1001 &828340009
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -539,6 +550,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9105512e9059f274d88153a59aea38e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AdrenalineSystem
+--- !u!114 &1160277032 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8235329975902488796, guid: b0629385ab71d524f95157719c77b00b, type: 3}
+  m_PrefabInstance: {fileID: 1160277029}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ab506d365a63d469a770d8be10eb5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SwipeInput
 --- !u!114 &1160277035 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -3543420369880566964, guid: b0629385ab71d524f95157719c77b00b, type: 3}
@@ -696,8 +718,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  segmentSpawner: {fileID: 0}
-  adrenalineSystem: {fileID: 0}
+  segmentSpawner: {fileID: 424769311}
+  adrenalineSystem: {fileID: 1160277031}
+  swipeInput: {fileID: 1160277032}
   debugInvincible: 0
   scorePerSecond: 10
 --- !u!1001 &1948756192

@@ -4168,8 +4168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21066bb02728f2f4e82b875e826092cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RunnerController
-  forwardSpeed: 13
-  laneMoveSpeed: 16
+  forwardSpeed: 15
+  laneMoveSpeed: 24
   laneWidth: 3
   jumpVelocity: 10
   groundCheck: {fileID: 137914863254468417}

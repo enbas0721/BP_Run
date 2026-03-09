@@ -88,7 +88,7 @@ MonoBehaviour:
   player: {fileID: 0}
   roadPool: {fileID: 3309138622086827466}
   itemPlacer: {fileID: 7054258023032897551}
-  roadInitialAheadOffset: 20
+  roadInitialAheadOffset: 19
   aheadDistance: 120
   roadInitialSegments: 4
   behindDistance: 10

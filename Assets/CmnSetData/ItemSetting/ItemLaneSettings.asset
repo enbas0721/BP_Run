@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ItemLaneSettings
   m_EditorClassIdentifier: Assembly-CSharp::ItemLaneSettings
   laneWidth: 3
-  itemSpacing: 1.2
+  itemSpacing: 1.6
   verticalStep: 3
   defaultRangeLengthZ: 10

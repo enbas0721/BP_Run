@@ -2,8 +2,12 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform target;
-    public Vector3 offset;
+    [SerializeField] private Transform target;
+    [SerializeField] private Vector3 offset;
+
+    [Header("Y Limit")]
+    [SerializeField] private float minY = 0f;
+    [SerializeField] private float maxY = 5f;
 
     private Vector3 startPos;
     private Quaternion startRot;
@@ -32,7 +36,10 @@ public class CameraFollow : MonoBehaviour
             }
         }
 
+        Vector3 pos = target.position + offset;
 
-        transform.position = target.position + offset;
+        pos.y = Mathf.Clamp(pos.y, minY, maxY);
+
+        transform.position = pos;
     }
 }
