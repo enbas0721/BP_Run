@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
 
     public event Action<int> OnScoreChanged;
     public event Action<GameState> OnStateChanged;
+    public event Action OnReadyToShowResult;
 
     public ScoreSystem ScoreSystem { get; private set; }
 
@@ -110,6 +111,11 @@ public class GameManager : MonoBehaviour
     {
         if (State == GameState.GameOver) return;
         SetState(GameState.GameOver);
+    }
+
+    public void NotifyReadyToShowResult()
+    {
+        OnReadyToShowResult?.Invoke();
     }
 
     public void StartRun()
