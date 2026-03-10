@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemLanePlacer : MonoBehaviour
@@ -6,10 +6,10 @@ public class ItemLanePlacer : MonoBehaviour
     [Header("Prefab")]
     [SerializeField] private GameObject itemPrefab;
 
-    [Header("‹¤—Lİ’è")]
+    [Header("å…±æœ‰è¨­å®š")]
     [SerializeField] private ItemLaneSettings settings;
 
-    // “à•”ƒLƒƒƒbƒVƒ…
+    // å†…éƒ¨ã‚­ãƒ£ãƒƒã‚·ãƒ¥
     private readonly List<ItemLaneAnchor> _candidates = new List<ItemLaneAnchor>(32);
     private readonly List<ItemLaneSampling.Sample> _samples = new List<ItemLaneSampling.Sample>(256);
 

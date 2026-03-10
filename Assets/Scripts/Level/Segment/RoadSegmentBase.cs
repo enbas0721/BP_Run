@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class RoadSegmentBase : MonoBehaviour
 {
@@ -14,8 +14,8 @@ public class RoadSegmentBase : MonoBehaviour
 
     public float SegmentLength => endPoint.localPosition.z;
 
-    /* ”p~ */
-    /* ƒZƒOƒƒ“ƒg‚Éƒ‰ƒ“ƒ_ƒ€‚ÅƒIƒuƒWƒFƒNƒg‚ğ”z’u‚·‚é•K—v‚ªo‚½‚ÉÄ—˜—p */
+    /* å»ƒæ­¢ */
+    /* ã‚»ã‚°ãƒ¡ãƒ³ãƒˆã«ãƒ©ãƒ³ãƒ€ãƒ ã§ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’é…ç½®ã™ã‚‹å¿…è¦ãŒå‡ºãŸæ™‚ã«å†åˆ©ç”¨ */
     /*public void RebuildObstacles(ObstaclePlacer placer)
     {
         if (!obstaclePoints || !placer  || !obstacleInstancesRoot) return;

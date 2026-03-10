@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 
 public enum GameState
@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     [Header("Score Settings")]
-    [Tooltip("1•b‚ ‚½‚è‚ÌƒXƒRƒA‘‰Á—Ê")]
+    [Tooltip("1ç§’ã‚ãŸã‚Šã®ã‚¹ã‚³ã‚¢å¢—åŠ é‡")]
     [SerializeField] private float scorePerSecond = 10f;
 
     public GameState State { get; private set; } = GameState.Ready;
@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
         if (State == next) return;
         State = next;
 
-        /* [MEMO] PlayingˆÈŠO‚Í~‚ß‚é */
+        /* [MEMO] Playingä»¥å¤–ã¯æ­¢ã‚ã‚‹ */
         /* Time.timeScale = (State == GameState.Playing) ? 1f : 0f; */
 
         OnStateChanged?.Invoke(State);
@@ -135,34 +135,34 @@ public class GameManager : MonoBehaviour
     public void ResetRun()
     {
         playTime = 0f;
-        // runner‚ÌƒŠƒZƒbƒg
+        // runnerã®ãƒªã‚»ãƒƒãƒˆ
         if (runner)
         {
             runner.ResetRunner();
         }
 
-        // segmentSpawner‚ÌƒŠƒZƒbƒg
+        // segmentSpawnerã®ãƒªã‚»ãƒƒãƒˆ
         if (segmentSpawner)
         {
             segmentSpawner.ResetSegments();
         }
 
-        // adrenalineSystem‚ÌƒŠƒZƒbƒg
+        // adrenalineSystemã®ãƒªã‚»ãƒƒãƒˆ
         if (adrenalineSystem)
         {
             adrenalineSystem.ResetSystem();
         }
 
-        // SwipeInput‚ÌƒŠƒZƒbƒg
+        // SwipeInputã®ãƒªã‚»ãƒƒãƒˆ
         if (swipeInput)
         {
             swipeInput.ResetInputState();
         }
 
-        // –³“Gó‘Ô‚ğƒNƒŠƒA
+        // ç„¡æ•µçŠ¶æ…‹ã‚’ã‚¯ãƒªã‚¢
         ClearInvincible();
 
-        // ƒXƒRƒAƒŠƒZƒbƒg
+        // ã‚¹ã‚³ã‚¢ãƒªã‚»ãƒƒãƒˆ
         ScoreSystem.Reset();
         OnScoreChanged?.Invoke(ScoreSystem.Score);
 

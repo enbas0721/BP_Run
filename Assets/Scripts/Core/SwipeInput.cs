@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class SwipeInput : MonoBehaviour
@@ -34,7 +34,7 @@ public class SwipeInput : MonoBehaviour
             return;
         }
 
-            // Touch—Dæ
+            // Touchå„ªå…ˆ
             if (touch != null && touch.primaryTouch.press.isPressed)
         {
             var pos = touch.primaryTouch.position.ReadValue();
@@ -46,7 +46,7 @@ public class SwipeInput : MonoBehaviour
             }
         }
 
-        // TouchC—¹
+        // Touchä¿®äº†æ™‚
         if (tracking && touch != null && !touch.primaryTouch.press.isPressed)
         {
             tracking = false;
@@ -55,7 +55,7 @@ public class SwipeInput : MonoBehaviour
             return;
         }
 
-        // Editor/PC—p(ƒ}ƒEƒX)
+        // Editor/PCç”¨(ãƒã‚¦ã‚¹)
         if (mouse == null) return;
 
         if (mouse.leftButton.wasPressedThisFrame)
@@ -78,13 +78,13 @@ public class SwipeInput : MonoBehaviour
 
         if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
         {
-            /* ‰¡•ûŒüƒXƒƒCƒv”»’è */
+            /* æ¨ªæ–¹å‘ã‚¹ãƒ¯ã‚¤ãƒ—åˆ¤å®š */
             if (delta.x > 0) runner.MoveLane(+1);
             else runner.MoveLane(-1);
         }
         else
         {
-            /* c•ûŒüƒXƒƒCƒv”»’è */
+            /* ç¸¦æ–¹å‘ã‚¹ãƒ¯ã‚¤ãƒ—åˆ¤å®š */
             if (delta.y > 0) runner.Jump();
             else runner.Slide();
         }

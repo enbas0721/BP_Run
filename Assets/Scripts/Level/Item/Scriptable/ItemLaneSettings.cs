@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "ItemLaneSettings", menuName = "Runner/Item Lane Settings")]
 public class ItemLaneSettings : ScriptableObject

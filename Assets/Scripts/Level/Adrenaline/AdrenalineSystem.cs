@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(RunnerController))]
@@ -60,7 +60,7 @@ public class AdrenalineSystem : MonoBehaviour
 
     public void ResetSystem()
     {
-        // 1) NearMiss ‹­§I—¹iTimeScale‚ğ•K‚¸–ß‚·j
+        // 1) NearMiss å¼·åˆ¶çµ‚äº†ï¼ˆTimeScaleã‚’å¿…ãšæˆ»ã™ï¼‰
         if (nearMissActive)
         {
             nearMissActive = false;
@@ -70,17 +70,17 @@ public class AdrenalineSystem : MonoBehaviour
         Time.timeScale = 1f;
         Time.fixedDeltaTime = originalFixedDeltaTime;
 
-        // 2) Rush ‹­§I—¹i‘¬“x”{—¦‚ğ–ß‚·j
+        // 2) Rush å¼·åˆ¶çµ‚äº†ï¼ˆé€Ÿåº¦å€ç‡ã‚’æˆ»ã™ï¼‰
         rushActive = false;
         rushEndTime = -999f;
         if (runner) runner.SetRushForwardMultiplier(1f);
 
-        // 3) ƒQ[ƒW‚ÆƒN[ƒ‹ƒ_ƒEƒ“
+        // 3) ã‚²ãƒ¼ã‚¸ã¨ã‚¯ãƒ¼ãƒ«ãƒ€ã‚¦ãƒ³
         gauge = 0f;
         nearMissEndTime = -999f;
         cooldownUntil = -999f;
 
-        // 4) ÚGƒ][ƒ“î•ñ‚ğƒNƒŠƒAiŸ‚Ìƒ‰ƒ“‚É‚¿‰z‚³‚È‚¢j
+        // 4) æ¥è§¦ã‚¾ãƒ¼ãƒ³æƒ…å ±ã‚’ã‚¯ãƒªã‚¢ï¼ˆæ¬¡ã®ãƒ©ãƒ³ã«æŒã¡è¶Šã•ãªã„ï¼‰
         overlappedZones.Clear();
     }
 

@@ -1,6 +1,6 @@
-/*
+ï»¿/*
  * ObstaclePlacer.cs
- * áŠQ•¨”z’u’S“–ƒNƒ‰ƒX
+ * éšœå®³ç‰©é…ç½®æ‹…å½“ã‚¯ãƒ©ã‚¹
  */
 
 using UnityEngine;

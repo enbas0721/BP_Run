@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
@@ -29,7 +29,7 @@ public class AdrenalineGaugeUI : MonoBehaviour
         if (adrenaline.IsRushActive)
         {
             target = adrenaline.RushRemaining01;
-            /* –žƒ^ƒ“ŽžF‚ð‹A‚éê‡‚Í—LŒø‚É */
+            /* æº€ã‚¿ãƒ³æ™‚è‰²ã‚’å¸°ã‚‹å ´åˆã¯æœ‰åŠ¹ã« */
             /* fillImage.color = Color.yellow; */
         }
         else
@@ -51,11 +51,11 @@ public class AdrenalineGaugeUI : MonoBehaviour
 
         float height = barRect.rect.height;
 
-        // ‰º’[ = -pivot.y * height
+        // ä¸‹ç«¯ = -pivot.y * height
         float bottomY = -barRect.pivot.y * height;
         float topY = bottomY + height;
 
-        // fill01(0..1) -> Y(‰º¨ã)
+        // fill01(0..1) -> Y(ä¸‹â†’ä¸Š)
         float y = Mathf.Lerp(bottomY + headPadding, topY - headPadding, fill01);
 
         Vector2 a = headMarker.anchoredPosition;

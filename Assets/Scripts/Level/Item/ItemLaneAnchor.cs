@@ -1,10 +1,10 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class ItemLaneAnchor : MonoBehaviour
 {
-    [Tooltip("Anchor’Š‘I‚Ì‘Š‘Îd‚İ(‘å‚«‚¢‚Ù‚Ç‘I‚Î‚ê‚â‚·‚¢)")]
+    [Tooltip("AnchoræŠ½é¸ã®ç›¸å¯¾é‡ã¿(å¤§ãã„ã»ã©é¸ã°ã‚Œã‚„ã™ã„)")]
     [Min(0f)] public float spawnWeight = 1f;
-    [Tooltip("Anchor‚ÌƒAƒCƒeƒ€”z’uƒpƒ^[ƒ“")]
+    [Tooltip("Anchorã®ã‚¢ã‚¤ãƒ†ãƒ é…ç½®ãƒ‘ã‚¿ãƒ¼ãƒ³")]
     public ItemLanePattern pattern;
 
     [Header("Local-Z Range")]
@@ -13,12 +13,12 @@ public class ItemLaneAnchor : MonoBehaviour
 
     [Header("Gizmo Preview")]
     public bool drawPreviewGizmo = true;
-    [Tooltip("•\¦‚·‚é“_‚Ì‘å‚«‚³")]
+    [Tooltip("è¡¨ç¤ºã™ã‚‹ç‚¹ã®å¤§ãã•")]
     public float gizmoPointRadius = 0.4f;
-    [Tooltip("“_‚ğü‚ÅŒ‹‚Ô")]
+    [Tooltip("ç‚¹ã‚’ç·šã§çµã¶")]
     public bool drawPolyline = true;
 
-    [Header("‹¤—Lİ’è")]
+    [Header("å…±æœ‰è¨­å®š")]
     public ItemLaneSettings settings;
 
     private static readonly System.Collections.Generic.List<ItemLaneSampling.Sample> _samples

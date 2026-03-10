@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 public static class ItemLaneSampling
@@ -10,8 +10,8 @@ public static class ItemLaneSampling
     }
 
     /// <summary>
-    /// anchor/basis/start/end/pattern/settings ‚©‚çA¶¬‚·‚×‚«ƒ[ƒ‹ƒhÀ•W—ñ‚ğ outSamples‚É‹l‚ß‚é
-    /// outSamples ‚Í Clear‚³‚ê‚éB
+    /// anchor/basis/start/end/pattern/settings ã‹ã‚‰ã€ç”Ÿæˆã™ã¹ããƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™åˆ—ã‚’ outSamplesã«è©°ã‚ã‚‹
+    /// outSamples ã¯ Clearã•ã‚Œã‚‹ã€‚
     /// </summary>
     public static void SamplePositionsLocalZ (
         Transform anchorTransform, 
@@ -27,7 +27,7 @@ public static class ItemLaneSampling
 
         Transform basis = anchorTransform.parent != null ? anchorTransform.parent : anchorTransform;
 
-        // ŠJn/I—¹ˆÊ’u‚Ìƒ}[ƒJ[‚ğæ“¾Binull‚È‚çƒfƒtƒHƒ‹ƒg’l‚ğİ’èj
+        // é–‹å§‹/çµ‚äº†ä½ç½®ã®ãƒãƒ¼ã‚«ãƒ¼ã‚’å–å¾—ã€‚ï¼ˆnullãªã‚‰ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤ã‚’è¨­å®šï¼‰
         Transform sTr = startMarker ? startMarker : anchorTransform;
         Transform eTr = endMarker ? endMarker : null;
 
