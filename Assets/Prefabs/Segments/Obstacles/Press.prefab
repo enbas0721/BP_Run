@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16b11e970de1a5e4eb7ec7b9e0af57a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NearMissZone
-  adrenalinePerSecond: 100
 --- !u!65 &2081019908228670665
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -154,6 +153,12 @@ PrefabInstance:
       insertIndex: 0
       addedObject: {fileID: 8632886543715371731}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 560feb23da0f6394f85d5819c60675cb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1396993763292387024}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 560feb23da0f6394f85d5819c60675cb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7754859590476670981}
     - targetCorrespondingSourceObject: {fileID: -3507343686244464696, guid: 560feb23da0f6394f85d5819c60675cb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7398696776902557063}
@@ -163,6 +168,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 560feb23da0f6394f85d5819c60675cb, type: 3}
   m_PrefabInstance: {fileID: 225060379809993491}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1143627233825123906 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 560feb23da0f6394f85d5819c60675cb, type: 3}
+  m_PrefabInstance: {fileID: 225060379809993491}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &1396993763292387024
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143627233825123906}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &7754859590476670981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143627233825123906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7a59e196b699ee40aed8a2808913b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Obstacle
+  blastScore: 100
+  blastForce: {x: 20, y: 30, z: 50}
+  destroyDelay: 3
 --- !u!1 &5498044917918094555 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3507343686244464696, guid: 560feb23da0f6394f85d5819c60675cb, type: 3}

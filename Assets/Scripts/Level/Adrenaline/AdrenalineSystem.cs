@@ -12,6 +12,7 @@ public class AdrenalineSystem : MonoBehaviour
     [SerializeField] private float nearMissDuration = 0.20f;
     [SerializeField] private float nearMissCooldown = 0.1f;
     [SerializeField] private float nearMissTimeScale = 0.3f;
+    [SerializeField] private float nearMissAdrenalinePerSecond = 40f;
 
     private float originalFixedDeltaTime;
 
@@ -133,7 +134,7 @@ public class AdrenalineSystem : MonoBehaviour
         nearMissEndTime = Time.unscaledTime + nearMissDuration;
         cooldownUntil = Time.unscaledTime + nearMissCooldown;
 
-        gaugePerSec = zone.AdrenalinePerSecond;
+        gaugePerSec = nearMissAdrenalinePerSecond;
 
         Time.timeScale = nearMissTimeScale;
         Time.fixedDeltaTime = originalFixedDeltaTime * nearMissTimeScale;
