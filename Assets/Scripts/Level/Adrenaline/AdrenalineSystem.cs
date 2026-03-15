@@ -19,6 +19,8 @@ public class AdrenalineSystem : MonoBehaviour
     [Header("Rush (Invincible + Fast)")]
     [SerializeField] private float rushDuration = 5.0f;
     [SerializeField] private float rushForwardSpeedMultiplier = 2.0f;
+    [SerializeField] private float rushWindDownDuration = 1.5f;
+    [SerializeField] private AnimationCurve rushWindDownCurve = AnimationCurve.Linear(0, 0, 1, 1);
 
     public event System.Action<int> OnNearMissStarted;
     public event System.Action OnNearMissEnded;
@@ -99,10 +101,19 @@ public class AdrenalineSystem : MonoBehaviour
                 EndNearMiss();
         }
 
-        if (rushActive && now >= rushEndTime)
+        if (rushActive)
         {
-            rushActive = false;
-            runner.SetRushForwardMultiplier(1f);
+            float windDownStart = rushEndTime - rushWindDownDuration;
+            if (now >= windDownStart)
+            {
+                float t = Mathf.Clamp01((now - windDownStart) / rushWindDownDuration);
+                runner.SetRushForwardMultiplier(Mathf.Lerp(rushForwardSpeedMultiplier, 1f, rushWindDownCurve.Evaluate(t)));
+            }
+            if (now >= rushEndTime)
+            {
+                rushActive = false;
+                runner.SetRushForwardMultiplier(1f);
+            }
         }
     }
 

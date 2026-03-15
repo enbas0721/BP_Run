@@ -299,6 +299,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7274a0ccbf2abf24bae5608c457f76c6, type: 3}
+--- !u!114 &827598176 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
+  m_PrefabInstance: {fileID: 1629748778}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d84ebe7b5bad0b4d87c9dbc8ea2cd4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SegmentSpawner
 --- !u!1001 &828340009
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -751,7 +762,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  segmentSpawner: {fileID: 0}
+  segmentSpawner: {fileID: 827598176}
   adrenalineSystem: {fileID: 1160277031}
   swipeInput: {fileID: 1160277032}
   debugInvincible: 0

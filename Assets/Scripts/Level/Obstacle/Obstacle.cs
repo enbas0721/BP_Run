@@ -5,7 +5,9 @@ public class Obstacle : MonoBehaviour
 {
     [Header("Blast Settings")]
     [SerializeField] private int blastScore = 100;
-    [SerializeField] private Vector3 blastForce = new Vector3(0f, 4f, -8f);
+    [SerializeField] private float blastForceMagnitude = 60f;
+    [SerializeField] private float blastUpAngle = 30f;
+    [SerializeField] private float blastSpreadAngle = 25f;
     [SerializeField] private float destroyDelay = 3f;
 
     private Rigidbody rb;
@@ -57,7 +59,9 @@ public class Obstacle : MonoBehaviour
         if (rb != null)
         {
             rb.isKinematic = false;
-            rb.AddForce(blastForce, ForceMode.Impulse);
+            float yaw = Random.Range(-blastSpreadAngle, blastSpreadAngle);
+            Vector3 dir = Quaternion.Euler(-blastUpAngle, yaw, 0) * Vector3.forward;
+            rb.AddForce(dir * blastForceMagnitude, ForceMode.Impulse);
         }
 
         GameManager.Instance.AddScore(blastScore);
