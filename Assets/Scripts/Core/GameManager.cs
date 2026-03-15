@@ -65,6 +65,8 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
 
+        Application.targetFrameRate = 60;
+
         ScoreSystem = new ScoreSystem(scorePerSecond);
         ScoreSystem.OnScoreChanged += HandleScoreChanged;
     }
