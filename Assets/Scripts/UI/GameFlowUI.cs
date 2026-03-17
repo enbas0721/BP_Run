@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
@@ -27,6 +27,7 @@ public class GameFlowUI : MonoBehaviour
         if (GameManager.Instance != null)
         {
             GameManager.Instance.OnStateChanged += HandleStateChanged;
+            GameManager.Instance.OnReadyToShowResult += ShowResult;
         }
     }
 
@@ -35,6 +36,7 @@ public class GameFlowUI : MonoBehaviour
         if (GameManager.Instance  != null)
         {
             GameManager.Instance.OnStateChanged -= HandleStateChanged;
+            GameManager.Instance.OnReadyToShowResult -= ShowResult;
         }
     }
 
@@ -66,7 +68,6 @@ public class GameFlowUI : MonoBehaviour
                 break;
 
             case GameState.GameOver:
-                ShowResult();
                 break;
         }
     }

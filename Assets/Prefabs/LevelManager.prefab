@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3309138622086827466}
   - component: {fileID: 8222377864733174166}
   - component: {fileID: 5923924726750574902}
-  - component: {fileID: 4188903997800767285}
   - component: {fileID: 7054258023032897551}
   m_Layer: 0
   m_Name: LevelManager
@@ -50,12 +49,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SegmentPool
   entries:
   - segmentPrefab: {fileID: 1126375026918509926, guid: 0000cd5d63ff6804b8983ff6c77fcd56, type: 3}
-    warmCount: 6
+    warmCount: 3
     weight: 1
-  - segmentPrefab: {fileID: 4065237540404446330, guid: c2571fa03b51bde4cb9a0d65963f793d, type: 3}
-    warmCount: 6
+  - segmentPrefab: {fileID: 1126375026918509926, guid: 5af759d6008fc9844844c7b41f44d17a, type: 3}
+    warmCount: 3
     weight: 1
-  avoidSameAsLast: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: 167c9d6d3be7f764386cb95fb06a07f3, type: 3}
+    warmCount: 3
+    weight: 3
+  - segmentPrefab: {fileID: 1126375026918509926, guid: 58669a4bad31cad4192fde8c3f417178, type: 3}
+    warmCount: 3
+    weight: 2
+  - segmentPrefab: {fileID: 1126375026918509926, guid: c68ea4dd352e2b747abc0fdfec631c2a, type: 3}
+    warmCount: 3
+    weight: 2
+  - segmentPrefab: {fileID: 1126375026918509926, guid: 35048f5899b779d49b53fb990e33c50b, type: 3}
+    warmCount: 3
+    weight: 1
+  - segmentPrefab: {fileID: 1126375026918509926, guid: 749cc7087b6c2cb4a8813e27b26f9f8a, type: 3}
+    warmCount: 3
+    weight: 1
+  - segmentPrefab: {fileID: 1126375026918509926, guid: b7c596b3484ad5046803d4fc69b3e184, type: 3}
+    warmCount: 3
+    weight: 1
+  avoidSameAsLast: 1
 --- !u!114 &8222377864733174166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,29 +105,15 @@ MonoBehaviour:
   player: {fileID: 0}
   roadPool: {fileID: 3309138622086827466}
   itemPlacer: {fileID: 7054258023032897551}
-  roadInitialAheadOffset: 20
+  roadInitialAheadOffset: 39
   aheadDistance: 120
   roadInitialSegments: 4
   behindDistance: 10
   envPool: {fileID: 8222377864733174166}
-  envInitialAheadOffset: 19
+  envInitialAheadOffset: 11
   envAheadDistance: 120
   envInitialSegment: 6
   envBehindDistance: 20
---- !u!114 &4188903997800767285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 978825348936330713}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aeee688a0e914344ea56737f191c7c8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObstaclePlacer
-  obstaclePrefab: {fileID: 6370437689949321743, guid: a12e4933299320543a4f6ebf286b8d6c, type: 3}
-  spawnChance: 0.2
 --- !u!114 &7054258023032897551
 MonoBehaviour:
   m_ObjectHideFlags: 0

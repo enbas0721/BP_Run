@@ -1,6 +1,6 @@
-/*
+ï»¿/*
  * SegmentPool.cs
- * ƒZƒOƒƒ“ƒgƒIƒuƒWƒFƒNƒg‚ğƒLƒ…[‚Å•ÛB
+ * ã‚»ã‚°ãƒ¡ãƒ³ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ã‚­ãƒ¥ãƒ¼ã§ä¿æŒã€‚
  */ 
 
 using UnityEngine;
@@ -12,9 +12,9 @@ public class RoadSegmentPool : MonoBehaviour
     public class Entry
     { 
         public RoadSegmentBase segmentPrefab;
-        [Tooltip("Å‰‚Éƒv[ƒ‹‚µ‚Ä‚¨‚­ƒZƒOƒƒ“ƒg‚Ì”B<br>”­¶Šm—¦‚ª’á‚¢‚à‚Ì‚Í¬‚³‚­‚µ‚Ä‚¨‚­‚ÆƒŠƒ\[ƒXíŒ¸‚Å‚«‚éB‚©‚àB")]
+        [Tooltip("æœ€åˆã«ãƒ—ãƒ¼ãƒ«ã—ã¦ãŠãã‚»ã‚°ãƒ¡ãƒ³ãƒˆã®æ•°ã€‚<br>ç™ºç”Ÿç¢ºç‡ãŒä½ã„ã‚‚ã®ã¯å°ã•ãã—ã¦ãŠãã¨ãƒªã‚½ãƒ¼ã‚¹å‰Šæ¸›ã§ãã‚‹ã€‚ã‹ã‚‚ã€‚")]
         public int warmCount = 3;
-        [Tooltip("¶¬‚Ì‘Š‘Î“I‚Èd‚İ i‘¼‚æ‚è‘å‚«‚¢‚Ù‚Ç‘I‚Î‚ê‚â‚·‚¢j")]
+        [Tooltip("ç”Ÿæˆã®ç›¸å¯¾çš„ãªé‡ã¿ ï¼ˆä»–ã‚ˆã‚Šå¤§ãã„ã»ã©é¸ã°ã‚Œã‚„ã™ã„ï¼‰")]
         [Min(0f)] public float weight = 1f;
     }
 
@@ -99,7 +99,7 @@ public class RoadSegmentPool : MonoBehaviour
     }
 
     /// <Summary>
-    /// ret < 0 ‚Ìê‡ƒGƒ‰[
+    /// ret < 0 ã®å ´åˆã‚¨ãƒ©ãƒ¼
     /// </Summary>
     private int PickIndexWeighted(bool avoidSameAsLast)
     {
@@ -121,7 +121,7 @@ public class RoadSegmentPool : MonoBehaviour
         {
             if (avoidSameAsLast && lastIndex >= 0)
             {
-                /* avoidSameAsLast—LŒøŒó•â‚ª‚È‚©‚Á‚½‚È‚çlastIndex‚ª—Bˆê‚ÌŒó•â */
+                /* avoidSameAsLastæœ‰åŠ¹æ™‚å€™è£œãŒãªã‹ã£ãŸãªã‚‰lastIndexãŒå”¯ä¸€ã®å€™è£œ */
                 return lastIndex;
             }
             else

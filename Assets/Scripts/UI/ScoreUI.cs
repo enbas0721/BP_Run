@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class ScoreUI : MonoBehaviour
@@ -22,7 +22,7 @@ public class ScoreUI : MonoBehaviour
 
     private void RefreshUI(int score)
     {
-        if (scoreText) scoreText.text = score.ToString();
+        if (scoreText) scoreText.SetText("{0}", score);
     }
 
 }

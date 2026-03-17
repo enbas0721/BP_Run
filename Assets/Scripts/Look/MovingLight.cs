@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class MovingLight : MonoBehaviour
 {
-    public Transform yAxisPivot; // ¶‰E‰ñ“]—p
-    public Transform xAxisPivot; // ã‰º‰ñ“]—p
+    public Transform yAxisPivot; // å·¦å³å›è»¢ç”¨
+    public Transform xAxisPivot; // ä¸Šä¸‹å›è»¢ç”¨
 
     public float panSpeed = 1.0f;
     public float tiltSpeed = 1.2f;
@@ -12,11 +12,11 @@ public class MovingLight : MonoBehaviour
 
     void Update()
     {
-        // ¶‰E‚ÌñU‚èiSin”g‚Å‰•œ‚³‚¹‚éj
+        // å·¦å³ã®é¦–æŒ¯ã‚Šï¼ˆSinæ³¢ã§å¾€å¾©ã•ã›ã‚‹ï¼‰
         float pan = Mathf.Sin(Time.time * panSpeed) * panRange;
         yAxisPivot.localRotation = Quaternion.Euler(0, pan, 0);
 
-        // ã‰º‚ÌñU‚è
+        // ä¸Šä¸‹ã®é¦–æŒ¯ã‚Š
         float tilt = Mathf.Sin(Time.time * tiltSpeed) * tiltRange;
         xAxisPivot.localRotation = Quaternion.Euler(tilt, 0, 0);
     }

@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -66,7 +66,7 @@ public class RunnerController : MonoBehaviour
         lastJumpPressedTime = -999f;
         jumpQueued = false;
 
-        // Ÿ‚ÌUpdate‚ÅGroundedChanged‚ª”ò‚Ô‚½‚ßfalse‚É‚µ‚Ä‚¨‚¢‚ÄØ‚è‘Ö‚¦‚³‚¹‚éB
+        // æ¬¡ã®Updateã§GroundedChangedãŒé£›ã¶ãŸã‚falseã«ã—ã¦ãŠã„ã¦åˆ‡ã‚Šæ›¿ãˆã•ã›ã‚‹ã€‚
         wasGrounded = false;
 
         rb.linearVelocity = Vector3.zero;
@@ -107,7 +107,7 @@ public class RunnerController : MonoBehaviour
             lastGroundedTime = Time.time;
         }
 
-        /* ƒWƒƒƒ“ƒv‚Ü‚Å‚Ìƒoƒbƒtƒ@ŠÔiƒWƒƒƒ“ƒvŠJn‚ª‘‚·‚¬‚é‚Ì‚ğ§Œäj */
+        /* ã‚¸ãƒ£ãƒ³ãƒ—ã¾ã§ã®ãƒãƒƒãƒ•ã‚¡æ™‚é–“ï¼ˆã‚¸ãƒ£ãƒ³ãƒ—é–‹å§‹ãŒæ—©ã™ãã‚‹ã®ã‚’åˆ¶å¾¡ï¼‰ */
         if (Time.time - lastJumpPressedTime <= jumpBufferTime &&
             Time.time - lastGroundedTime <= coyoteTime) 
         {
@@ -164,7 +164,7 @@ public class RunnerController : MonoBehaviour
     public void Slide()
     {
         if (!IsPlaying()) return;
-        // [MEMO] ’Ç‰Á—\’è‚È‚µ
+        // [MEMO] è¿½åŠ äºˆå®šãªã—
     }
 
     private void DoJump()
@@ -201,12 +201,12 @@ public class RunnerController : MonoBehaviour
 
         if (v.y > 0.01f)
         {
-            // ã¸’†‚Ì‰Á‘¬“x’Ç‰Á
+            // ä¸Šæ˜‡ä¸­ã®åŠ é€Ÿåº¦è¿½åŠ 
             rb.AddForce(Physics.gravity * (riseGravityMultiplier - 1f), ForceMode.Acceleration);
         }
         else if (v.y < -0.01f)
         {
-            // ‰ÁH’†‚Ì‰Á‘¬“x’Ç‰Á
+            // åŠ å·¥ä¸­ã®åŠ é€Ÿåº¦è¿½åŠ 
             rb.AddForce(Physics.gravity * (fallGravityMultiplier - 1f), ForceMode.Acceleration);
         }
     }

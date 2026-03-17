@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(RunnerController))]
@@ -12,12 +12,15 @@ public class AdrenalineSystem : MonoBehaviour
     [SerializeField] private float nearMissDuration = 0.20f;
     [SerializeField] private float nearMissCooldown = 0.1f;
     [SerializeField] private float nearMissTimeScale = 0.3f;
+    [SerializeField] private float nearMissAdrenalinePerSecond = 40f;
 
     private float originalFixedDeltaTime;
 
     [Header("Rush (Invincible + Fast)")]
     [SerializeField] private float rushDuration = 5.0f;
     [SerializeField] private float rushForwardSpeedMultiplier = 2.0f;
+    [SerializeField] private float rushWindDownDuration = 1.5f;
+    [SerializeField] private AnimationCurve rushWindDownCurve = AnimationCurve.Linear(0, 0, 1, 1);
 
     public event System.Action<int> OnNearMissStarted;
     public event System.Action OnNearMissEnded;
@@ -60,7 +63,7 @@ public class AdrenalineSystem : MonoBehaviour
 
     public void ResetSystem()
     {
-        // 1) NearMiss ‹­§I—¹iTimeScale‚ð•K‚¸–ß‚·j
+        // 1) NearMiss å¼·åˆ¶çµ‚äº†ï¼ˆTimeScaleã‚’å¿…ãšæˆ»ã™ï¼‰
         if (nearMissActive)
         {
             nearMissActive = false;
@@ -70,17 +73,17 @@ public class AdrenalineSystem : MonoBehaviour
         Time.timeScale = 1f;
         Time.fixedDeltaTime = originalFixedDeltaTime;
 
-        // 2) Rush ‹­§I—¹i‘¬“x”{—¦‚ð–ß‚·j
+        // 2) Rush å¼·åˆ¶çµ‚äº†ï¼ˆé€Ÿåº¦å€çŽ‡ã‚’æˆ»ã™ï¼‰
         rushActive = false;
         rushEndTime = -999f;
         if (runner) runner.SetRushForwardMultiplier(1f);
 
-        // 3) ƒQ[ƒW‚ÆƒN[ƒ‹ƒ_ƒEƒ“
+        // 3) ã‚²ãƒ¼ã‚¸ã¨ã‚¯ãƒ¼ãƒ«ãƒ€ã‚¦ãƒ³
         gauge = 0f;
         nearMissEndTime = -999f;
         cooldownUntil = -999f;
 
-        // 4) ÚGƒ][ƒ“î•ñ‚ðƒNƒŠƒAiŽŸ‚Ìƒ‰ƒ“‚ÉŽ‚¿‰z‚³‚È‚¢j
+        // 4) æŽ¥è§¦ã‚¾ãƒ¼ãƒ³æƒ…å ±ã‚’ã‚¯ãƒªã‚¢ï¼ˆæ¬¡ã®ãƒ©ãƒ³ã«æŒã¡è¶Šã•ãªã„ï¼‰
         overlappedZones.Clear();
     }
 
@@ -98,10 +101,19 @@ public class AdrenalineSystem : MonoBehaviour
                 EndNearMiss();
         }
 
-        if (rushActive && now >= rushEndTime)
+        if (rushActive)
         {
-            rushActive = false;
-            runner.SetRushForwardMultiplier(1f);
+            float windDownStart = rushEndTime - rushWindDownDuration;
+            if (now >= windDownStart)
+            {
+                float t = Mathf.Clamp01((now - windDownStart) / rushWindDownDuration);
+                runner.SetRushForwardMultiplier(Mathf.Lerp(rushForwardSpeedMultiplier, 1f, rushWindDownCurve.Evaluate(t)));
+            }
+            if (now >= rushEndTime)
+            {
+                rushActive = false;
+                runner.SetRushForwardMultiplier(1f);
+            }
         }
     }
 
@@ -133,7 +145,7 @@ public class AdrenalineSystem : MonoBehaviour
         nearMissEndTime = Time.unscaledTime + nearMissDuration;
         cooldownUntil = Time.unscaledTime + nearMissCooldown;
 
-        gaugePerSec = zone.AdrenalinePerSecond;
+        gaugePerSec = nearMissAdrenalinePerSecond;
 
         Time.timeScale = nearMissTimeScale;
         Time.fixedDeltaTime = originalFixedDeltaTime * nearMissTimeScale;

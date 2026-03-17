@@ -1,3 +1,4 @@
+﻿using System.Collections;
 using UnityEngine;
 
 public enum RunnerAnimMoveState
@@ -97,7 +98,8 @@ public class RunnerAnimatorController : MonoBehaviour
 
             case GameState.GameOver:
                 animator.SetTrigger(deathHash);
-                animator.SetInteger(moveStateHash, (int)RunnerAnimMoveState.Stand);
+                animator.SetInteger(moveStateHash, (int)RunnerAnimMoveState.Death);
+                StartCoroutine(WaitForDeathAnim());
                 break;
         }
     }
@@ -108,6 +110,17 @@ public class RunnerAnimatorController : MonoBehaviour
 
         if (direction < 0) animator.SetTrigger(spinLeftHash);
         else if (direction > 0) animator.SetTrigger(spinRightHash);
+    }
+
+    private IEnumerator WaitForDeathAnim()
+    {
+        yield return null;
+        while (animator.IsInTransition(0))
+            yield return null;
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+            yield return null;
+        animator.SetInteger(moveStateHash, (int)RunnerAnimMoveState.Stand);
+        GameManager.Instance?.NotifyReadyToShowResult();
     }
 
     private void SyncInitialState()

@@ -1,6 +1,6 @@
-/*
+ï»¿/*
  * SegmentSpwner.cs
- * ƒZƒOƒƒ“ƒg‚Ì”z’uæ‚â”z’uƒZƒOƒƒ“ƒg‚ğŠÇ—EŒˆ’è
+ * ã‚»ã‚°ãƒ¡ãƒ³ãƒˆã®é…ç½®å…ˆã‚„é…ç½®ã‚»ã‚°ãƒ¡ãƒ³ãƒˆã‚’ç®¡ç†ãƒ»æ±ºå®š
  */
 
 using UnityEngine;
@@ -13,13 +13,13 @@ public class SegmentSpawner : MonoBehaviour
     [Header("Game Segment (Road)")]
     [SerializeField] private RoadSegmentPool roadPool;
     [SerializeField] private ItemLanePlacer itemPlacer;
-    [Tooltip("ŠJn“_‚Ì‘O•ûƒIƒtƒZƒbƒgiƒXƒ^[ƒgƒZƒOƒƒ“ƒg‚Ì’·‚³•ªj")]
+    [Tooltip("é–‹å§‹æ™‚ç‚¹ã®å‰æ–¹ã‚ªãƒ•ã‚»ãƒƒãƒˆï¼ˆã‚¹ã‚¿ãƒ¼ãƒˆã‚»ã‚°ãƒ¡ãƒ³ãƒˆã®é•·ã•åˆ†ï¼‰")]
     [SerializeField] private float roadInitialAheadOffset = 20f;
-    [Tooltip("ƒvƒŒƒCƒ„[‚Ì‘O•û‚ÉŠm•Û‚µ‚½‚¢°‚Ì‹——£")]
+    [Tooltip("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‰æ–¹ã«ç¢ºä¿ã—ãŸã„åºŠã®è·é›¢")]
     [SerializeField] private float aheadDistance = 60f;
-    [Tooltip("‰Šú‚É•~‚­Å’á–‡”iŒ©‚½–Ú‚Ì‚½‚ßj")]
+    [Tooltip("åˆæœŸã«æ•·ãæœ€ä½æšæ•°ï¼ˆè¦‹ãŸç›®ã®ãŸã‚ï¼‰")]
     [SerializeField] private int roadInitialSegments = 4;
-    [Tooltip("ƒvƒŒƒCƒ„[‚ÌŒã•û‚Å‰ñû‚·‚é‹——£iƒZƒOƒƒ“ƒgI’[‚ª‚±‚Ì‹——£‚¾‚¯Œã‚ë‚È‚ç‰ñûj")]
+    [Tooltip("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¾Œæ–¹ã§å›åã™ã‚‹è·é›¢ï¼ˆã‚»ã‚°ãƒ¡ãƒ³ãƒˆçµ‚ç«¯ãŒã“ã®è·é›¢ã ã‘å¾Œã‚ãªã‚‰å›åï¼‰")]
     [SerializeField] private float behindDistance = 30f;
 
     [Header("Env Segment (Walls/Ceiling)")]
@@ -29,7 +29,7 @@ public class SegmentSpawner : MonoBehaviour
     [SerializeField] private int envInitialSegment = 3;
     [SerializeField] private float envBehindDistance = 40f;
 
-    /* áŠQ•¨‚Ì©“®¶¬‚Í–³Œø‰» */
+    /* éšœå®³ç‰©ã®è‡ªå‹•ç”Ÿæˆã¯ç„¡åŠ¹åŒ– */
     /* [Header("Obstacle")] */
     /* [SerializeField] private ObstaclePlacer obstaclePlacer; */
 
@@ -49,12 +49,12 @@ public class SegmentSpawner : MonoBehaviour
         if (GameManager.Instance != null && GameManager.Instance.State != GameState.Playing)
             return;
 
-        // ƒvƒŒƒCƒ„[‘O•û‚ÌŠm•Û‹——£‚ğ–‚½‚·‚Ü‚ÅA•K—v–‡”‚ğ‚Ü‚Æ‚ß‚Ä¶¬
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼å‰æ–¹ã®ç¢ºä¿è·é›¢ã‚’æº€ãŸã™ã¾ã§ã€å¿…è¦æšæ•°ã‚’ã¾ã¨ã‚ã¦ç”Ÿæˆ
         while (roadSpawnZ <= player.position.z + aheadDistance)
         {
             if (!SpawnRoadSegment())
             {
-                /* Segment‚ª¶¬‚Å‚«‚È‚©‚Á‚½‚çbreak(Editor‚ÌƒtƒŠ[ƒY‰ñ”ğ) */
+                /* SegmentãŒç”Ÿæˆã§ããªã‹ã£ãŸã‚‰break(Editorã®ãƒ•ãƒªãƒ¼ã‚ºå›é¿) */
                 break;
             }
         }
@@ -73,7 +73,7 @@ public class SegmentSpawner : MonoBehaviour
 
     public void ResetSegments()
     {
-        // Šù‘¶ƒZƒOƒƒ“ƒg‚Ì‰ñû
+        // æ—¢å­˜ã‚»ã‚°ãƒ¡ãƒ³ãƒˆã®å›å
         while (activeRoadSegments.Count > 0)
         {
             var seg = activeRoadSegments.Dequeue();
@@ -86,11 +86,11 @@ public class SegmentSpawner : MonoBehaviour
             envPool.Release(env);
         }
 
-        // ƒXƒ|[ƒ“ˆÊ’u‚Ì‰Šú‰»
+        // ã‚¹ãƒãƒ¼ãƒ³ä½ç½®ã®åˆæœŸåŒ–
         roadSpawnZ = roadInitialAheadOffset;
         envSpawnZ = envInitialAheadOffset;
 
-        // ‰ŠúƒZƒOƒƒ“ƒg‚Ì¶¬
+        // åˆæœŸã‚»ã‚°ãƒ¡ãƒ³ãƒˆã®ç”Ÿæˆ
         for (int i = 0; i < roadInitialSegments; i++ )
         {
             if (!SpawnRoadSegment()) break;
@@ -112,7 +112,7 @@ public class SegmentSpawner : MonoBehaviour
 
         seg.transform.position = new Vector3(0, 0, roadSpawnZ);
 
-        /* áŠQ•¨‚ÍƒZƒOƒƒ“ƒg‚Éè“®”z’u‚µ‚Ä‚¨‚­‚Ì‚Å©“®¶¬‚Í–³Œø‰» */
+        /* éšœå®³ç‰©ã¯ã‚»ã‚°ãƒ¡ãƒ³ãƒˆã«æ‰‹å‹•é…ç½®ã—ã¦ãŠãã®ã§è‡ªå‹•ç”Ÿæˆã¯ç„¡åŠ¹åŒ– */
         /* seg.RebuildObstacles(obstaclePlacer); */
 
         seg.RebuildItems(itemPlacer);

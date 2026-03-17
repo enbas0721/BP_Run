@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c39f47333167b4846866bfcbba391c58, type: 3}
   m_Name: LP_Shift2right
   m_EditorClassIdentifier: Assembly-CSharp::ItemLanePattern
-  tag: 1
   weight: 1
   lines:
   - lane:
