@@ -15,11 +15,15 @@ public class GameFlowUI : MonoBehaviour
     [Header("Buttons")]
     [SerializeField] private Button startButton;
     [SerializeField] private Button retryButton;
+    [SerializeField] private Button pauseButton;
+    [SerializeField] private Button resumeButton;
 
     private void Awake()
     {
         if (startButton) startButton.onClick.AddListener(OnStartClicked);
         if (retryButton) retryButton.onClick.AddListener(OnRetryClicked);
+        if (pauseButton) pauseButton.onClick.AddListener(OnPauseClicked);
+        if (resumeButton) resumeButton.onClick.AddListener(OnResumeClicked);
     }
 
     private void OnEnable()
@@ -55,6 +59,16 @@ public class GameFlowUI : MonoBehaviour
         GameManager.Instance.ResetRun();
     }
 
+    private void OnPauseClicked()
+    {
+        GameManager.Instance.Pause();
+    }
+
+    private void OnResumeClicked()
+    {
+        GameManager.Instance.Resume();
+    }
+
     private void HandleStateChanged(GameState state)
     {
         switch(state)
@@ -65,6 +79,11 @@ public class GameFlowUI : MonoBehaviour
 
             case GameState.Playing:
                 ShowGame();
+                SetPauseButtonVisible(true);
+                break;
+
+            case GameState.Paused:
+                SetPauseButtonVisible(false);
                 break;
 
             case GameState.GameOver:
@@ -84,6 +103,13 @@ public class GameFlowUI : MonoBehaviour
         if (titlePanel) titlePanel.SetActive(false);
         if (gamePanel) gamePanel.SetActive(true);
         if (resultPanel) resultPanel.SetActive(false);
+        SetPauseButtonVisible(true);
+    }
+
+    private void SetPauseButtonVisible(bool pausing)
+    {
+        if (pauseButton) pauseButton.gameObject.SetActive(pausing);
+        if (resumeButton) resumeButton.gameObject.SetActive(!pausing);
     }
 
     private void ShowResult()

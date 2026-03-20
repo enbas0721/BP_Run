@@ -109,9 +109,24 @@ public class GameManager : MonoBehaviour
         OnStateChanged?.Invoke(State);
     }
 
+    public void Pause()
+    {
+        if (State != GameState.Playing) return;
+        SetState(GameState.Paused);
+        Time.timeScale = 0f;
+    }
+
+    public void Resume()
+    {
+        if (State != GameState.Paused) return;
+        Time.timeScale = 1f;
+        SetState(GameState.Playing);
+    }
+
     public void GameOver()
     {
         if (State == GameState.GameOver) return;
+        if (State == GameState.Paused) Time.timeScale = 1f;
         SetState(GameState.GameOver);
     }
 
