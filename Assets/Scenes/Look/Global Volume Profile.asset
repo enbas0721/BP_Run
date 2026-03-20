@@ -33,8 +33,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.34542817
-          value: 0.5239521
+          time: 0.33937153
+          value: 0.36999983
           inSlope: 1
           outSlope: 1
           tangentMode: 0
@@ -250,7 +250,7 @@ MonoBehaviour:
   active: 1
   type:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 8
   intensity:
     m_OverrideState: 1
     m_Value: 0.349
@@ -301,11 +301,11 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 6
   dirtTexture:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: {fileID: 0}
     dimension: 1
   dirtIntensity:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0
 --- !u!114 &-1218574677390654765
 MonoBehaviour:
@@ -414,10 +414,10 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 0.7
+    m_Value: 0.98
   contrast:
     m_OverrideState: 1
-    m_Value: 10.6
+    m_Value: -11.6
   colorFilter:
     m_OverrideState: 1
     m_Value: {r: 0.9103774, g: 1, b: 0.99938613, a: 1}
