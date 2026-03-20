@@ -11,6 +11,10 @@ public class GameFlowUI : MonoBehaviour
 
     [Header("Result UI")]
     [SerializeField] private TMP_Text resultScoreText;
+    [SerializeField] private TMP_Text resultBestScoreText;
+
+    [Header("Game UI")]
+    [SerializeField] private TMP_Text gameBestScoreText;
 
     [Header("Buttons")]
     [SerializeField] private Button startButton;
@@ -32,6 +36,7 @@ public class GameFlowUI : MonoBehaviour
         {
             GameManager.Instance.OnStateChanged += HandleStateChanged;
             GameManager.Instance.OnReadyToShowResult += ShowResult;
+            GameManager.Instance.OnBestScoreChanged += UpdateBestScoreTexts;
         }
     }
 
@@ -41,6 +46,7 @@ public class GameFlowUI : MonoBehaviour
         {
             GameManager.Instance.OnStateChanged -= HandleStateChanged;
             GameManager.Instance.OnReadyToShowResult -= ShowResult;
+            GameManager.Instance.OnBestScoreChanged -= UpdateBestScoreTexts;
         }
     }
 
@@ -104,6 +110,7 @@ public class GameFlowUI : MonoBehaviour
         if (gamePanel) gamePanel.SetActive(true);
         if (resultPanel) resultPanel.SetActive(false);
         SetPauseButtonVisible(true);
+        UpdateBestScoreTexts(GameManager.Instance != null ? GameManager.Instance.BestScore : 0);
     }
 
     private void SetPauseButtonVisible(bool pausing)
@@ -118,11 +125,18 @@ public class GameFlowUI : MonoBehaviour
         if (gamePanel) gamePanel.SetActive(false);
         if (resultPanel) resultPanel.SetActive(true);
 
-        if (resultScoreText && GameManager.Instance != null)
+        if (GameManager.Instance != null)
         {
-            int score = GameManager.Instance.ScoreSystem.Score;
-            resultScoreText.text = score.ToString();
+            if (resultScoreText)
+                resultScoreText.SetText("{0}", GameManager.Instance.ScoreSystem.Score);
+            UpdateBestScoreTexts(GameManager.Instance.BestScore);
         }
+    }
+
+    private void UpdateBestScoreTexts(int bestScore)
+    {
+        if (gameBestScoreText) gameBestScoreText.SetText("{0}", bestScore);
+        if (resultBestScoreText) resultBestScoreText.SetText("{0}", bestScore);
     }
     private void HideAll()
     {

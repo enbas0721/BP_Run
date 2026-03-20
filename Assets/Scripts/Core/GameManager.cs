@@ -48,9 +48,13 @@ public class GameManager : MonoBehaviour
     [Tooltip("1秒あたりのスコア増加量")]
     [SerializeField] private float scorePerSecond = 10f;
 
+    private const string BestScoreKey = "BestScore";
+
     public GameState State { get; private set; } = GameState.Ready;
+    public int BestScore { get; private set; }
 
     public event Action<int> OnScoreChanged;
+    public event Action<int> OnBestScoreChanged;
     public event Action<GameState> OnStateChanged;
     public event Action OnReadyToShowResult;
 
@@ -66,6 +70,8 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         Application.targetFrameRate = 60;
+
+        BestScore = PlayerPrefs.GetInt(BestScoreKey, 0);
 
         ScoreSystem = new ScoreSystem(scorePerSecond);
         ScoreSystem.OnScoreChanged += HandleScoreChanged;
@@ -127,6 +133,15 @@ public class GameManager : MonoBehaviour
     {
         if (State == GameState.GameOver) return;
         if (State == GameState.Paused) Time.timeScale = 1f;
+
+        if (ScoreSystem.Score > BestScore)
+        {
+            BestScore = ScoreSystem.Score;
+            PlayerPrefs.SetInt(BestScoreKey, BestScore);
+            PlayerPrefs.Save();
+            OnBestScoreChanged?.Invoke(BestScore);
+        }
+
         SetState(GameState.GameOver);
     }
 
