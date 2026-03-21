@@ -30,14 +30,14 @@ public class AdrenalineGaugeUI : MonoBehaviour
         {
             target = adrenaline.RushRemaining01;
             /* 満タン時色を帰る場合は有効に */
-            /* fillImage.color = Color.yellow; */
+            fillImage.color = Color.yellow;
         }
         else
         {
             float max = Mathf.Max(1f, adrenaline.GaugeMax);
             target = Mathf.Clamp01(adrenaline.Gauge / max);
 
-            /* fillImage.color = adrenaline.CanActivateRush ? Color.yellow : Color.blue; */
+            fillImage.color = adrenaline.CanActivateRush ? Color.yellow : Color.white;
         }
 
         fillImage.fillAmount = Mathf.Lerp(fillImage.fillAmount, target, 12f * Time.deltaTime);
