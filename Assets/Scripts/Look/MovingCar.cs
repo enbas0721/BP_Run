@@ -17,10 +17,21 @@ public class MovingCar : MonoBehaviour
     private bool isStopped = false;
     private float[] xPositions;
 
-    void Start()
+    private void Awake()
     {
         xPositions = new float[] { centerX, rightX, leftX };
+    }
+
+    private void OnEnable()
+    {
+        isStopped = false;
         StartCoroutine(MovementRoutine());
+    }
+
+    private void OnDisable()
+    {
+        isStopped = true;
+        StopAllCoroutines();
     }
 
     private IEnumerator MovementRoutine()
@@ -86,7 +97,7 @@ public class MovingCar : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         isStopped = true;
         StopAllCoroutines();
