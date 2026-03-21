@@ -4277,7 +4277,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwipeInput
   runner: {fileID: -3543420369880566964}
+  adrenaline: {fileID: 2620719305706279403}
   minSwipePixels: 6
+  doubleTapInterval: 0.3
 --- !u!114 &8661294900957576629
 MonoBehaviour:
   m_ObjectHideFlags: 0

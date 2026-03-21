@@ -788,6 +788,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6678067853584699342, guid: 7274a0ccbf2abf24bae5608c457f76c6, type: 3}
+      propertyPath: adrenaline
+      value: 
+      objectReference: {fileID: 1160277031}
+    - target: {fileID: 6678067853584699342, guid: 7274a0ccbf2abf24bae5608c457f76c6, type: 3}
+      propertyPath: pulseSpeed
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
