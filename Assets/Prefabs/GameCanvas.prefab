@@ -2320,6 +2320,7 @@ GameObject:
   - component: {fileID: 6107291719722932939}
   - component: {fileID: 5273567671713552527}
   - component: {fileID: 310181383733751123}
+  - component: {fileID: 699589154005180889}
   m_Layer: 5
   m_Name: ShareButton
   m_TagString: Untagged
@@ -2429,6 +2430,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &699589154005180889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8462230364054947845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29155d6776dbce540a20332053eb8b26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShareButton
+  button: {fileID: 310181383733751123}
 --- !u!1 &8520122711966314230
 GameObject:
   m_ObjectHideFlags: 0
