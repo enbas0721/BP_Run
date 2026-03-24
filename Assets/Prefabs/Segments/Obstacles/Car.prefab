@@ -180,8 +180,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.6, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.64099944, y: 0.58027446, z: 0.3639076}
+  m_Center: {x: 0.013857394, y: -0.021698117, z: -0.0063769743}
 --- !u!54 &3769749959680622361
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -222,5 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Obstacle
   blastScore: 100
-  blastForce: {x: 20, y: 30, z: 50}
+  blastForceMagnitude: 60
+  blastUpAngle: 30
+  blastSpreadAngle: 25
   destroyDelay: 3
