@@ -25,6 +25,11 @@ public class EffectController : MonoBehaviour
     [SerializeField] private EffectEntry[] entries;
     [SerializeField] private AdrenalineSystem adrenalineSystem;
 
+    [Header("Rush Effect")]
+    [SerializeField] private RushEffect rushEffect;
+
+    private bool prevRushActive = false;
+
     private void Awake()
     {
         if (!adrenalineSystem)
@@ -56,6 +61,20 @@ public class EffectController : MonoBehaviour
                 entry.particles.Stop(true, stopBehavior);
             }
         }
+
+        UpdateRushEffect();
+    }
+
+    private void UpdateRushEffect()
+    {
+        if (!rushEffect) return;
+
+        bool rushActive = adrenalineSystem != null && adrenalineSystem.IsRushActive;
+        if (rushActive == prevRushActive) return;
+
+        prevRushActive = rushActive;
+        if (rushActive) rushEffect.Activate();
+        else            rushEffect.Deactivate();
     }
 
     private bool EvaluateCondition(EffectCondition condition)
