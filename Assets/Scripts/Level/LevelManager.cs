@@ -19,7 +19,7 @@ public class LevelManager : MonoBehaviour
 
     [Header("Difficulty Curve")]
     [Tooltip("ピークがmaxDifficultyに到達するスコア")]
-    [SerializeField] private float scoreAtMaxDifficulty = 500f;
+    [SerializeField] private float scoreAtMaxDifficulty = 30000f;
     [Tooltip("ピークが到達する最大難易度")]
     [SerializeField] private DifficultyLevel maxDifficulty = DifficultyLevel.VeryHard;
     [Tooltip("ガウス分布の広がり（大きいほど隣接難易度が多く混ざる）")]
@@ -70,7 +70,7 @@ public class LevelManager : MonoBehaviour
 #if UNITY_EDITOR
     // インスペクターでリアルタイム確認用
     [Header("Debug (Editor Only)")]
-    [SerializeField] [Range(0f, 2000f)] private float debugScore = 0f;
+    [SerializeField] [Range(0f, 30000f)] private float debugScore = 0f;
     private float prevDebugScore = -1f;
 
     private void OnValidate()

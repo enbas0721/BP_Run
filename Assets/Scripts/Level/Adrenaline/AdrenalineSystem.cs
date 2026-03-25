@@ -44,6 +44,7 @@ public class AdrenalineSystem : MonoBehaviour
     private float rushPausedRemaining = 0f;
 
     public bool IsRushActive => rushActive;
+    public bool IsNearMissActive => nearMissActive;
 
     private void Awake()
     {

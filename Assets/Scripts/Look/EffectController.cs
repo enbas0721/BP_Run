@@ -1,0 +1,75 @@
+using UnityEngine;
+
+public enum EffectCondition
+{
+    Always,     // 常時
+    OnRush,     // Rush中
+    OnNearMiss, // NearMiss中
+}
+
+[System.Serializable]
+public class EffectEntry
+{
+    public ParticleSystem particles;
+    public EffectCondition condition;
+    [Tooltip("ONにすると条件が外れた後も既存パーティクルを最後まで再生する")]
+    public bool playToCompletion = false;
+}
+
+/// <summary>
+/// 複数のParticleSystemを条件ごとに一括管理する。
+/// RunnerのGameObjectにアタッチし、子オブジェクトのParticleSystemを登録する。
+/// </summary>
+public class EffectController : MonoBehaviour
+{
+    [SerializeField] private EffectEntry[] entries;
+    [SerializeField] private AdrenalineSystem adrenalineSystem;
+
+    private void Awake()
+    {
+        if (!adrenalineSystem)
+            adrenalineSystem = FindFirstObjectByType<AdrenalineSystem>();
+
+        foreach (var entry in entries)
+        {
+            if (entry.particles)
+                entry.particles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        }
+    }
+
+    private void Update()
+    {
+        foreach (var entry in entries)
+        {
+            if (!entry.particles) continue;
+
+            bool shouldPlay = EvaluateCondition(entry.condition);
+            bool isPlaying  = entry.particles.isEmitting;
+
+            if (shouldPlay && !isPlaying)
+                entry.particles.Play();
+            else if (!shouldPlay && isPlaying)
+            {
+                var stopBehavior = entry.playToCompletion
+                    ? ParticleSystemStopBehavior.StopEmitting
+                    : ParticleSystemStopBehavior.StopEmittingAndClear;
+                entry.particles.Stop(true, stopBehavior);
+            }
+        }
+    }
+
+    private bool EvaluateCondition(EffectCondition condition)
+    {
+        switch (condition)
+        {
+            case EffectCondition.Always:
+                return true;
+            case EffectCondition.OnRush:
+                return adrenalineSystem != null && adrenalineSystem.IsRushActive;
+            case EffectCondition.OnNearMiss:
+                return adrenalineSystem != null && adrenalineSystem.IsNearMissActive;
+            default:
+                return false;
+        }
+    }
+}
