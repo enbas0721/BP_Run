@@ -127,6 +127,22 @@ MonoBehaviour:
     warmCount: 3
     weight: 1
     difficultyLevel: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: a2592053ed7e9f54baebe5cfbc373de0, type: 3}
+    warmCount: 3
+    weight: 1
+    difficultyLevel: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: 16d9987d0c7d1a84e829ed13d7ffc411, type: 3}
+    warmCount: 3
+    weight: 1
+    difficultyLevel: 2
+  - segmentPrefab: {fileID: 1126375026918509926, guid: e3475bd4542599e47ae15b48acf7a085, type: 3}
+    warmCount: 3
+    weight: 1
+    difficultyLevel: 2
+  - segmentPrefab: {fileID: 1126375026918509926, guid: addcb1bce608b0143846ad9049e1b95d, type: 3}
+    warmCount: 3
+    weight: 1
+    difficultyLevel: 2
   avoidSameAsLast: 1
 --- !u!114 &8222377864733174166
 MonoBehaviour:
