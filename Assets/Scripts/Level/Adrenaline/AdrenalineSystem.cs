@@ -43,6 +43,8 @@ public class AdrenalineSystem : MonoBehaviour
     private float rushEndTime = -999f;
     private float rushPausedRemaining = 0f;
 
+    private bool gaugeFillNotified = false;
+
     public bool IsRushActive => rushActive;
     public bool IsNearMissActive => nearMissActive;
 
@@ -104,6 +106,8 @@ public class AdrenalineSystem : MonoBehaviour
 
         // 4) 接触ゾーン情報をクリア（次のランに持ち越さない）
         overlappedZones.Clear();
+
+        gaugeFillNotified = false;
     }
 
     private void Update()
@@ -118,6 +122,12 @@ public class AdrenalineSystem : MonoBehaviour
 
             if (now >= nearMissEndTime)
                 EndNearMiss();
+        }
+
+        if (!gaugeFillNotified && CanActivateRush)
+        {
+            gaugeFillNotified = true;
+            GameManager.Instance?.NotifyFirstGaugeFull();
         }
 
         if (rushActive)

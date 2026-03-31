@@ -57,6 +57,9 @@ public class GameManager : MonoBehaviour
     public event Action<int> OnBestScoreChanged;
     public event Action<GameState> OnStateChanged;
     public event Action OnReadyToShowResult;
+    public event Action OnFirstGaugeFull;
+
+    private bool firstGaugeFilled = false;
 
     public ScoreSystem ScoreSystem { get; private set; }
 
@@ -194,6 +197,9 @@ public class GameManager : MonoBehaviour
         // 無敵状態をクリア
         ClearInvincible();
 
+        // 初回ゲージ満タンフラグをリセット
+        firstGaugeFilled = false;
+
         // スコアリセット
         ScoreSystem.Reset();
         OnScoreChanged?.Invoke(ScoreSystem.Score);
@@ -218,6 +224,15 @@ public class GameManager : MonoBehaviour
     {
         if (State != GameState.Playing) return;
         ScoreSystem.Add(amount);
+    }
+
+    public bool IsFirstGaugeFilled => firstGaugeFilled;
+
+    public void NotifyFirstGaugeFull()
+    {
+        if (firstGaugeFilled) return;
+        firstGaugeFilled = true;
+        OnFirstGaugeFull?.Invoke();
     }
 
     private void HandleScoreChanged(int newScore)
