@@ -11,15 +11,23 @@ public class GameFlowUI : MonoBehaviour
 
     [Header("Result UI")]
     [SerializeField] private TMP_Text resultScoreText;
+    [SerializeField] private TMP_Text resultBestScoreText;
+
+    [Header("Game UI")]
+    [SerializeField] private TMP_Text gameBestScoreText;
 
     [Header("Buttons")]
     [SerializeField] private Button startButton;
     [SerializeField] private Button retryButton;
+    [SerializeField] private Button pauseButton;
+    [SerializeField] private Button resumeButton;
 
     private void Awake()
     {
         if (startButton) startButton.onClick.AddListener(OnStartClicked);
         if (retryButton) retryButton.onClick.AddListener(OnRetryClicked);
+        if (pauseButton) pauseButton.onClick.AddListener(OnPauseClicked);
+        if (resumeButton) resumeButton.onClick.AddListener(OnResumeClicked);
     }
 
     private void OnEnable()
@@ -28,6 +36,7 @@ public class GameFlowUI : MonoBehaviour
         {
             GameManager.Instance.OnStateChanged += HandleStateChanged;
             GameManager.Instance.OnReadyToShowResult += ShowResult;
+            GameManager.Instance.OnBestScoreChanged += UpdateBestScoreTexts;
         }
     }
 
@@ -37,6 +46,7 @@ public class GameFlowUI : MonoBehaviour
         {
             GameManager.Instance.OnStateChanged -= HandleStateChanged;
             GameManager.Instance.OnReadyToShowResult -= ShowResult;
+            GameManager.Instance.OnBestScoreChanged -= UpdateBestScoreTexts;
         }
     }
 
@@ -55,6 +65,16 @@ public class GameFlowUI : MonoBehaviour
         GameManager.Instance.ResetRun();
     }
 
+    private void OnPauseClicked()
+    {
+        GameManager.Instance.Pause();
+    }
+
+    private void OnResumeClicked()
+    {
+        GameManager.Instance.Resume();
+    }
+
     private void HandleStateChanged(GameState state)
     {
         switch(state)
@@ -65,6 +85,11 @@ public class GameFlowUI : MonoBehaviour
 
             case GameState.Playing:
                 ShowGame();
+                SetPauseButtonVisible(true);
+                break;
+
+            case GameState.Paused:
+                SetPauseButtonVisible(false);
                 break;
 
             case GameState.GameOver:
@@ -84,6 +109,14 @@ public class GameFlowUI : MonoBehaviour
         if (titlePanel) titlePanel.SetActive(false);
         if (gamePanel) gamePanel.SetActive(true);
         if (resultPanel) resultPanel.SetActive(false);
+        SetPauseButtonVisible(true);
+        UpdateBestScoreTexts(GameManager.Instance != null ? GameManager.Instance.BestScore : 0);
+    }
+
+    private void SetPauseButtonVisible(bool pausing)
+    {
+        if (pauseButton) pauseButton.gameObject.SetActive(pausing);
+        if (resumeButton) resumeButton.gameObject.SetActive(!pausing);
     }
 
     private void ShowResult()
@@ -92,11 +125,18 @@ public class GameFlowUI : MonoBehaviour
         if (gamePanel) gamePanel.SetActive(false);
         if (resultPanel) resultPanel.SetActive(true);
 
-        if (resultScoreText && GameManager.Instance != null)
+        if (GameManager.Instance != null)
         {
-            int score = GameManager.Instance.ScoreSystem.Score;
-            resultScoreText.text = score.ToString();
+            if (resultScoreText)
+                resultScoreText.SetText("{0}", GameManager.Instance.ScoreSystem.Score);
+            UpdateBestScoreTexts(GameManager.Instance.BestScore);
         }
+    }
+
+    private void UpdateBestScoreTexts(int bestScore)
+    {
+        if (gameBestScoreText) gameBestScoreText.SetText("{0}", bestScore);
+        if (resultBestScoreText) resultBestScoreText.SetText("{0}", bestScore);
     }
     private void HideAll()
     {

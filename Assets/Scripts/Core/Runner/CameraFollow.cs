@@ -20,6 +20,7 @@ public class CameraFollow : MonoBehaviour
     private bool introActive = false;
     private float introElapsed = 0f;
     private Vector3 introFromPos;
+    private GameState previousState = GameState.Ready;
 
     private void Awake()
     {
@@ -41,7 +42,7 @@ public class CameraFollow : MonoBehaviour
 
     private void HandleStateChanged(GameState state)
     {
-        if (state == GameState.Playing)
+        if (state == GameState.Playing && previousState == GameState.Ready)
         {
             introFromPos = transform.position;
             introElapsed = 0f;
@@ -51,6 +52,7 @@ public class CameraFollow : MonoBehaviour
         {
             introActive = false;
         }
+        previousState = state;
     }
 
     private void LateUpdate()

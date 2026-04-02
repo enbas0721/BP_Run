@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bca8a53322c517d4a9bab77e695f9b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemLaneAnchor
-  spawnWeight: 2
+  spawnWeight: 3
   pattern: {fileID: 11400000, guid: c58e017bea920f547b90a27d86547ab6, type: 2}
   startMarker: {fileID: 5233001436507528683}
   endMarker: {fileID: 6087222423778519915}
@@ -530,7 +530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bca8a53322c517d4a9bab77e695f9b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemLaneAnchor
-  spawnWeight: 2
+  spawnWeight: 3
   pattern: {fileID: 11400000, guid: ed4d2aef760034f40a5c352b16fd8b8a, type: 2}
   startMarker: {fileID: 6675587895473389497}
   endMarker: {fileID: 6404253489501207884}
@@ -1080,7 +1080,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7013271149951604499, guid: a9d3b5bec68956a4c89381ad921ab468, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7013271149951604499, guid: a9d3b5bec68956a4c89381ad921ab468, type: 3}
       propertyPath: m_LocalPosition.y

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1305310621471910492}
   m_Layer: 0
   m_Name: Pipe
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,7 +48,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010262200590, guid: 4f0247688049bc04bb2eae2c407f514b, type: 3}
       propertyPath: m_TagString
-      value: Obstacle
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 4000010452992690, guid: 4f0247688049bc04bb2eae2c407f514b, type: 3}
       propertyPath: m_LocalScale.x
@@ -126,7 +126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010262200590, guid: 4f0247688049bc04bb2eae2c407f514b, type: 3}
       propertyPath: m_TagString
-      value: Obstacle
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 4000010452992690, guid: 4f0247688049bc04bb2eae2c407f514b, type: 3}
       propertyPath: m_LocalScale.x
@@ -338,7 +338,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Obstacle
   blastScore: 100
-  blastForce: {x: 20, y: 40, z: 100}
+  blastForceMagnitude: 60
+  blastUpAngle: 30
+  blastSpreadAngle: 25
   destroyDelay: 3
 --- !u!4 &8060686724542195776 stripped
 Transform:

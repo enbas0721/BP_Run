@@ -41,8 +41,12 @@ public class AdrenalineSystem : MonoBehaviour
 
     private bool rushActive = false;
     private float rushEndTime = -999f;
+    private float rushPausedRemaining = 0f;
+
+    private bool gaugeFillNotified = false;
 
     public bool IsRushActive => rushActive;
+    public bool IsNearMissActive => nearMissActive;
 
     private void Awake()
     {
@@ -54,11 +58,28 @@ public class AdrenalineSystem : MonoBehaviour
     private void OnEnable()
     {
         runner.OnLaneChangeRequested += HandleLaneChangeRequested;
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnStateChanged += HandleStateChanged;
     }
 
     private void OnDisable()
     {
         runner.OnLaneChangeRequested -= HandleLaneChangeRequested;
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnStateChanged -= HandleStateChanged;
+    }
+
+    private void HandleStateChanged(GameState state)
+    {
+        if (state == GameState.Paused && rushActive)
+        {
+            rushPausedRemaining = rushEndTime - Time.unscaledTime;
+        }
+        else if (state == GameState.Playing && rushPausedRemaining > 0f)
+        {
+            rushEndTime = Time.unscaledTime + rushPausedRemaining;
+            rushPausedRemaining = 0f;
+        }
     }
 
     public void ResetSystem()
@@ -85,6 +106,8 @@ public class AdrenalineSystem : MonoBehaviour
 
         // 4) 接触ゾーン情報をクリア（次のランに持ち越さない）
         overlappedZones.Clear();
+
+        gaugeFillNotified = false;
     }
 
     private void Update()
@@ -99,6 +122,12 @@ public class AdrenalineSystem : MonoBehaviour
 
             if (now >= nearMissEndTime)
                 EndNearMiss();
+        }
+
+        if (!gaugeFillNotified && CanActivateRush)
+        {
+            gaugeFillNotified = true;
+            GameManager.Instance?.NotifyFirstGaugeFull();
         }
 
         if (rushActive)

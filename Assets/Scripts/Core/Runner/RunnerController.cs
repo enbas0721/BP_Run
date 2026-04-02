@@ -18,6 +18,10 @@ public class RunnerController : MonoBehaviour
     [SerializeField] private float jumpBufferTime = 0.10f;
     [SerializeField] private float riseGravityMultiplier = 1.4f;
     [SerializeField] private float fallGravityMultiplier = 2.6f;
+    [SerializeField] private float cancelFallMultiplier = 1.5f; // キャンセル時にfallGravityMultiplierへ重ねて掛ける倍率
+
+    [Header("Stairs / Slope")]
+    [SerializeField] private float stepDownDistance = 0.4f; // 下り時の地面スナップ最大距離
 
     // Events
     public event Action<int, int> OnLaneChangeRequested;
@@ -44,6 +48,7 @@ public class RunnerController : MonoBehaviour
     private float lastJumpPressedTime = -999f;
 
     private bool jumpQueued;
+    private bool jumpCancelled;
 
     private bool wasGrounded;
 
@@ -65,6 +70,7 @@ public class RunnerController : MonoBehaviour
         lastGroundedTime = -999f;
         lastJumpPressedTime = -999f;
         jumpQueued = false;
+        jumpCancelled = false;
 
         // 次のUpdateでGroundedChangedが飛ぶためfalseにしておいて切り替えさせる。
         wasGrounded = false;
@@ -97,7 +103,10 @@ public class RunnerController : MonoBehaviour
             OnGroundedChanged?.Invoke(grounded);
 
             if (grounded)
+            {
                 OnLanded?.Invoke();
+                jumpCancelled = false;
+            }
 
             wasGrounded = grounded;
         }
@@ -128,6 +137,18 @@ public class RunnerController : MonoBehaviour
 
         float targetX = currentLane * laneWidth;
         pos.x = Mathf.Lerp(pos.x, targetX, (laneMoveSpeed * laneSpeedMultiplier )* Time.fixedDeltaTime);
+
+        // 下り階段・スロープ対応：落下中でなければ地面にスナップ
+        if (rb.linearVelocity.y <= 0.01f && groundCheck != null)
+        {
+            float feetOffset = rb.position.y - groundCheck.position.y;
+            if (Physics.Raycast(pos, Vector3.down, out RaycastHit hit, feetOffset + stepDownDistance, groundMask, QueryTriggerInteraction.Ignore))
+            {
+                float targetY = hit.point.y + feetOffset;
+                if (targetY < pos.y)
+                    pos.y = targetY;
+            }
+        }
 
         rb.MovePosition(pos);
         ApplyExtraGravity();
@@ -164,7 +185,16 @@ public class RunnerController : MonoBehaviour
     public void Slide()
     {
         if (!IsPlaying()) return;
-        // [MEMO] 追加予定なし
+        if (!IsGrounded())
+            CancelJump();
+    }
+
+    private void CancelJump()
+    {
+        Vector3 v = rb.linearVelocity;
+        if (v.y > 0f) v.y = 0f;
+        rb.linearVelocity = v;
+        jumpCancelled = true;
     }
 
     private void DoJump()
@@ -206,8 +236,9 @@ public class RunnerController : MonoBehaviour
         }
         else if (v.y < -0.01f)
         {
-            // 加工中の加速度追加
-            rb.AddForce(Physics.gravity * (fallGravityMultiplier - 1f), ForceMode.Acceleration);
+            // 下降中の加速度追加（キャンセル時はcancelFallMultiplierを重ねて掛ける）
+            float mul = jumpCancelled ? (fallGravityMultiplier - 1f) * cancelFallMultiplier : (fallGravityMultiplier - 1f);
+            rb.AddForce(Physics.gravity * mul, ForceMode.Acceleration);
         }
     }
 

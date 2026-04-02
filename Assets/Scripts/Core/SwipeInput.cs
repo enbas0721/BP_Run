@@ -4,23 +4,31 @@ using UnityEngine.InputSystem;
 public class SwipeInput : MonoBehaviour
 {
     [SerializeField] private RunnerController runner;
+    [SerializeField] private AdrenalineSystem adrenaline;
 
     [Header("Swipe")]
     [SerializeField] private float minSwipePixels = 60f;
 
+    [Header("Double Tap")]
+    [SerializeField] private float doubleTapInterval = 0.3f;
+
     private Vector2 startPos;
     private bool tracking;
+
+    private float lastTapTime = -999f;
 
     private void Awake()
     {
         if (!runner) runner = GetComponent<RunnerController>();
         if (!runner) runner = FindFirstObjectByType<RunnerController>();
+        if (!adrenaline) adrenaline = FindFirstObjectByType<AdrenalineSystem>();
     }
 
     public void ResetInputState()
     {
         tracking = false;
         startPos = Vector2.zero;
+        lastTapTime = -999f;
     }
 
     private void Update()
@@ -35,7 +43,7 @@ public class SwipeInput : MonoBehaviour
         }
 
             // Touch優先
-            if (touch != null && touch.primaryTouch.press.isPressed)
+        if (touch != null && touch.primaryTouch.press.isPressed)
         {
             var pos = touch.primaryTouch.position.ReadValue();
 
@@ -74,7 +82,21 @@ public class SwipeInput : MonoBehaviour
 
     private void HandleSwipe(Vector2 delta)
     {
-        if (delta.magnitude < minSwipePixels) return;
+        if (delta.magnitude < minSwipePixels)
+        {
+            // Tap (not a swipe) — check for double tap
+            float now = Time.unscaledTime;
+            if (now - lastTapTime <= doubleTapInterval)
+            {
+                adrenaline?.ActivateRush();
+                lastTapTime = -999f;
+            }
+            else
+            {
+                lastTapTime = now;
+            }
+            return;
+        }
 
         if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
         {
