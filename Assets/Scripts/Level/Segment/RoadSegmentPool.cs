@@ -10,12 +10,13 @@ public class RoadSegmentPool : MonoBehaviour
 {
     [System.Serializable]
     public class Entry
-    { 
+    {
         public RoadSegmentBase segmentPrefab;
         [Tooltip("最初にプールしておくセグメントの数。<br>発生確率が低いものは小さくしておくとリソース削減できる。かも。")]
         public int warmCount = 3;
-        [Tooltip("生成の相対的な重み （他より大きいほど選ばれやすい）")]
-        [Min(0f)] public float weight = 1f;
+        [HideInInspector] public float weight = 1f;
+        [Tooltip("LevelManagerによる難易度重み付けの基準レベル")]
+        public DifficultyLevel difficultyLevel = DifficultyLevel.Easy;
     }
 
     [Header("Segment Variants")]

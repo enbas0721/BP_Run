@@ -48,11 +48,18 @@ public class GameManager : MonoBehaviour
     [Tooltip("1秒あたりのスコア増加量")]
     [SerializeField] private float scorePerSecond = 10f;
 
+    private const string BestScoreKey = "BestScore";
+
     public GameState State { get; private set; } = GameState.Ready;
+    public int BestScore { get; private set; }
 
     public event Action<int> OnScoreChanged;
+    public event Action<int> OnBestScoreChanged;
     public event Action<GameState> OnStateChanged;
     public event Action OnReadyToShowResult;
+    public event Action OnFirstGaugeFull;
+
+    private bool firstGaugeFilled = false;
 
     public ScoreSystem ScoreSystem { get; private set; }
 
@@ -66,6 +73,8 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         Application.targetFrameRate = 60;
+
+        BestScore = PlayerPrefs.GetInt(BestScoreKey, 0);
 
         ScoreSystem = new ScoreSystem(scorePerSecond);
         ScoreSystem.OnScoreChanged += HandleScoreChanged;
@@ -109,9 +118,33 @@ public class GameManager : MonoBehaviour
         OnStateChanged?.Invoke(State);
     }
 
+    public void Pause()
+    {
+        if (State != GameState.Playing) return;
+        SetState(GameState.Paused);
+        Time.timeScale = 0f;
+    }
+
+    public void Resume()
+    {
+        if (State != GameState.Paused) return;
+        Time.timeScale = 1f;
+        SetState(GameState.Playing);
+    }
+
     public void GameOver()
     {
         if (State == GameState.GameOver) return;
+        if (State == GameState.Paused) Time.timeScale = 1f;
+
+        if (ScoreSystem.Score > BestScore)
+        {
+            BestScore = ScoreSystem.Score;
+            PlayerPrefs.SetInt(BestScoreKey, BestScore);
+            PlayerPrefs.Save();
+            OnBestScoreChanged?.Invoke(BestScore);
+        }
+
         SetState(GameState.GameOver);
     }
 
@@ -164,6 +197,9 @@ public class GameManager : MonoBehaviour
         // 無敵状態をクリア
         ClearInvincible();
 
+        // 初回ゲージ満タンフラグをリセット
+        firstGaugeFilled = false;
+
         // スコアリセット
         ScoreSystem.Reset();
         OnScoreChanged?.Invoke(ScoreSystem.Score);
@@ -188,6 +224,15 @@ public class GameManager : MonoBehaviour
     {
         if (State != GameState.Playing) return;
         ScoreSystem.Add(amount);
+    }
+
+    public bool IsFirstGaugeFilled => firstGaugeFilled;
+
+    public void NotifyFirstGaugeFull()
+    {
+        if (firstGaugeFilled) return;
+        firstGaugeFilled = true;
+        OnFirstGaugeFull?.Invoke();
     }
 
     private void HandleScoreChanged(int newScore)

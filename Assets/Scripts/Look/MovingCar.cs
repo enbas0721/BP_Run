@@ -10,84 +10,109 @@ public class MovingCar : MonoBehaviour
     [SerializeField] private float waitInterval = 2f;      // 移動間の待機時間（秒）
 
     [Header("X Position Settings")]
-    [SerializeField] private float centerX = 0f;           // 中央のX座標
-    [SerializeField] private float rightX = 3f;            // 右のX座標
-    [SerializeField] private float leftX = -3f;            // 左のX座標
+    [SerializeField] private float centerX = 0f;           // 中央のX座標（ローカル）
+    [SerializeField] private float rightX = 3f;            // 右のX座標（ローカル）
+    [SerializeField] private float leftX = -3f;            // 左のX座標（ローカル）
 
     private bool isStopped = false;
     private float[] xPositions;
+    private Vector3 startLocalPos;
+    private Quaternion startLocalRot;
 
-    void Start()
+    private void Awake()
     {
         xPositions = new float[] { centerX, rightX, leftX };
+    }
+
+    private void OnEnable()
+    {
+        isStopped = false;
+        startLocalPos = transform.localPosition;
+        startLocalRot = transform.localRotation;
         StartCoroutine(MovementRoutine());
+    }
+
+    private void OnDisable()
+    {
+        isStopped = true;
+        StopAllCoroutines();
     }
 
     private IEnumerator MovementRoutine()
     {
         while (!isStopped)
         {
-            // 前方にforwardDistance分移動
-            Vector3 forwardTarget = transform.position + Vector3.forward * forwardDistance;
-            yield return StartCoroutine(MoveToPosition(forwardTarget));
-
+            // Phase 1: -Z方向へ移動
+            Vector3 forwardLocalTarget = new Vector3(transform.localPosition.x, startLocalPos.y, startLocalPos.z - forwardDistance);
+            yield return StartCoroutine(RotateAndMoveLocal(forwardLocalTarget));
             if (isStopped) yield break;
 
             yield return new WaitForSeconds(waitInterval);
-
             if (isStopped) yield break;
 
-            // ランダムにX位置（中央・右・左）を選択して移動
+            // Phase 2: ランダムX位置へ横移動
             float targetX = xPositions[Random.Range(0, xPositions.Length)];
-            Vector3 lateralTarget = new Vector3(targetX, transform.position.y, transform.position.z);
-
-            // 横方向に回転してから移動
-            yield return StartCoroutine(RotateAndMove(lateralTarget));
-
+            Vector3 lateralLocalTarget = new Vector3(targetX, transform.localPosition.y, transform.localPosition.z);
+            yield return StartCoroutine(RotateAndMoveLocal(lateralLocalTarget));
             if (isStopped) yield break;
 
-            // 前方（Z+方向）に回転を戻す
-            yield return StartCoroutine(RotateTo(Quaternion.identity));
+            yield return new WaitForSeconds(waitInterval);
+            if (isStopped) yield break;
+
+            // Phase 3: +Z方向へ開始位置まで戻る
+            Vector3 returnLocalTarget = new Vector3(transform.localPosition.x, startLocalPos.y, startLocalPos.z);
+            yield return StartCoroutine(RotateAndMoveLocal(returnLocalTarget));
+            if (isStopped) yield break;
 
             yield return new WaitForSeconds(waitInterval);
         }
     }
 
-    private IEnumerator MoveToPosition(Vector3 target)
+    private IEnumerator MoveToLocalPosition(Vector3 localTarget)
     {
-        while (!isStopped && Vector3.Distance(transform.position, target) > 0.05f)
+        while (!isStopped)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
+            Vector3 worldTarget = LocalToWorld(localTarget);
+            if (Vector3.Distance(transform.position, worldTarget) <= 0.05f) break;
+            transform.position = Vector3.MoveTowards(transform.position, worldTarget, moveSpeed * Time.deltaTime);
             yield return null;
         }
     }
 
-    private IEnumerator RotateAndMove(Vector3 target)
+    private IEnumerator RotateAndMoveLocal(Vector3 localTarget)
     {
-        if (Vector3.Distance(transform.position, target) < 0.05f) yield break;
+        Vector3 localDir = localTarget - transform.localPosition;
+        if (localDir.sqrMagnitude < 0.05f * 0.05f) yield break;
+        localDir.Normalize();
 
-        // ターゲット方向を向くように回転
-        Vector3 direction = (target - transform.position).normalized;
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-        yield return StartCoroutine(RotateTo(targetRotation));
+        // XZ平面の移動方向からY角度を直接計算
+        float angle = Mathf.Atan2(localDir.x, localDir.z) * Mathf.Rad2Deg;
+        Quaternion targetLocalRot = Quaternion.Euler(0, angle, 0);
+        yield return StartCoroutine(RotateToLocal(targetLocalRot));
 
         if (isStopped) yield break;
 
-        // 目標位置まで移動
-        yield return StartCoroutine(MoveToPosition(target));
+        yield return StartCoroutine(MoveToLocalPosition(localTarget));
     }
 
-    private IEnumerator RotateTo(Quaternion targetRotation)
+    private IEnumerator RotateToLocal(Quaternion targetLocalRot)
     {
-        while (!isStopped && Quaternion.Angle(transform.rotation, targetRotation) > 0.5f)
+        while (!isStopped && Quaternion.Angle(transform.localRotation, targetLocalRot) > 0.5f)
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
+            transform.localRotation = Quaternion.RotateTowards(transform.localRotation, targetLocalRot, rotateSpeed * Time.deltaTime);
             yield return null;
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private Vector3 LocalToWorld(Vector3 localPos)
     {
+        return transform.parent != null ? transform.parent.TransformPoint(localPos) : localPos;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("Player") && !other.CompareTag("Obstacle")) return;
+        if (other.transform.IsChildOf(transform)) return;
         isStopped = true;
         StopAllCoroutines();
     }
