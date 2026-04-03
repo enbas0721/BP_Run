@@ -1148,7 +1148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MusicManager
   bpm: 120
-  beatsPerBar: 8
+  beatsPerBar: 4
   barsPerClip: 4
   bassTrack: {fileID: 1829902520}
   kickTrack: {fileID: 338316549}
