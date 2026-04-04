@@ -30,8 +30,8 @@ public class EffectController : MonoBehaviour
     [SerializeField] private RushEffect rushEffect;
 
     [Header("NearMiss Effect")]
-    [Tooltip("NearMiss時にスポーンするTorusLineEffectのPrefab")]
-    [SerializeField] private TorusLineEffect nearMissTorusPrefab;
+    [Tooltip("NearMiss時にスポーンするTorusTrailMoverのPrefab")]
+    [SerializeField] private TorusTrailMover nearMissTorusPrefab;
     [Tooltip("ランナーに追従する時間（秒）")]
     [SerializeField] private float nearMissFollowDuration = 0.2f;
     [Tooltip("切り離し後にその場に残る時間（秒）")]

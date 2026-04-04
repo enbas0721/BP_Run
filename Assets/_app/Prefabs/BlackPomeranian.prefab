@@ -79,7 +79,7 @@ MonoBehaviour:
   entries: []
   adrenalineSystem: {fileID: 2620719305706279403}
   rushEffect: {fileID: 1873891949872319769}
-  nearMissTorusPrefab: {fileID: 2514378767693360312, guid: 69e1edfc4337b3442a2d9e635fed2f1c, type: 3}
+  nearMissTorusPrefab: {fileID: 9144367180848162566, guid: d44a8a750151bb14cb97fc8e4fc052aa, type: 3}
   nearMissFollowDuration: 0.2
   nearMissLingerDuration: 0.25
 --- !u!114 &1873891949872319769
