@@ -1970,7 +1970,7 @@ MonoBehaviour:
   majorDuration: 0.5
   minorDuration: 0.1
   playOnStart: 0
-  debugLoop: 0
+  debugLoop: 1
 --- !u!1001 &686711097
 PrefabInstance:
   m_ObjectHideFlags: 0

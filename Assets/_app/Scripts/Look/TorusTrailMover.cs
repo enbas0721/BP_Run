@@ -30,12 +30,14 @@ public class TorusTrailMover : MonoBehaviour
     // 内部状態
     private bool _isPlaying = false;
     private float _elapsedTime = 0f;
+    private float _direction = 1f; // 1f=左回り, -1f=右回り
     private Vector3 _localOffset; // 親からの初期ローカルオフセット
-    private TrailRenderer _trail;
+    private TrailRenderer[] _trails;
 
     private void Awake()
     {
-        _trail = GetComponent<TrailRenderer>();
+        _trails = GetComponentsInChildren<TrailRenderer>(true);
+        foreach (var t in _trails) t.enabled = false;
     }
 
     private void Start()
@@ -65,8 +67,8 @@ public class TorusTrailMover : MonoBehaviour
             _isPlaying = false;
         }
 
-        // 大円の角度（Y軸周り）
-        float majorAngle = majorT * Mathf.PI * 2f;
+        // 大円の角度（Y軸周り）※_directionで回転方向を制御
+        float majorAngle = majorT * Mathf.PI * 2f * _direction;
 
         // 小円の角度（XY平面に平行）
         float minorT = _elapsedTime / minorDuration;
@@ -93,15 +95,14 @@ public class TorusTrailMover : MonoBehaviour
     /// <summary>
     /// 回転を開始する（外部から呼び出し可能）
     /// </summary>
-    public void StartRotation()
+    public void StartRotation(int direction = 1)
     {
+        _direction = direction >= 0 ? 1f : -1f;
         _elapsedTime = 0f;
         _isPlaying = true;
 
-        if (_trail != null)
-        {
-            _trail.Clear();
-        }
+        if (_trails != null)
+            foreach (var t in _trails) { t.enabled = true; t.Clear(); }
     }
 
     /// <summary>
@@ -110,6 +111,7 @@ public class TorusTrailMover : MonoBehaviour
     public void StopRotation()
     {
         _isPlaying = false;
+        foreach (var t in _trails) { t.Clear(); t.enabled = false; }
     }
 
     /// <summary>

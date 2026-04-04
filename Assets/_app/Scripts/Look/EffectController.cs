@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public enum EffectCondition
@@ -28,6 +29,14 @@ public class EffectController : MonoBehaviour
     [Header("Rush Effect")]
     [SerializeField] private RushEffect rushEffect;
 
+    [Header("NearMiss Effect")]
+    [Tooltip("NearMiss時にスポーンするTorusLineEffectのPrefab")]
+    [SerializeField] private TorusLineEffect nearMissTorusPrefab;
+    [Tooltip("ランナーに追従する時間（秒）")]
+    [SerializeField] private float nearMissFollowDuration = 0.2f;
+    [Tooltip("切り離し後にその場に残る時間（秒）")]
+    [SerializeField] private float nearMissLingerDuration = 0.4f;
+
     private bool prevRushActive = false;
 
     private void Awake()
@@ -40,6 +49,18 @@ public class EffectController : MonoBehaviour
             if (entry.particles)
                 entry.particles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
+    }
+
+    private void OnEnable()
+    {
+        if (adrenalineSystem)
+            adrenalineSystem.OnNearMissStarted += OnNearMissStarted;
+    }
+
+    private void OnDisable()
+    {
+        if (adrenalineSystem)
+            adrenalineSystem.OnNearMissStarted -= OnNearMissStarted;
     }
 
     private void Update()
@@ -63,6 +84,31 @@ public class EffectController : MonoBehaviour
         }
 
         UpdateRushEffect();
+    }
+
+    private void OnNearMissStarted(int direction)
+    {
+        if (!nearMissTorusPrefab) return;
+        StartCoroutine(SpawnNearMissTorus(direction));
+    }
+
+    private IEnumerator SpawnNearMissTorus(int direction)
+    {
+        // ランナーの子として生成 → 横移動に追従
+        var instance = Instantiate(nearMissTorusPrefab, transform);
+        instance.transform.localPosition = Vector3.zero;
+        instance.StartRotation(direction);
+
+        // 追従フェーズ
+        yield return new WaitForSeconds(nearMissFollowDuration);
+
+        // 切り離し → その場に残る
+        instance.transform.SetParent(null, worldPositionStays: true);
+
+        // 残留フェーズ後にDestroy
+        yield return new WaitForSeconds(nearMissLingerDuration);
+
+        Destroy(instance.gameObject);
     }
 
     private void UpdateRushEffect()

@@ -76,15 +76,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60f1e48a4443445438718fa1f437785c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EffectController
-  entries:
-  - particles: {fileID: 0}
-    condition: 1
-    playToCompletion: 0
-  - particles: {fileID: 0}
-    condition: 2
-    playToCompletion: 1
+  entries: []
   adrenalineSystem: {fileID: 2620719305706279403}
   rushEffect: {fileID: 1873891949872319769}
+  nearMissTorusPrefab: {fileID: 2514378767693360312, guid: 69e1edfc4337b3442a2d9e635fed2f1c, type: 3}
+  nearMissFollowDuration: 0.2
+  nearMissLingerDuration: 0.25
 --- !u!114 &1873891949872319769
 MonoBehaviour:
   m_ObjectHideFlags: 0
