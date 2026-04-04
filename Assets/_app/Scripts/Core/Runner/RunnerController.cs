@@ -20,6 +20,10 @@ public class RunnerController : MonoBehaviour
     [SerializeField] private float fallGravityMultiplier = 2.6f;
     [SerializeField] private float cancelFallMultiplier = 1.5f; // キャンセル時にfallGravityMultiplierへ重ねて掛ける倍率
 
+    [Header("Jump Speed Scaling")]
+    [Tooltip("速度倍率に応じてジャンプ重力・初速をスケールする強さ（0=無効, 1=完全追従）")]
+    [SerializeField] [Range(0f, 1f)] private float jumpSpeedScaleStrength = 1f;
+
     [Header("Stairs / Slope")]
     [SerializeField] private float stepDownDistance = 0.4f; // 下り時の地面スナップ最大距離
 
@@ -203,7 +207,9 @@ public class RunnerController : MonoBehaviour
         if (v.y < 0f) v.y = 0f;
         rb.linearVelocity = v;
 
-        rb.AddForce(Vector3.up * jumpVelocity, ForceMode.VelocityChange);
+        // 速度スケール：jumpSpeedScaleStrength=1で完全追従、0で固定
+        float k = Mathf.Lerp(1f, baseForwardMultiplier, jumpSpeedScaleStrength);
+        rb.AddForce(Vector3.up * jumpVelocity * Mathf.Sqrt(k), ForceMode.VelocityChange);
 
         OnJumped?.Invoke();
     }
@@ -229,16 +235,19 @@ public class RunnerController : MonoBehaviour
     {
         var v = rb.linearVelocity;
 
+        // 速度スケール：同じ比率で重力も強くすることで高さを維持しつつ滞空時間を短縮
+        float k = Mathf.Lerp(1f, baseForwardMultiplier, jumpSpeedScaleStrength);
+
         if (v.y > 0.01f)
         {
             // 上昇中の加速度追加
-            rb.AddForce(Physics.gravity * (riseGravityMultiplier - 1f), ForceMode.Acceleration);
+            rb.AddForce(Physics.gravity * (riseGravityMultiplier - 1f) * k, ForceMode.Acceleration);
         }
         else if (v.y < -0.01f)
         {
             // 下降中の加速度追加（キャンセル時はcancelFallMultiplierを重ねて掛ける）
             float mul = jumpCancelled ? (fallGravityMultiplier - 1f) * cancelFallMultiplier : (fallGravityMultiplier - 1f);
-            rb.AddForce(Physics.gravity * mul, ForceMode.Acceleration);
+            rb.AddForce(Physics.gravity * mul * k, ForceMode.Acceleration);
         }
     }
 

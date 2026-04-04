@@ -579,7 +579,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3543420369880566964, guid: b0629385ab71d524f95157719c77b00b, type: 3}
       propertyPath: stepDownDistance
-      value: 0.3
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -3543420369880566964, guid: b0629385ab71d524f95157719c77b00b, type: 3}
       propertyPath: cancelFallMultiplier
