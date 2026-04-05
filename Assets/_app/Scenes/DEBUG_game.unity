@@ -1007,7 +1007,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   runner: {fileID: 1160277035}
-  timeToMaxSpeed: 600
+  timeToMaxSpeed: 30
   maxBaseSpeedMultiplier: 2.5
   speedCurve:
     serializedVersion: 2
