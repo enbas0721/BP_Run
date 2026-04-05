@@ -328,7 +328,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &220645876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -569,30 +569,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -3543420369880566964, guid: b0629385ab71d524f95157719c77b00b, type: 3}
-      propertyPath: coyoteTime
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: -3543420369880566964, guid: b0629385ab71d524f95157719c77b00b, type: 3}
-      propertyPath: jumpBufferTime
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: -3543420369880566964, guid: b0629385ab71d524f95157719c77b00b, type: 3}
-      propertyPath: stepDownDistance
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: -3543420369880566964, guid: b0629385ab71d524f95157719c77b00b, type: 3}
-      propertyPath: cancelFallMultiplier
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: -3543420369880566964, guid: b0629385ab71d524f95157719c77b00b, type: 3}
-      propertyPath: fallGravityMultiplier
-      value: 2.6
-      objectReference: {fileID: 0}
-    - target: {fileID: -3543420369880566964, guid: b0629385ab71d524f95157719c77b00b, type: 3}
-      propertyPath: riseGravityMultiplier
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 5917927903818137878, guid: b0629385ab71d524f95157719c77b00b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.000018114199
@@ -700,6 +676,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 7132014953970972521, guid: 00c7ab1440b1e9c47ae0ac3a3356b356, type: 3}
+      propertyPath: m_RequiresDepthTextureOption
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8801343236216500033, guid: 00c7ab1440b1e9c47ae0ac3a3356b356, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -761,7 +741,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1442210438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -931,7 +911,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1511093298
 Transform:
   m_ObjectHideFlags: 0
@@ -1007,7 +987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   runner: {fileID: 1160277035}
-  timeToMaxSpeed: 30
+  timeToMaxSpeed: 600
   maxBaseSpeedMultiplier: 2.5
   speedCurve:
     serializedVersion: 2
@@ -1072,7 +1052,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1763873334
 MonoBehaviour:
   m_ObjectHideFlags: 0

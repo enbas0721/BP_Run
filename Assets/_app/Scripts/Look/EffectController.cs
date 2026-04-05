@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public enum EffectCondition
@@ -30,12 +29,10 @@ public class EffectController : MonoBehaviour
     [SerializeField] private RushEffect rushEffect;
 
     [Header("NearMiss Effect")]
-    [Tooltip("NearMiss時にスポーンするTorusTrailMoverのPrefab")]
-    [SerializeField] private TorusTrailMover nearMissTorusPrefab;
-    [Tooltip("ランナーに追従する時間（秒）")]
-    [SerializeField] private float nearMissFollowDuration = 0.2f;
-    [Tooltip("切り離し後にその場に残る時間（秒）")]
-    [SerializeField] private float nearMissLingerDuration = 0.4f;
+    [Tooltip("左ターン時のNearMissエフェクト（direction=-1）")]
+    [SerializeField] private ParticleSystem nearMissLeftEffect;
+    [Tooltip("右ターン時のNearMissエフェクト（direction=1）")]
+    [SerializeField] private ParticleSystem nearMissRightEffect;
 
     private bool prevRushActive = false;
 
@@ -88,27 +85,10 @@ public class EffectController : MonoBehaviour
 
     private void OnNearMissStarted(int direction)
     {
-        if (!nearMissTorusPrefab) return;
-        StartCoroutine(SpawnNearMissTorus(direction));
-    }
-
-    private IEnumerator SpawnNearMissTorus(int direction)
-    {
-        // ランナーの子として生成 → 横移動に追従
-        var instance = Instantiate(nearMissTorusPrefab, transform);
-        instance.transform.localPosition = Vector3.zero;
-        instance.StartRotation(direction);
-
-        // 追従フェーズ
-        yield return new WaitForSeconds(nearMissFollowDuration);
-
-        // 切り離し → その場に残る
-        instance.transform.SetParent(null, worldPositionStays: true);
-
-        // 残留フェーズ後にDestroy
-        yield return new WaitForSeconds(nearMissLingerDuration);
-
-        Destroy(instance.gameObject);
+        var effect = direction >= 0 ? nearMissRightEffect : nearMissLeftEffect;
+        if (!effect) return;
+        effect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        effect.Play();
     }
 
     private void UpdateRushEffect()
