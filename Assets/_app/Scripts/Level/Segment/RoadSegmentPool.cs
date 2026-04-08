@@ -17,6 +17,8 @@ public class RoadSegmentPool : MonoBehaviour
         [HideInInspector] public float weight = 1f;
         [Tooltip("LevelManagerによる難易度重み付けの基準レベル")]
         public DifficultyLevel difficultyLevel = DifficultyLevel.Easy;
+        [Tooltip("ONにするとデバッグモード中はこのEntryのみが出現する")]
+        public bool debugOnly = false;
     }
 
     [Header("Segment Variants")]
@@ -24,6 +26,10 @@ public class RoadSegmentPool : MonoBehaviour
 
     [Header("Options")]
     [SerializeField] private bool avoidSameAsLast = false;
+#if UNITY_EDITOR
+    [Tooltip("ONにするとdebugOnlyフラグが立ったEntryのみ出現する（Editor専用）")]
+    [SerializeField] private bool debugMode = false;
+#endif
 
     private readonly List<Queue<RoadSegmentBase>> pools = new List<Queue<RoadSegmentBase>>();
     private readonly List<int> cand = new List<int>(32);
@@ -104,6 +110,11 @@ public class RoadSegmentPool : MonoBehaviour
     /// </Summary>
     private int PickIndexWeighted(bool avoidSameAsLast)
     {
+#if UNITY_EDITOR
+        bool isDebug = debugMode;
+#else
+        bool isDebug = false;
+#endif
         float total = 0f;
         cand.Clear();
 
@@ -111,11 +122,12 @@ public class RoadSegmentPool : MonoBehaviour
         {
             var e = entries[i];
             if (e.segmentPrefab == null) continue;
-            if (e.weight <= 0f) continue;
+            if (isDebug && !e.debugOnly) continue;
+            if (!isDebug && e.weight <= 0f) continue;
             if (avoidSameAsLast && i == lastIndex && entries.Count > 1) continue;
 
             cand.Add(i);
-            total += e.weight;
+            total += isDebug ? 1f : e.weight;
         }
 
         if (cand.Count == 0)

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7926453293491022756}
   - component: {fileID: 6416550264220661965}
   - component: {fileID: 7569691797778545056}
+  - component: {fileID: 2935496098570440897}
   m_Layer: 0
   m_Name: Car_red
   m_TagString: Obstacle
@@ -116,6 +117,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7a59e196b699ee40aed8a2808913b94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Obstacle
+--- !u!114 &2935496098570440897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2184797729327884017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6ca81f957c898c4988612f446a68880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Blastable
   blastScore: 100
   blastForceMagnitude: 60
   blastUpAngle: 30

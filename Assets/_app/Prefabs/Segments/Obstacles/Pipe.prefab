@@ -271,6 +271,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1000013483694438, guid: 51b9e2639774c80489c8dfd478f275f3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4582510764022425537}
+    - targetCorrespondingSourceObject: {fileID: 1000013483694438, guid: 51b9e2639774c80489c8dfd478f275f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5126169841294376089}
   m_SourcePrefab: {fileID: 100100000, guid: 51b9e2639774c80489c8dfd478f275f3, type: 3}
 --- !u!1 &8057212010474007036 stripped
 GameObject:
@@ -337,6 +340,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7a59e196b699ee40aed8a2808913b94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Obstacle
+--- !u!114 &5126169841294376089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8057212010474007036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6ca81f957c898c4988612f446a68880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Blastable
   blastScore: 100
   blastForceMagnitude: 60
   blastUpAngle: 30
