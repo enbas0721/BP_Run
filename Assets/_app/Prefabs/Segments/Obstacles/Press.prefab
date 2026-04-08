@@ -5414,7 +5414,7 @@ MonoBehaviour:
   bottomY: -0.15
   topWaitDuration: 1.5
   descendDuration: 0.3
-  bottomWaitDuration: 1.5
+  bottomWaitDuration: 1
   ascendDuration: 0.5
   shakeStrength: 0.1
   shakeDuration: 0.15

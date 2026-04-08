@@ -46,24 +46,13 @@ public class PressAnimator : MonoBehaviour
         blastable = GetComponent<Blastable>();
     }
 
+    private bool blasted = false;
+
     private void OnEnable()
     {
         if (blastable) blastable.OnBlasted += OnBlasted;
-    }
 
-    private void OnDisable()
-    {
-        if (blastable) blastable.OnBlasted -= OnBlasted;
-    }
-
-    private void OnBlasted()
-    {
-        enabled = false;
-        transform.localPosition = baseLocalPosition;
-    }
-
-    private void Start()
-    {
+        blasted = false;
         shakeElapsed = -1f;
         transform.localPosition = baseLocalPosition;
 
@@ -86,9 +75,20 @@ public class PressAnimator : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        if (blastable) blastable.OnBlasted -= OnBlasted;
+    }
+
+    private void OnBlasted()
+    {
+        blasted = true;
+        transform.localPosition = baseLocalPosition;
+    }
+
     private void Update()
     {
-        if (!upperPart) return;
+        if (!upperPart || blasted) return;
 
         elapsed += Time.deltaTime;
 
