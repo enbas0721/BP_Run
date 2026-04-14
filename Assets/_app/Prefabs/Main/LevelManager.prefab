@@ -69,81 +69,101 @@ MonoBehaviour:
   entries:
   - segmentPrefab: {fileID: 1126375026918509926, guid: 0000cd5d63ff6804b8983ff6c77fcd56, type: 3}
     warmCount: 3
-    weight: 2
+    weight: 0.1
     difficultyLevel: 0
+    debugOnly: 0
   - segmentPrefab: {fileID: 1126375026918509926, guid: 5af759d6008fc9844844c7b41f44d17a, type: 3}
     warmCount: 3
-    weight: 2
+    weight: 0.13533528
     difficultyLevel: 1
+    debugOnly: 0
   - segmentPrefab: {fileID: 1126375026918509926, guid: 167c9d6d3be7f764386cb95fb06a07f3, type: 3}
     warmCount: 3
-    weight: 2
+    weight: 0.13533528
     difficultyLevel: 1
+    debugOnly: 0
   - segmentPrefab: {fileID: 1126375026918509926, guid: 58669a4bad31cad4192fde8c3f417178, type: 3}
     warmCount: 3
-    weight: 2
+    weight: 0.60653067
     difficultyLevel: 2
+    debugOnly: 0
   - segmentPrefab: {fileID: 1126375026918509926, guid: c68ea4dd352e2b747abc0fdfec631c2a, type: 3}
     warmCount: 3
-    weight: 2
+    weight: 1
     difficultyLevel: 3
+    debugOnly: 0
   - segmentPrefab: {fileID: 1126375026918509926, guid: 35048f5899b779d49b53fb990e33c50b, type: 3}
     warmCount: 3
-    weight: 2
+    weight: 0.1
     difficultyLevel: 0
+    debugOnly: 0
   - segmentPrefab: {fileID: 1126375026918509926, guid: 749cc7087b6c2cb4a8813e27b26f9f8a, type: 3}
     warmCount: 3
-    weight: 2
+    weight: 0.1
     difficultyLevel: 0
+    debugOnly: 0
   - segmentPrefab: {fileID: 1126375026918509926, guid: b7c596b3484ad5046803d4fc69b3e184, type: 3}
     warmCount: 3
-    weight: 2
+    weight: 0.1
     difficultyLevel: 0
+    debugOnly: 0
   - segmentPrefab: {fileID: 1126375026918509926, guid: ec0624ec3ea0d8f4c859be7461ec530e, type: 3}
     warmCount: 3
     weight: 1
     difficultyLevel: 3
+    debugOnly: 0
   - segmentPrefab: {fileID: 1126375026918509926, guid: 757ffdf93f777364cbf84983c7fea4cd, type: 3}
     warmCount: 3
-    weight: 1
+    weight: 0.13533528
     difficultyLevel: 1
+    debugOnly: 0
   - segmentPrefab: {fileID: 1126375026918509926, guid: 6192c9ae4efd6e948a57422a762a6a22, type: 3}
     warmCount: 3
-    weight: 1
+    weight: 0.13533528
     difficultyLevel: 1
+    debugOnly: 0
   - segmentPrefab: {fileID: 1126375026918509926, guid: 295bf4cbf5187f54596a52f0ff508c02, type: 3}
     warmCount: 3
-    weight: 1
+    weight: 0.13533528
     difficultyLevel: 1
+    debugOnly: 0
   - segmentPrefab: {fileID: 1126375026918509926, guid: fb56a4b68686e714f9a073b460c19e29, type: 3}
     warmCount: 3
-    weight: 1
+    weight: 0.1
     difficultyLevel: 0
+    debugOnly: 0
   - segmentPrefab: {fileID: 1126375026918509926, guid: 1d311a370cb030944ac5020c34607963, type: 3}
     warmCount: 3
-    weight: 1
+    weight: 0.1
     difficultyLevel: 0
+    debugOnly: 0
   - segmentPrefab: {fileID: 1126375026918509926, guid: a2592053ed7e9f54baebe5cfbc373de0, type: 3}
     warmCount: 3
-    weight: 1
+    weight: 0.1
     difficultyLevel: 0
+    debugOnly: 0
   - segmentPrefab: {fileID: 1126375026918509926, guid: a2592053ed7e9f54baebe5cfbc373de0, type: 3}
     warmCount: 3
-    weight: 1
+    weight: 0.1
     difficultyLevel: 0
+    debugOnly: 0
   - segmentPrefab: {fileID: 1126375026918509926, guid: 16d9987d0c7d1a84e829ed13d7ffc411, type: 3}
     warmCount: 3
-    weight: 1
+    weight: 0.60653067
     difficultyLevel: 2
+    debugOnly: 0
   - segmentPrefab: {fileID: 1126375026918509926, guid: e3475bd4542599e47ae15b48acf7a085, type: 3}
     warmCount: 3
-    weight: 1
+    weight: 0.60653067
     difficultyLevel: 2
+    debugOnly: 0
   - segmentPrefab: {fileID: 1126375026918509926, guid: addcb1bce608b0143846ad9049e1b95d, type: 3}
     warmCount: 3
-    weight: 1
+    weight: 0.60653067
     difficultyLevel: 2
+    debugOnly: 0
   avoidSameAsLast: 1
+  debugMode: 0
 --- !u!114 &8222377864733174166
 MonoBehaviour:
   m_ObjectHideFlags: 0
