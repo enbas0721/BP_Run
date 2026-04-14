@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: CriAtomWindowPrefs
   m_EditorClassIdentifier: CriMw.CriWare.Editor::CriWare.CriAtomWindowPrefs
   searchPath: C:/BP_Run/Assets/StreamingAssets
-  outputAssetsRoot: C:/AtomCraftProj/BP_Run/Public/Assets
+  outputAssetsRoot: C:\AtomCraftProj\BPRun\Public\Assets
   showPrivateCue: 0
