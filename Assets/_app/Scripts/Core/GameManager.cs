@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SegmentSpawner segmentSpawner;
     [SerializeField] private AdrenalineSystem adrenalineSystem;
     [SerializeField] private SwipeInput swipeInput;
+    [SerializeField] private MusicIntensityController musicIntensityController;
 
     private float playTime = 0f;
 
@@ -204,6 +205,10 @@ public class GameManager : MonoBehaviour
         // スコアリセット
         ScoreSystem.Reset();
         OnScoreChanged?.Invoke(ScoreSystem.Score);
+
+        // BGMリセット
+        if (musicIntensityController)
+            musicIntensityController.ResetIntensity();
 
         SetState(GameState.Ready);
     }

@@ -38,13 +38,7 @@ public class MusicIntensityController : MonoBehaviour
 
     private void Start()
     {
-        if (bgmSource == null || tracks == null || tracks.Length == 0) return;
-
-        // 再生前に初期ラベルを設定してからPlay
-        currentTrackIndex = 0;
-        bgmSource.player.SetSelectorLabel(bassSelectorName, tracks[0].bassLabel);
-        bgmSource.player.SetSelectorLabel(chordSelectorName, tracks[0].chordLabel);
-        bgmPlayback = bgmSource.Play();
+        StartBgm();
 
         // Start後にイベント購読（GameManagerがStart時点で確実に存在するため）
         if (GameManager.Instance != null)
@@ -99,11 +93,26 @@ public class MusicIntensityController : MonoBehaviour
     /// <summary>
     /// ゲームリセット時にIntensityを初期状態に戻す
     /// </summary>
+    /// <summary>
+    /// BGMを初期状態（tracks[0]）から再生する。Start時およびリセット時に使用。
+    /// </summary>
+    public void StartBgm()
+    {
+        if (bgmSource == null || tracks == null || tracks.Length == 0) return;
+
+        bgmSource.Stop();
+        currentTrackIndex = 0;
+        bgmSource.player.SetSelectorLabel(bassSelectorName, tracks[0].bassLabel);
+        bgmSource.player.SetSelectorLabel(chordSelectorName, tracks[0].chordLabel);
+        bgmPlayback = bgmSource.Play();
+    }
+
+    /// <summary>
+    /// ゲームリセット時にIntensityを初期状態に戻して再生し直す
+    /// </summary>
     public void ResetIntensity()
     {
-        currentTrackIndex = -1;
-        if (tracks == null || tracks.Length == 0) return;
-        ApplyTrack(tracks[0]);
+        StartBgm();
     }
 
     /// <summary>
