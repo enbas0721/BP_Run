@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
     public event Action<GameState> OnStateChanged;
     public event Action OnReadyToShowResult;
     public event Action OnFirstGaugeFull;
+    public event Action OnItemCollected;
 
     private bool firstGaugeFilled = false;
 
@@ -224,6 +225,11 @@ public class GameManager : MonoBehaviour
     {
         if (State != GameState.Playing) return;
         ScoreSystem.Add(amount);
+    }
+
+    public void NotifyItemCollected()
+    {
+        OnItemCollected?.Invoke();
     }
 
     public bool IsFirstGaugeFilled => firstGaugeFilled;

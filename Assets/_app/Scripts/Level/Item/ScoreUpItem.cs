@@ -11,6 +11,7 @@ public class ScoreUpItem : MonoBehaviour
         if (GameManager.Instance != null)
         {
             GameManager.Instance.AddScore(amount);
+            GameManager.Instance.NotifyItemCollected();
         }
 
         Destroy(gameObject);

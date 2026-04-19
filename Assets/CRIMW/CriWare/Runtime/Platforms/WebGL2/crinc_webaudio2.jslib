@@ -5,11 +5,12 @@
         processors: [],
         interval: null,
         initPromise: null,
-        createPromise: null,
+        createPromise: [],
         setRenderingRatioFunc: null,
         mainFunc: null,
         useWorklet: false,
         serverFrequency: 60,
+        sampleRate: 48000,
 
         // Enhanced Timer System
         timing: {
@@ -21,14 +22,11 @@
             consecutiveLateCount: 0,
             isRunning: false,
             
-            // Performance tracking
-            executionHistory: [],
+            // Performance tracking (Optimized: Zero GC)
+            latenessHistory: null,     // Float32Array
+            durationHistory: null,     // Float32Array
             historyIndex: 0,
             historySize: 60,
-            
-            // Drift compensation
-            driftCompensation: 0,
-            maxDriftCompensation: 2.0,
             
             // Adaptive parameters
             urgencyThreshold: 0.75,    // When to use high-priority scheduling
@@ -55,22 +53,15 @@
             CriNcAsr.timing.targetInterval = 1000 / CriNcAsr.serverFrequency;
             CriNcAsr.timing.adaptiveInterval = CriNcAsr.timing.targetInterval;
             
-            // Initialize execution history
-            CriNcAsr.timing.executionHistory = new Array(CriNcAsr.timing.historySize);
-            for (let i = 0; i < CriNcAsr.timing.historySize; i++) {
-                CriNcAsr.timing.executionHistory[i] = {
-                    scheduledTime: 0,
-                    actualTime: 0,
-                    lateness: 0,
-                    executionDuration: 0,
-                    priority: 'normal'
-                };
-            }
+            // Initialize execution history (Zero GC)
+            CriNcAsr.timing.latenessHistory = new Float32Array(CriNcAsr.timing.historySize);
+            CriNcAsr.timing.durationHistory = new Float32Array(CriNcAsr.timing.historySize);
             
             // Reset metrics
             CriNcAsr.timing.totalExecutions = 0;
             CriNcAsr.timing.totalLateExecutions = 0;
             CriNcAsr.timing.maxLateness = 0;
+            CriNcAsr.timing.historyIndex = 0;
             
             // Setup event handlers
             if (typeof document !== 'undefined') {
@@ -86,7 +77,6 @@
         // Start the enhanced timer
         startEnhancedTimer: function() {
             if (CriNcAsr.timing.isRunning) {
-                console.warn("CriNcAsr: Timer already running");
                 return;
             }
             
@@ -95,14 +85,12 @@
             CriNcAsr.timing.nextScheduledTime = CriNcAsr.timing.lastExecutionTime + CriNcAsr.timing.targetInterval;
             CriNcAsr.timing.lastFrameTime = CriNcAsr.timing.lastExecutionTime;
             
-            console.log("CriNcAsr: Starting enhanced timer");
             CriNcAsr.scheduleNextExecution();
         },
 
         // Stop the enhanced timer
         stopEnhancedTimer: function() {
             CriNcAsr.timing.isRunning = false;
-            console.log("CriNcAsr: Stopping enhanced timer");
         },
 
         // Schedule the next execution with adaptive priority
@@ -183,36 +171,27 @@
             const executionStartTime = performance.now();
             const scheduledTime = CriNcAsr.timing.nextScheduledTime;
             const lateness = executionStartTime - scheduledTime;
-            const frameTime = executionStartTime - CriNcAsr.timing.lastFrameTime;
             
             // Update frame time tracking
             CriNcAsr.timing.lastFrameTime = executionStartTime;
             
             // Execute the actual main function
-            let executionSuccess = true;
             try {
                 dynCall("v", CriNcAsr.mainFunc, []);
             } catch (error) {
                 console.error("CriNcAsr: Error in main function execution:", error);
-                executionSuccess = false;
             }
             
             // Measure execution duration
             const executionDuration = performance.now() - executionStartTime;
             
-            // Update execution history
-            const historyEntry = {
-                scheduledTime: scheduledTime,
-                actualTime: executionStartTime,
-                lateness: lateness,
-                executionDuration: executionDuration,
-                priority: schedulingMethod,
-                frameTime: frameTime,
-                success: executionSuccess
-            };
-            
-            CriNcAsr.timing.executionHistory[CriNcAsr.timing.historyIndex] = historyEntry;
-            CriNcAsr.timing.historyIndex = (CriNcAsr.timing.historyIndex + 1) % CriNcAsr.timing.historySize;
+            // Update execution history (Zero GC)
+            const idx = CriNcAsr.timing.historyIndex;
+            if (CriNcAsr.timing.latenessHistory) {
+                CriNcAsr.timing.latenessHistory[idx] = lateness;
+                CriNcAsr.timing.durationHistory[idx] = executionDuration;
+                CriNcAsr.timing.historyIndex = (idx + 1) % CriNcAsr.timing.historySize;
+            }
             
             // Update metrics
             CriNcAsr.timing.totalExecutions++;
@@ -239,10 +218,6 @@
                 const skip = Math.ceil((executionStartTime - CriNcAsr.timing.nextScheduledTime) / 
                                        CriNcAsr.timing.targetInterval);
                 CriNcAsr.timing.nextScheduledTime += skip * CriNcAsr.timing.targetInterval;
-                
-                if (skip > 1) {
-                    console.warn(`CriNcAsr: Skipped ${skip - 1} execution(s) due to timing delay`);
-                }
             }
             
             // Schedule next execution
@@ -251,62 +226,39 @@
 
         // Adapt timing based on recent performance
         adaptTiming: function() {
-            const recentHistory = CriNcAsr.getRecentHistory(10);
-            if (recentHistory.length < 5) {
-                return; // Not enough data to adapt
-            }
-            
-            // Calculate performance metrics
+            if (!CriNcAsr.timing.latenessHistory) return;
+
+            const count = 10;
+            const historySize = CriNcAsr.timing.historySize;
             let totalLateness = 0;
-            let totalDuration = 0;
             let lateCount = 0;
-            let maxLateness = 0;
             
-            for (const entry of recentHistory) {
-                totalLateness += entry.lateness;
-                totalDuration += entry.executionDuration;
-                if (entry.lateness > 2) {
-                    lateCount++;
-                }
-                if (entry.lateness > maxLateness) {
-                    maxLateness = entry.lateness;
-                }
+            // Iterate backwards from current index to get recent frames
+            for (let i = 0; i < count; i++) {
+                const idx = (CriNcAsr.timing.historyIndex - 1 - i + historySize) % historySize;
+                const l = CriNcAsr.timing.latenessHistory[idx];
+                totalLateness += l;
+                if (l > 2) lateCount++;
             }
             
-            const avgLateness = totalLateness / recentHistory.length;
-            const avgDuration = totalDuration / recentHistory.length;
-            const latePercentage = lateCount / recentHistory.length;
+            const latePercentage = lateCount / count;
             
-            // Drift compensation
-            if (Math.abs(avgLateness) > 0.5) {
-                const compensation = Math.max(
-                    -CriNcAsr.timing.maxDriftCompensation,
-                    Math.min(CriNcAsr.timing.maxDriftCompensation, -avgLateness * 0.1)
-                );
-                CriNcAsr.timing.driftCompensation += compensation;
-            } else {
-                // Gradually reduce compensation when timing is stable
-                CriNcAsr.timing.driftCompensation *= 0.95;
-            }
-            
-            // Adaptive interval adjustment
+            // Simple interval adjustment based on load - Removed complex drift compensation
             let intervalAdjustment = 0;
             
             if (latePercentage > 0.7) {
-                // We're late too often
+                // High load: slow down slightly
                 intervalAdjustment = 0.5;
-                console.warn(`CriNcAsr: High lateness rate (${(latePercentage * 100).toFixed(1)}%)`);
             } else if (latePercentage > 0.5) {
-                // Moderate lateness
+                // Moderate load
                 intervalAdjustment = 0.2;
-            } else if (avgLateness < -3 && latePercentage < 0.1) {
-                // We're consistently early
-                intervalAdjustment = -0.5;
+            } else if (totalLateness / count < -2) {
+                // Consistently early: tighten up
+                intervalAdjustment = -0.2;
             }
             
             // Apply adjustments
             CriNcAsr.timing.adaptiveInterval = CriNcAsr.timing.targetInterval + 
-                                          CriNcAsr.timing.driftCompensation + 
                                           intervalAdjustment * CriNcAsr.timing.adaptiveStepSize;
             
             // Constrain adaptive interval to reasonable bounds
@@ -317,36 +269,22 @@
                                                           CriNcAsr.timing.adaptiveInterval));
         },
 
-        // Get recent execution history
-        getRecentHistory: function(count) {
-            const history = [];
-            for (let i = 0; i < Math.min(count, CriNcAsr.timing.historySize); i++) {
-                const index = (CriNcAsr.timing.historyIndex - 1 - i + CriNcAsr.timing.historySize) % 
-                             CriNcAsr.timing.historySize;
-                const entry = CriNcAsr.timing.executionHistory[index];
-                if (entry && entry.actualTime > 0) {
-                    history.push(entry);
-                }
-            }
-            return history;
-        },
-
         handleVisibilityChange: function() {
             if (document.hidden) {
-                // From timing system: reset adaptive timing
+                // Reset adaptive timing
                 CriNcAsr.timing.adaptiveInterval = CriNcAsr.timing.targetInterval;
                 CriNcAsr.timing.consecutiveLateCount = 0;
                 
-                // From audio system: suspend audio
+                // Suspend audio
                 if (CriNcAsr.wactx) {
                     CriNcAsr.wactx.suspend();
                 }
             } else {
-                // From timing system: reset timing to prevent catch-up burst
+                // Reset timing to prevent catch-up burst
                 CriNcAsr.timing.lastExecutionTime = performance.now();
                 CriNcAsr.timing.nextScheduledTime = CriNcAsr.timing.lastExecutionTime + CriNcAsr.timing.targetInterval;
                 
-                // From audio system: resume audio with delay
+                // Resume audio with delay
                 if (CriNcAsr.wactx) {
                     setTimeout(() => {
                         CriNcAsr.wactx.suspend();
@@ -384,8 +322,17 @@
 
         // Get timing statistics
         getTimingStats: function() {
-            const recentHistory = CriNcAsr.getRecentHistory(30);
-            if (recentHistory.length === 0) {
+            if (!CriNcAsr.timing.latenessHistory) {
+                return {
+                    running: false,
+                    avgLatency: 0,
+                    latePercentage: 0,
+                    maxLateness: 0
+                };
+            }
+
+            const count = Math.min(30, CriNcAsr.timing.totalExecutions);
+            if (count === 0) {
                 return {
                     running: false,
                     avgLatency: 0,
@@ -394,15 +341,19 @@
                 };
             }
             
-            const avgLatency = recentHistory.reduce((sum, h) => sum + h.lateness, 0) / recentHistory.length;
-            const lateCount = recentHistory.filter(h => h.lateness > 2).length;
-            const latePercentage = (lateCount / recentHistory.length) * 100;
+            let totalLateness = 0;
+            let lateCount = 0;
+            const historySize = CriNcAsr.timing.historySize;
             
-            // Method distribution
-            const methodCounts = {};
-            recentHistory.forEach(h => {
-                methodCounts[h.priority] = (methodCounts[h.priority] || 0) + 1;
-            });
+            for (let i = 0; i < count; i++) {
+                const idx = (CriNcAsr.timing.historyIndex - 1 - i + historySize) % historySize;
+                const l = CriNcAsr.timing.latenessHistory[idx];
+                totalLateness += l;
+                if (l > 2) lateCount++;
+            }
+            
+            const avgLatency = totalLateness / count;
+            const latePercentage = (lateCount / count) * 100;
             
             return {
                 running: CriNcAsr.timing.isRunning,
@@ -414,9 +365,7 @@
                 maxLateness: CriNcAsr.timing.maxLateness,
                 totalExecutions: CriNcAsr.timing.totalExecutions,
                 totalLateExecutions: CriNcAsr.timing.totalLateExecutions,
-                consecutiveLateCount: CriNcAsr.timing.consecutiveLateCount,
-                driftCompensation: CriNcAsr.timing.driftCompensation,
-                methodDistribution: methodCounts
+                consecutiveLateCount: CriNcAsr.timing.consecutiveLateCount
             };
         },
 
@@ -588,6 +537,7 @@
         this.ringBuffer = [];
         this.offset = 0;
         this.destroyFlag = false;
+        this.stopFlag = true;
         
         // Dynamic buffer management
         this.targetBufferSize = 2048;        // Start small for low latency
@@ -617,9 +567,18 @@
         if(event.data['type'] == "Finalize"){
             this.destroyFlag = true;
         }
+        if(event.data['type'] == "Start"){
+            this.stopFlag = false;
+        }
+        if(event.data['type'] == "Stop"){
+            this.stopFlag = true;
+        }
     }
 
     process(inputs, outputs, parameters) {
+        if(this.stopFlag){
+            return !this.destroyFlag;
+        }
         const output = outputs[0];
         const bufferFillRatio = this.totalStoredSamples / this.targetBufferSize;
         
@@ -737,7 +696,7 @@ registerProcessor('cri-ncvoice-audio-worklet-processor', CriNcAsrVoiceAudioWorkl
             if(isWeChat){
                 context = AudioContext;
             } else {
-                context = CriNc.wactx || itf["audioContext"] || new AudioContext({sampleRate: 48000});
+                context = CriNc.wactx || itf["audioContext"] || new AudioContext({sampleRate: CriNcAsr.sampleRate});
             }
             
             if (context.audioWorklet && !isWeChat) {
@@ -768,14 +727,19 @@ registerProcessor('cri-ncvoice-audio-worklet-processor', CriNcAsrVoiceAudioWorkl
 
     WAASRJS_Create: function(num_channels) {
         var audioProcessor = {};
-        CriNcAsr.processors.push(audioProcessor);
+        var index = CriNcAsr.processors.findIndex(p => p === undefined);
+        if (index !== -1) {
+            CriNcAsr.processors[index] = audioProcessor;
+        } else {
+            CriNcAsr.processors.push(audioProcessor);
+        }
         var id = CriNcAsr.processors.indexOf(audioProcessor);
         
         if (CriNcAsr.useWorklet) {
-            CriNcAsr.createPromise = CriNcAsr.createAudioWorklet(id, num_channels);
+            CriNcAsr.createPromise[id] = CriNcAsr.createAudioWorklet(id, num_channels);
         } else {
             CriNcAsr.createScriptProcessor(id, num_channels);
-            CriNcAsr.createPromise = Promise.resolve();
+            CriNcAsr.createPromise[id] = Promise.resolve();
         }
 
         CriNcAsr.wactx.destination.channelCount = Math.min(num_channels, CriNcAsr.wactx.destination.maxChannelCount);
@@ -812,7 +776,7 @@ registerProcessor('cri-ncvoice-audio-worklet-processor', CriNcAsrVoiceAudioWorkl
     },
 
     WAASRJS_Setup: async function(ncv, id, nch) {
-        await CriNcAsr.createPromise;
+        await CriNcAsr.createPromise[id];
 
         const processor = CriNcAsr.processors[id];
         if (!processor) return;
@@ -849,23 +813,29 @@ registerProcessor('cri-ncvoice-audio-worklet-processor', CriNcAsrVoiceAudioWorkl
     },
 
     WAASRJS_Start: async function(id) {
-        await CriNcAsr.createPromise;
+        await CriNcAsr.createPromise[id];
         const processor = CriNcAsr.processors[id];
         if (processor) {
             processor.connect(CriNcAsr.wactx.destination);
+            if (CriNcAsr.useWorklet) {
+                processor.port.postMessage({ 'type': "Start"});
+            }
         }
     },
 
     WAASRJS_Stop: async function(id) {
-        await CriNcAsr.createPromise;
+        await CriNcAsr.createPromise[id];
         const processor = CriNcAsr.processors[id];
         if (processor) {
             processor.disconnect();
+            if (CriNcAsr.useWorklet) {
+                processor.port.postMessage({ 'type': "Stop"});
+            }
         }
     },
 
     WAASRJS_Destroy: async function(id) {
-        await CriNcAsr.createPromise;
+        await CriNcAsr.createPromise[id];
         const processor = CriNcAsr.processors[id];
         if (processor) {
             if (CriNcAsr.useWorklet) {
@@ -875,8 +845,8 @@ registerProcessor('cri-ncvoice-audio-worklet-processor', CriNcAsrVoiceAudioWorkl
                 processor.onaudioprocess = null;
             }
             processor.disconnect();
-            CriNcAsr.processors[id] = null;
-            CriNcAsr.ncvoices[id] = null;
+            delete CriNcAsr.processors[id];
+            delete CriNcAsr.ncvoices[id];
         }
     },
 
@@ -886,7 +856,11 @@ registerProcessor('cri-ncvoice-audio-worklet-processor', CriNcAsrVoiceAudioWorkl
         
         CriNcAsr.wactx = null;
         CriNcAsr.initPromise = null;
-        CriNcAsr.createPromise = null;
+        CriNcAsr.createPromise = [];
+        for(var i = 0; i < CriNcAsr.processors.length; i++){
+            _WAASRJS_Destroy(i);
+        }
+        CriNcAsr.ncvoices = {};
         CriNcAsr.dataCbFunc = null;
         CriNcAsr.mainFunc = null;
         CriNcAsr.interval = null;
@@ -939,10 +913,14 @@ registerProcessor('cri-ncvoice-audio-worklet-processor', CriNcAsrVoiceAudioWorkl
             if(isWeChat){
                 context = AudioContext;
             } else {
-                context = new AudioContext();
+                context = new AudioContext({sampleRate: 48000});
             }
             sampleRate = context.sampleRate;
+            if(sampleRate != 48000){
+                console.warn("Current sample rate is ",sampleRate);
+            }
             context.close();
+            CriNcAsr.sampleRate = sampleRate;
             return sampleRate;
         }
         console.error("AudioContext is not exist");

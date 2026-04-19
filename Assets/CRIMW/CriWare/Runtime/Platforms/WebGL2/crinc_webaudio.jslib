@@ -1849,7 +1849,7 @@ WAJS_Initialize: function() {
 
 	// AudioContextを作成
 	if (AudioContext) {
-		var context = CriNc.wactx || itf["audioContext"] || new AudioContext();
+		var context = CriNc.wactx || itf["audioContext"] || new AudioContext({sampleRate:48000});
 
 		CriNc.wactx = itf["audioContext"] = context;
 

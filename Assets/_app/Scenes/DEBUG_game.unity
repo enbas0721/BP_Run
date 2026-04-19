@@ -424,12 +424,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 220645875}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1763873335}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &271468663 stripped
 MonoBehaviour:
@@ -442,12 +442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d84ebe7b5bad0b4d87c9dbc8ea2cd4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SegmentSpawner
---- !u!4 &498450071 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 24846727540971837, guid: b0629385ab71d524f95157719c77b00b, type: 3}
-  m_PrefabInstance: {fileID: 1160277029}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &611886863
+--- !u!1 &491719224
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -455,22 +450,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 611886864}
-  - component: {fileID: 611886865}
+  - component: {fileID: 491719226}
+  - component: {fileID: 491719227}
   m_Layer: 0
-  m_Name: GetItem(CriAtomSource)
+  m_Name: BGM(CriAtomSource)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &611886864
+--- !u!4 &491719226
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 611886863}
+  m_GameObject: {fileID: 491719224}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.28356, y: -0.125, z: -8.5774}
@@ -479,18 +474,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1511093298}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &611886865
+--- !u!114 &491719227
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 611886863}
+  m_GameObject: {fileID: 491719224}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Script: {fileID: 11500000, guid: c1406b3e082f8497eb73ee9f4c314365, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: CriMw.CriWare.Runtime::CriWare.CriAtomSource
+  m_EditorClassIdentifier: CriMw.CriWare.Assets.Runtime::CriWare.Assets.CriAtomSourceForAsset
   _playOnStart: 0
   _regionOnStart: {fileID: 0}
   _listenerOnStart: {fileID: 0}
@@ -510,8 +505,14 @@ MonoBehaviour:
     - 0
     - 0
     - 0
-  _cueName: GetItem
-  _cueSheet: CueSheet
+  cue:
+    acbAsset: {fileID: -6750239444755058063, guid: 1e040d2dd49c48c4082f9954b6b08fbd, type: 3}
+    cueId: 3
+--- !u!4 &498450071 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 24846727540971837, guid: b0629385ab71d524f95157719c77b00b, type: 3}
+  m_PrefabInstance: {fileID: 1160277029}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1160277029
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -703,7 +704,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: CriMw.CriWare.Runtime::CriWare.CriWareErrorHandler
   enableDebugPrintOnTerminal: 0
   enableForceCrashOnError: 0
-  dontDestroyOnLoad: 1
+  dontDestroyOnLoad: 0
   messageBufferCounts: 8
 --- !u!4 &1442210439
 Transform:
@@ -713,13 +714,79 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1442210437}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1763873335}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1451148075
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1451148077}
+  - component: {fileID: 1451148078}
+  m_Layer: 0
+  m_Name: Bell(CriAtomSource)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1451148077
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451148075}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.28356, y: -0.125, z: -8.5774}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1511093298}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1451148078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451148075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1406b3e082f8497eb73ee9f4c314365, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CriMw.CriWare.Assets.Runtime::CriWare.Assets.CriAtomSourceForAsset
+  _playOnStart: 0
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _freezeOrientation: 0
+  _loop: 0
+  _volume: 0.5
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
+  _use3dRandomization: 0
+  _randomPositionListMaxLength: 0
+  randomize3dConfig:
+    followsOriginalSource: 0
+    calculationType: 0
+    calculationParameters:
+    - 0
+    - 0
+    - 0
+  cue:
+    acbAsset: {fileID: -6750239444755058063, guid: 1e040d2dd49c48c4082f9954b6b08fbd, type: 3}
+    cueId: 1
 --- !u!1001 &1475118513
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -777,71 +844,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3ab8d649e24b5142953d04c2550ed94, type: 3}
---- !u!1 &1505114767
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1505114768}
-  - component: {fileID: 1505114769}
-  m_Layer: 0
-  m_Name: BGM(CriAtomSource)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1505114768
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1505114767}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.28356, y: -0.125, z: -8.5774}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1511093298}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1505114769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1505114767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: CriMw.CriWare.Runtime::CriWare.CriAtomSource
-  _playOnStart: 0
-  _regionOnStart: {fileID: 0}
-  _listenerOnStart: {fileID: 0}
-  _use3dPositioning: 1
-  _freezeOrientation: 0
-  _loop: 1
-  _volume: 1
-  _pitch: 0
-  _androidUseLowLatencyVoicePool: 0
-  need_to_player_update_all: 1
-  _use3dRandomization: 0
-  _randomPositionListMaxLength: 0
-  randomize3dConfig:
-    followsOriginalSource: 0
-    calculationType: 0
-    calculationParameters:
-    - 0
-    - 0
-    - 0
-  _cueName: BGM
-  _cueSheet: CueSheet
 --- !u!1001 &1509464608
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -933,8 +935,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1505114768}
-  - {fileID: 611886864}
+  - {fileID: 491719226}
+  - {fileID: 1451148077}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1511093299
@@ -944,12 +946,31 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1511093297}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a4af8e2d036470488f5524a1a0930bc, type: 3}
+  m_Script: {fileID: 11500000, guid: 7af098eb09953ef408acb94e28cfa79c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BgmManager
-  bgmSource: {fileID: 1505114769}
+  m_EditorClassIdentifier: Assembly-CSharp::MusicIntensityController
+  bgmSource: {fileID: 491719227}
+  bellSource: {fileID: 1451148078}
+  tracks:
+  - scoreThreshold: 0
+    bassLabel: bass_silent
+    chordLabel: chord_silent
+  - scoreThreshold: 100
+    bassLabel: bass_1
+    chordLabel: chord_1
+  - scoreThreshold: 3000
+    bassLabel: bass_2
+    chordLabel: chord_2
+  - scoreThreshold: 5000
+    bassLabel: bass_3
+    chordLabel: chord_3
+  - scoreThreshold: 10000
+    bassLabel: bass_4
+    chordLabel: chord_4
+  bassSelectorName: Bass_Selector
+  chordSelectorName: Chord_Selector
 --- !u!1 &1707479588
 GameObject:
   m_ObjectHideFlags: 0
@@ -1053,7 +1074,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1763873335}
-  - component: {fileID: 1763873334}
+  - component: {fileID: 1763873336}
   m_Layer: 0
   m_Name: CRIWARE
   m_TagString: Untagged
@@ -1061,27 +1082,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1763873334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1763873333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91f529aa944b914449d62b8c40f188fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: CriMw.CriWare.Runtime::CriWare.CriAtom
-  acfFile: BP_Run.acf
-  cueSheets:
-  - name: CueSheet
-    acbFile: CueSheet.acb
-    awbFile: 
-    loaderStatus: 0
-  dspBusSetting: 
-  dontDestroyOnLoad: 0
-  dontRemoveExistsCueSheet: 0
 --- !u!4 &1763873335
 Transform:
   m_ObjectHideFlags: 0
@@ -1094,9 +1094,27 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 220645877}
+  - {fileID: 1442210439}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1763873336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763873333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fe880b4dd4ce42fa9f0b72c2fb15765, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CriMw.CriWare.Assets.Runtime::CriWare.Assets.CriAtomAssets
+  acfAsset: {fileID: -6750239444755058063, guid: 47130dd77232abc469243f6946bf6e0f, type: 3}
+  dspBusSetting: 
+  acbAssets:
+  - {fileID: -6750239444755058063, guid: 1e040d2dd49c48c4082f9954b6b08fbd, type: 3}
 --- !u!1001 &1767556688655160603
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1275,8 +1293,6 @@ SceneRoots:
   - {fileID: 170232143}
   - {fileID: 1509464608}
   - {fileID: 1763873335}
-  - {fileID: 220645877}
-  - {fileID: 1442210439}
   - {fileID: 1511093298}
   - {fileID: 3342101446370321714}
   - {fileID: 1237863053}
