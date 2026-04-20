@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2986017684724255145}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.596, y: -0.058, z: 0.038}
+  m_LocalPosition: {x: 0.878, y: -0.03, z: 0.038}
   m_LocalScale: {x: 0.24999994, y: 0.5, z: 0.24999994}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -68,7 +68,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2, y: 1, z: 3}
-  m_Center: {x: -0.15, y: 0, z: -1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3984229076867270946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5293,5 +5293,5 @@ MonoBehaviour:
   blastScore: 100
   blastForceMagnitude: 60
   blastUpAngle: 30
-  blastSpreadAngle: 25
+  blastSpreadAngle: 90
   destroyDelay: 3

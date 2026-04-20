@@ -13,6 +13,10 @@ public class SegmentSpawner : MonoBehaviour
     [Header("Game Segment (Road)")]
     [SerializeField] private RoadSegmentPool roadPool;
     [SerializeField] private ItemLanePlacer itemPlacer;
+
+    [Header("Tutorial Segments")]
+    [Tooltip("ゲーム開始時に順番通りに生成するセグメントPrefab。空なら通常のプールを使用する。")]
+    [SerializeField] private RoadSegmentBase[] tutorialSegmentPrefabs;
     [Tooltip("開始時点の前方オフセット（スタートセグメントの長さ分）")]
     [SerializeField] private float roadInitialAheadOffset = 20f;
     [Tooltip("プレイヤーの前方に確保したい床の距離")]
@@ -35,6 +39,7 @@ public class SegmentSpawner : MonoBehaviour
 
     private float roadSpawnZ = 0f;
     private float envSpawnZ = 0f;
+    private int tutorialIndex = 0;
 
     private readonly Queue<RoadSegmentBase> activeRoadSegments = new Queue<RoadSegmentBase>();
     private readonly Queue<EnvSegmentBase> activeEnvSegments = new Queue<EnvSegmentBase>();
@@ -89,6 +94,7 @@ public class SegmentSpawner : MonoBehaviour
         // スポーン位置の初期化
         roadSpawnZ = roadInitialAheadOffset;
         envSpawnZ = envInitialAheadOffset;
+        tutorialIndex = 0;
 
         // 初期セグメントの生成
         for (int i = 0; i < roadInitialSegments; i++ )
@@ -103,11 +109,28 @@ public class SegmentSpawner : MonoBehaviour
 
     private bool SpawnRoadSegment()
     {
-        var seg = roadPool.Get();
-        if (seg == null)
+        RoadSegmentBase seg;
+
+        // チュートリアルセグメントが残っている間はそちらを順番に使用する
+        if (tutorialSegmentPrefabs != null && tutorialIndex < tutorialSegmentPrefabs.Length)
         {
-            Debug.LogError("SpawnSegment failed: roadPool.Get() returned null");
-            return false;
+            var prefab = tutorialSegmentPrefabs[tutorialIndex];
+            if (prefab == null)
+            {
+                Debug.LogError($"Tutorial segment prefab at index {tutorialIndex} is null");
+                return false;
+            }
+            seg = Instantiate(prefab);
+            tutorialIndex++;
+        }
+        else
+        {
+            seg = roadPool.Get();
+            if (seg == null)
+            {
+                Debug.LogError("SpawnSegment failed: roadPool.Get() returned null");
+                return false;
+            }
         }
 
         seg.transform.position = new Vector3(0, 0, roadSpawnZ);
@@ -150,7 +173,12 @@ public class SegmentSpawner : MonoBehaviour
             if (headEndZ < player.position.z - behindDistance)
             {
                 activeRoadSegments.Dequeue();
-                roadPool.Release(head);
+
+                // チュートリアルセグメントはプール管理外なのでDestroyする
+                if (head.GetComponent<PooledSegment>() != null)
+                    roadPool.Release(head);
+                else
+                    Destroy(head.gameObject);
             }
             else
             {

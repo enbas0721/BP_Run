@@ -13,6 +13,8 @@ public class AdrenalineSystem : MonoBehaviour
     [SerializeField] private float nearMissCooldown = 0.1f;
     [SerializeField] private float nearMissTimeScale = 0.3f;
     [SerializeField] private float nearMissAdrenalinePerSecond = 40f;
+    [Tooltip("初回ゲージ満タンまでのチュートリアル中に使用するゲージ上昇量")]
+    [SerializeField] private float tutorialNearMissAdrenalinePerSecond = 80f;
 
     private float originalFixedDeltaTime;
 
@@ -174,7 +176,7 @@ public class AdrenalineSystem : MonoBehaviour
         nearMissEndTime = Time.unscaledTime + nearMissDuration;
         cooldownUntil = Time.unscaledTime + nearMissCooldown;
 
-        gaugePerSec = nearMissAdrenalinePerSecond;
+        gaugePerSec = gaugeFillNotified ? nearMissAdrenalinePerSecond : tutorialNearMissAdrenalinePerSecond;
 
         Time.timeScale = nearMissTimeScale;
         Time.fixedDeltaTime = originalFixedDeltaTime * nearMissTimeScale;
