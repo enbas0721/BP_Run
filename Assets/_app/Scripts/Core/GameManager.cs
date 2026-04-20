@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
     public event Action OnReadyToShowResult;
     public event Action OnFirstGaugeFull;
     public event Action OnItemCollected;
+    public event Action OnTutorialEnded;
 
     private bool firstGaugeFilled = false;
 
@@ -80,6 +81,9 @@ public class GameManager : MonoBehaviour
 
         ScoreSystem = new ScoreSystem(scorePerSecond);
         ScoreSystem.OnScoreChanged += HandleScoreChanged;
+
+        if (segmentSpawner)
+            segmentSpawner.OnTutorialCompleted += () => OnTutorialEnded?.Invoke();
     }
 
     private void Start()

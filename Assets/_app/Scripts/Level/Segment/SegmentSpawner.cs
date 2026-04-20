@@ -8,6 +8,7 @@ using System.Collections.Generic;
 
 public class SegmentSpawner : MonoBehaviour
 {
+    public event System.Action OnTutorialCompleted;
     [SerializeField] private Transform player;
 
     [Header("Game Segment (Road)")]
@@ -33,16 +34,14 @@ public class SegmentSpawner : MonoBehaviour
     [SerializeField] private int envInitialSegment = 3;
     [SerializeField] private float envBehindDistance = 40f;
 
-    /* 障害物の自動生成は無効化 */
-    /* [Header("Obstacle")] */
-    /* [SerializeField] private ObstaclePlacer obstaclePlacer; */
-
     private float roadSpawnZ = 0f;
     private float envSpawnZ = 0f;
     private int tutorialIndex = 0;
+    private int releasedTutorialCount = 0;
 
     private readonly Queue<RoadSegmentBase> activeRoadSegments = new Queue<RoadSegmentBase>();
     private readonly Queue<EnvSegmentBase> activeEnvSegments = new Queue<EnvSegmentBase>();
+    private readonly HashSet<RoadSegmentBase> tutorialSegments = new HashSet<RoadSegmentBase>();
 
     void Start()
     {
@@ -82,8 +81,12 @@ public class SegmentSpawner : MonoBehaviour
         while (activeRoadSegments.Count > 0)
         {
             var seg = activeRoadSegments.Dequeue();
-            roadPool.Release(seg);
+            if (tutorialSegments.Remove(seg))
+                Destroy(seg.gameObject);
+            else
+                roadPool.Release(seg);
         }
+        tutorialSegments.Clear();
 
         while (activeEnvSegments.Count > 0)
         {
@@ -95,6 +98,7 @@ public class SegmentSpawner : MonoBehaviour
         roadSpawnZ = roadInitialAheadOffset;
         envSpawnZ = envInitialAheadOffset;
         tutorialIndex = 0;
+        releasedTutorialCount = 0;
 
         // 初期セグメントの生成
         for (int i = 0; i < roadInitialSegments; i++ )
@@ -121,6 +125,7 @@ public class SegmentSpawner : MonoBehaviour
                 return false;
             }
             seg = Instantiate(prefab);
+            tutorialSegments.Add(seg);
             tutorialIndex++;
         }
         else
@@ -134,9 +139,6 @@ public class SegmentSpawner : MonoBehaviour
         }
 
         seg.transform.position = new Vector3(0, 0, roadSpawnZ);
-
-        /* 障害物はセグメントに手動配置しておくので自動生成は無効化 */
-        /* seg.RebuildObstacles(obstaclePlacer); */
 
         seg.RebuildItems(itemPlacer);
 
@@ -174,11 +176,18 @@ public class SegmentSpawner : MonoBehaviour
             {
                 activeRoadSegments.Dequeue();
 
-                // チュートリアルセグメントはプール管理外なのでDestroyする
-                if (head.GetComponent<PooledSegment>() != null)
-                    roadPool.Release(head);
-                else
+                if (tutorialSegments.Remove(head))
+                {
+                    releasedTutorialCount++;
+                    int triggerAt = Mathf.Max(1, tutorialSegmentPrefabs.Length - 2);
+                    if (releasedTutorialCount == triggerAt)
+                        OnTutorialCompleted?.Invoke();
                     Destroy(head.gameObject);
+                }
+                else
+                {
+                    roadPool.Release(head);
+                }
             }
             else
             {
