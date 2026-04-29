@@ -6,7 +6,6 @@ public class DoubleTapHintUI : MonoBehaviour
     [SerializeField] private AdrenalineSystem adrenaline;
     [SerializeField] private float pulseSpeed = 1.5f;
 
-    private bool hasEverRushed = false;
     private bool isShowing = false;
     private float showStartTime = 0f;
 
@@ -16,33 +15,51 @@ public class DoubleTapHintUI : MonoBehaviour
         hintGroup.alpha = 0f;
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        if (hasEverRushed) return;
-
-        if (isShowing && adrenaline.IsRushActive)
+        if (GameManager.Instance != null)
         {
-            hasEverRushed = true;
-            hintGroup.alpha = 0f;
-            return;
+            GameManager.Instance.OnFirstGaugeFull += ShowHint;
+            GameManager.Instance.OnStateChanged += OnStateChanged;
         }
+    }
 
-        if (!isShowing && adrenaline.CanActivateRush)
+    private void OnDisable()
+    {
+        if (GameManager.Instance != null)
         {
-            isShowing = true;
-            showStartTime = Time.unscaledTime;
+            GameManager.Instance.OnFirstGaugeFull -= ShowHint;
+            GameManager.Instance.OnStateChanged -= OnStateChanged;
         }
+    }
 
-        if (isShowing && !adrenaline.CanActivateRush && !adrenaline.IsRushActive)
+    private void ShowHint()
+    {
+        isShowing = true;
+        showStartTime = Time.unscaledTime;
+    }
+
+    private void OnStateChanged(GameState state)
+    {
+        if (state == GameState.Playing)
         {
             isShowing = false;
             hintGroup.alpha = 0f;
         }
+    }
 
-        if (isShowing)
+    private void Update()
+    {
+        if (!isShowing) return;
+
+        if (adrenaline.IsRushActive)
         {
-            float elapsed = (Time.unscaledTime - showStartTime) * pulseSpeed;
-            hintGroup.alpha = (-Mathf.Cos(elapsed) + 1f) * 0.5f;
+            isShowing = false;
+            hintGroup.alpha = 0f;
+            return;
         }
+
+        float elapsed = (Time.unscaledTime - showStartTime) * pulseSpeed;
+        hintGroup.alpha = (-Mathf.Cos(elapsed) + 1f) * 0.5f;
     }
 }
