@@ -21,6 +21,7 @@ public class CameraFollow : MonoBehaviour
     private float introElapsed = 0f;
     private Vector3 introFromPos;
     private GameState previousState = GameState.Ready;
+    private float savedShadowDistance;
 
     private void Awake()
     {
@@ -47,6 +48,8 @@ public class CameraFollow : MonoBehaviour
             introFromPos = transform.position;
             introElapsed = 0f;
             introActive = true;
+            savedShadowDistance = QualitySettings.shadowDistance;
+            QualitySettings.shadowDistance = 0f;
         }
         else if (state == GameState.Ready)
         {
