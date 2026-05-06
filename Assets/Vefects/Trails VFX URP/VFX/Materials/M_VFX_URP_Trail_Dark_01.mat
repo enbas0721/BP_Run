@@ -12,7 +12,9 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _RECEIVESHADOWS_OFF
+  - _RECEIVE_SHADOWS_OFF
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -28,7 +30,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Color:
-        m_Texture: {fileID: 2800000, guid: aec738f429fa4ab4a8b574c7c804886c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0936515ed412c934f8480f5e1299f740, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CutoutMask:
@@ -48,7 +50,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Distortion:
-        m_Texture: {fileID: 2800000, guid: 3327b545e30728e47b34b9588ff64aef, type: 3}
+        m_Texture: {fileID: 10904, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -64,7 +66,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Mask:
-        m_Texture: {fileID: 2800000, guid: 922632811e88c394691f089f0d61eabb, type: 3}
+        m_Texture: {fileID: 2800000, guid: e0dd820227051c94395d3610ac3193f3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -144,7 +146,7 @@ Material:
     - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ReceiveShadows: 1
+    - _ReceiveShadows: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _Src: 5
@@ -156,8 +158,8 @@ Material:
     - __dirty: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color01: {r: 1, g: 1, b: 1, a: 0}
-    - _Color02: {r: 0.1981132, g: 0.13176396, b: 0.17350514, a: 0}
+    - _Color01: {r: 0.6139959, g: 0.9528302, b: 0.049439307, a: 0}
+    - _Color02: {r: 0, g: 1, b: 0.010393143, a: 0}
     - _ColorPanSpeed: {r: -1.15, g: -0.113, b: 0, a: 0}
     - _ColorUVScale: {r: 0.115, g: 1, b: 0, a: 0}
     - _Color_01: {r: 0.5323144, g: 0.3, b: 1, a: 0}
@@ -179,3 +181,4 @@ Material:
     - _Mask_Scale: {r: 0.5, g: 1, b: 0, a: 0}
     - _Mask_Speed: {r: 0.5, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
