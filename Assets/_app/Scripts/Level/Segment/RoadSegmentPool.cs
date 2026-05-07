@@ -35,6 +35,15 @@ public class RoadSegmentPool : MonoBehaviour
     private readonly List<int> cand = new List<int>(32);
     private int lastIndex = -1;
 
+#if UNITY_EDITOR
+    [ContextMenu("Sort Entries by Difficulty")]
+    private void SortEntriesByDifficulty()
+    {
+        entries.Sort((a, b) => a.difficultyLevel.CompareTo(b.difficultyLevel));
+        UnityEditor.EditorUtility.SetDirty(this);
+    }
+#endif
+
     private void Awake()
     {
         pools.Clear();
