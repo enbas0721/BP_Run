@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1520568888509299787}
   - component: {fileID: 1133781609258794873}
   - component: {fileID: 7926453293491022756}
-  - component: {fileID: 6416550264220661965}
   - component: {fileID: 7569691797778545056}
   - component: {fileID: 2935496098570440897}
+  - component: {fileID: 3798786474863561314}
   m_Layer: 0
   m_Name: Car_red
   m_TagString: Obstacle
@@ -86,25 +86,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5738487, y: 0.6, z: 1}
   m_Center: {x: -0.0030439347, y: 0, z: 0}
---- !u!114 &6416550264220661965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2184797729327884017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6207c0b594cb53458a939e3805fbc31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MovingCar
-  forwardDistance: 10
-  moveSpeed: 10
-  rotateSpeed: 180
-  waitInterval: 1
-  centerX: 0
-  rightX: 3
-  leftX: -3
 --- !u!114 &7569691797778545056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +114,26 @@ MonoBehaviour:
   blastForceMagnitude: 60
   blastUpAngle: 30
   blastSpreadAngle: 25
-  destroyDelay: 3
+  destroyDelay: 1
+--- !u!114 &3798786474863561314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2184797729327884017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 501778c8e2b7f964ab6ab16aa019f050, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MovingCar
+  forwardDistance: 5
+  moveSpeed: 3
+  rotateSpeed: 180
+  waitInterval: 2
+  centerX: 0
+  rightX: 3
+  leftX: -3
 --- !u!1 &4912362800754975963
 GameObject:
   m_ObjectHideFlags: 0

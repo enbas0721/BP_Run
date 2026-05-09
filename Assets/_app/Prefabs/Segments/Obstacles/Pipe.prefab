@@ -356,7 +356,7 @@ MonoBehaviour:
   blastForceMagnitude: 60
   blastUpAngle: 30
   blastSpreadAngle: 25
-  destroyDelay: 3
+  destroyDelay: 1
 --- !u!4 &8060686724542195776 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000014211504346, guid: 51b9e2639774c80489c8dfd478f275f3, type: 3}

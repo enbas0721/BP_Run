@@ -14,6 +14,7 @@ public class LevelManagerEditor : Editor
     };
 
     private SerializedProperty roadSegmentPool;
+    private SerializedProperty scoreAtMinDifficulty;
     private SerializedProperty scoreAtMaxDifficulty;
     private SerializedProperty maxDifficulty;
     private SerializedProperty sigma;
@@ -23,6 +24,7 @@ public class LevelManagerEditor : Editor
     private void OnEnable()
     {
         roadSegmentPool       = serializedObject.FindProperty("roadSegmentPool");
+        scoreAtMinDifficulty  = serializedObject.FindProperty("scoreAtMinDifficulty");
         scoreAtMaxDifficulty  = serializedObject.FindProperty("scoreAtMaxDifficulty");
         maxDifficulty         = serializedObject.FindProperty("maxDifficulty");
         sigma                 = serializedObject.FindProperty("sigma");
@@ -38,6 +40,7 @@ public class LevelManagerEditor : Editor
         EditorGUILayout.Space(4);
 
         EditorGUILayout.LabelField("Difficulty Curve", EditorStyles.boldLabel);
+        EditorGUILayout.PropertyField(scoreAtMinDifficulty);
         EditorGUILayout.PropertyField(scoreAtMaxDifficulty);
         EditorGUILayout.PropertyField(maxDifficulty);
         EditorGUILayout.PropertyField(sigma);
@@ -55,13 +58,15 @@ public class LevelManagerEditor : Editor
 
     private void DrawDistributionGraph()
     {
+        float scoreAtMin = scoreAtMinDifficulty.floatValue;
         float scoreAtMax = scoreAtMaxDifficulty.floatValue;
         int maxIdx       = maxDifficulty.enumValueIndex;
         float sig        = Mathf.Max(0.01f, sigma.floatValue);
         float minW       = minWeight.floatValue;
         float score      = debugScore.floatValue;
 
-        float t    = Mathf.Clamp01(score / Mathf.Max(1f, scoreAtMax));
+        float range = scoreAtMax - scoreAtMin;
+        float t    = range > 0f ? Mathf.Clamp01((score - scoreAtMin) / range) : 1f;
         float peak = t * maxIdx;
 
         // 各レベルの重みを計算
