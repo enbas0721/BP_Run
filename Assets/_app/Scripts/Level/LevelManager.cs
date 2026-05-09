@@ -18,13 +18,20 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private RoadSegmentPool roadSegmentPool;
 
     [Header("Difficulty Curve")]
+    
+    [Tooltip("難易度上昇を開始するスコア（チュートリアル終了後を想定）")]
+    [SerializeField] private float scoreAtMinDifficulty = 5000f;
+    
     [Tooltip("ピークがmaxDifficultyに到達するスコア")]
     [SerializeField] private float scoreAtMaxDifficulty = 30000f;
+
     [Tooltip("ピークが到達する最大難易度")]
     [SerializeField] private DifficultyLevel maxDifficulty = DifficultyLevel.VeryHard;
     [Tooltip("ガウス分布の広がり（大きいほど隣接難易度が多く混ざる）")]
+
     [SerializeField] private float sigma = 1.0f;
-    [Tooltip("どの難易度レベルにも保証する最低重み（0にならない）")]
+    
+    [Tooltip("どの難易度レベルにも保証する最低重み(0にならない)")]
     [SerializeField] [Min(0.01f)] private float minWeight = 0.1f;
 
     private void OnEnable()
@@ -55,7 +62,8 @@ public class LevelManager : MonoBehaviour
         if (roadSegmentPool == null) return;
 
         float maxIndex = (float)maxDifficulty;
-        float t = Mathf.Clamp01(score / scoreAtMaxDifficulty);
+        float range = scoreAtMaxDifficulty - scoreAtMinDifficulty;
+        float t = range > 0f ? Mathf.Clamp01((score - scoreAtMinDifficulty) / range) : 1f;
         float peak = t * maxIndex;
 
         foreach (var entry in roadSegmentPool.entries)
@@ -70,7 +78,7 @@ public class LevelManager : MonoBehaviour
 #if UNITY_EDITOR
     // インスペクターでリアルタイム確認用
     [Header("Debug (Editor Only)")]
-    [SerializeField] [Range(0f, 30000f)] private float debugScore = 0f;
+    [SerializeField] [Range(0f, 100000f)] private float debugScore = 0f;
     private float prevDebugScore = -1f;
 
     private void OnValidate()

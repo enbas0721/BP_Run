@@ -42,6 +42,33 @@ public class RoadSegmentPool : MonoBehaviour
         entries.Sort((a, b) => a.difficultyLevel.CompareTo(b.difficultyLevel));
         UnityEditor.EditorUtility.SetDirty(this);
     }
+
+    [ContextMenu("Check Duplicate Entries")]
+    private void CheckDuplicateEntries()
+    {
+        var seen = new Dictionary<RoadSegmentBase, List<int>>();
+        for (int i = 0; i < entries.Count; i++)
+        {
+            var prefab = entries[i].segmentPrefab;
+            if (prefab == null) continue;
+            if (!seen.ContainsKey(prefab))
+                seen[prefab] = new List<int>();
+            seen[prefab].Add(i);
+        }
+
+        bool found = false;
+        foreach (var kv in seen)
+        {
+            if (kv.Value.Count > 1)
+            {
+                string indices = string.Join(", ", kv.Value);
+                Debug.LogWarning($"[RoadSegmentPool] Duplicate prefab: {kv.Key.name} (elements: {indices})", this);
+                found = true;
+            }
+        }
+        if (!found)
+            Debug.Log("[RoadSegmentPool] No duplicate prefabs found.", this);
+    }
 #endif
 
     private void Awake()

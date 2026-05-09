@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7344441567705435091}
   - component: {fileID: 6256240307295662427}
   - component: {fileID: 1850946368985599391}
-  - component: {fileID: 3984229076867270946}
   m_Layer: 0
   m_Name: NearMissZone
   m_TagString: Untagged
@@ -67,19 +66,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 1, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3984229076867270946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2986017684724255145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 076395ff2461dbb4a83db572887123bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NearMissHighlight
-  particles: {fileID: 0}
 --- !u!1001 &7412535272205791480
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -254,4 +240,4 @@ MonoBehaviour:
   blastForceMagnitude: 60
   blastUpAngle: 30
   blastSpreadAngle: 90
-  destroyDelay: 3
+  destroyDelay: 1

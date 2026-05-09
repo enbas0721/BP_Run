@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 849035297950803350}
   - component: {fileID: 5368194218243871144}
   - component: {fileID: -7216874771620697853}
+  - component: {fileID: 1636671360530083687}
   - component: {fileID: 1728351132114834182}
   m_Layer: 0
   m_Name: Barrel
@@ -35,6 +36,7 @@ Transform:
   m_Children:
   - {fileID: 6802573044811154464}
   - {fileID: 1204496454942256944}
+  - {fileID: 5577100519113836338}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &849035297950803350
@@ -92,7 +94,21 @@ MonoBehaviour:
   blastForceMagnitude: 60
   blastUpAngle: 30
   blastSpreadAngle: 90
-  destroyDelay: 3
+  destroyDelay: 1
+--- !u!114 &1636671360530083687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326241716459456195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a22bfa58c0f2b8438efc6159cfa08e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Barrel
+  moveSpeed: 4
+  rollRotateSpeed: 360
 --- !u!136 &1728351132114834182
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -115,7 +131,7 @@ CapsuleCollider:
   m_Radius: 0.6182641
   m_Height: 2.0073717
   m_Direction: 0
-  m_Center: {x: 0.010448575, y: 0.01017952, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &807055696748077035
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,6 +198,100 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 9, z: 9}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &3684217303944710567
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5577100519113836338}
+  - component: {fileID: 2961991886985494217}
+  - component: {fileID: 4933728817708704642}
+  - component: {fileID: 8945174190080425304}
+  m_Layer: 0
+  m_Name: PlayerEnterArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5577100519113836338
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3684217303944710567}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5443369569212554986}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2961991886985494217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3684217303944710567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9853e598fc203c4f8b058d9b751e7a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BarrelStartTrigger
+--- !u!65 &4933728817708704642
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3684217303944710567}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 15.666119, y: 6.7034907, z: 45.954613}
+  m_Center: {x: 0, y: 2.851746, z: -22.477314}
+--- !u!54 &8945174190080425304
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3684217303944710567}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &6802573044811030176
 PrefabInstance:
   m_ObjectHideFlags: 0
