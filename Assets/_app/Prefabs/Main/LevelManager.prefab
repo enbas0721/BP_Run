@@ -49,11 +49,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
   roadSegmentPool: {fileID: 3309138622086827466}
-  scoreAtMaxDifficulty: 30000
+  scoreAtMinDifficulty: 5000
+  scoreAtMaxDifficulty: 50000
   maxDifficulty: 3
   sigma: 1
   minWeight: 0.1
-  debugScore: 30000
+  debugScore: 32155
 --- !u!114 &3309138622086827466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,99 +69,164 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SegmentPool
   entries:
   - segmentPrefab: {fileID: 1126375026918509926, guid: 0000cd5d63ff6804b8983ff6c77fcd56, type: 3}
-    warmCount: 3
-    weight: 0.1
-    difficultyLevel: 0
-    debugOnly: 0
-  - segmentPrefab: {fileID: 1126375026918509926, guid: 5af759d6008fc9844844c7b41f44d17a, type: 3}
-    warmCount: 3
-    weight: 0.13533528
-    difficultyLevel: 1
-    debugOnly: 0
-  - segmentPrefab: {fileID: 1126375026918509926, guid: 167c9d6d3be7f764386cb95fb06a07f3, type: 3}
-    warmCount: 3
-    weight: 0.13533528
-    difficultyLevel: 1
-    debugOnly: 0
-  - segmentPrefab: {fileID: 1126375026918509926, guid: 58669a4bad31cad4192fde8c3f417178, type: 3}
-    warmCount: 3
-    weight: 0.60653067
-    difficultyLevel: 2
-    debugOnly: 0
-  - segmentPrefab: {fileID: 1126375026918509926, guid: c68ea4dd352e2b747abc0fdfec631c2a, type: 3}
-    warmCount: 3
+    warmCount: 1
     weight: 1
-    difficultyLevel: 3
-    debugOnly: 0
-  - segmentPrefab: {fileID: 1126375026918509926, guid: 35048f5899b779d49b53fb990e33c50b, type: 3}
-    warmCount: 3
-    weight: 0.1
     difficultyLevel: 0
     debugOnly: 0
-  - segmentPrefab: {fileID: 1126375026918509926, guid: 749cc7087b6c2cb4a8813e27b26f9f8a, type: 3}
-    warmCount: 3
-    weight: 0.1
-    difficultyLevel: 0
-    debugOnly: 0
-  - segmentPrefab: {fileID: 1126375026918509926, guid: b7c596b3484ad5046803d4fc69b3e184, type: 3}
-    warmCount: 3
-    weight: 0.1
-    difficultyLevel: 0
-    debugOnly: 0
-  - segmentPrefab: {fileID: 1126375026918509926, guid: ec0624ec3ea0d8f4c859be7461ec530e, type: 3}
-    warmCount: 3
+  - segmentPrefab: {fileID: 1126375026918509926, guid: 044ae68622b268b45b33038c020c1c83, type: 3}
+    warmCount: 1
     weight: 1
-    difficultyLevel: 3
+    difficultyLevel: 0
     debugOnly: 0
-  - segmentPrefab: {fileID: 1126375026918509926, guid: 757ffdf93f777364cbf84983c7fea4cd, type: 3}
-    warmCount: 3
-    weight: 0.13533528
-    difficultyLevel: 1
+  - segmentPrefab: {fileID: 1126375026918509926, guid: 35275ec01198b7a4f82569cd8709b46c, type: 3}
+    warmCount: 1
+    weight: 1
+    difficultyLevel: 0
     debugOnly: 0
-  - segmentPrefab: {fileID: 1126375026918509926, guid: 6192c9ae4efd6e948a57422a762a6a22, type: 3}
-    warmCount: 3
-    weight: 0.13533528
-    difficultyLevel: 1
+  - segmentPrefab: {fileID: 1126375026918509926, guid: f0c965081f3428d40b0845945f59ad8a, type: 3}
+    warmCount: 1
+    weight: 1
+    difficultyLevel: 0
     debugOnly: 0
-  - segmentPrefab: {fileID: 1126375026918509926, guid: 295bf4cbf5187f54596a52f0ff508c02, type: 3}
-    warmCount: 3
-    weight: 0.13533528
-    difficultyLevel: 1
-    debugOnly: 0
-  - segmentPrefab: {fileID: 1126375026918509926, guid: fb56a4b68686e714f9a073b460c19e29, type: 3}
-    warmCount: 3
+  - segmentPrefab: {fileID: 1126375026918509926, guid: a2592053ed7e9f54baebe5cfbc373de0, type: 3}
+    warmCount: 1
     weight: 0.1
     difficultyLevel: 0
     debugOnly: 0
   - segmentPrefab: {fileID: 1126375026918509926, guid: 1d311a370cb030944ac5020c34607963, type: 3}
-    warmCount: 3
+    warmCount: 1
     weight: 0.1
     difficultyLevel: 0
     debugOnly: 0
-  - segmentPrefab: {fileID: 1126375026918509926, guid: a2592053ed7e9f54baebe5cfbc373de0, type: 3}
-    warmCount: 3
+  - segmentPrefab: {fileID: 1126375026918509926, guid: fb56a4b68686e714f9a073b460c19e29, type: 3}
+    warmCount: 1
     weight: 0.1
     difficultyLevel: 0
     debugOnly: 0
-  - segmentPrefab: {fileID: 1126375026918509926, guid: a2592053ed7e9f54baebe5cfbc373de0, type: 3}
-    warmCount: 3
-    weight: 0.1
-    difficultyLevel: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: 167c9d6d3be7f764386cb95fb06a07f3, type: 3}
+    warmCount: 1
+    weight: 0.13533528
+    difficultyLevel: 1
     debugOnly: 0
-  - segmentPrefab: {fileID: 1126375026918509926, guid: 16d9987d0c7d1a84e829ed13d7ffc411, type: 3}
-    warmCount: 3
+  - segmentPrefab: {fileID: 1126375026918509926, guid: 35048f5899b779d49b53fb990e33c50b, type: 3}
+    warmCount: 1
+    weight: 0.1
+    difficultyLevel: 1
+    debugOnly: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: 749cc7087b6c2cb4a8813e27b26f9f8a, type: 3}
+    warmCount: 1
+    weight: 0.1
+    difficultyLevel: 1
+    debugOnly: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: b7c596b3484ad5046803d4fc69b3e184, type: 3}
+    warmCount: 1
+    weight: 0.1
+    difficultyLevel: 1
+    debugOnly: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: 6192c9ae4efd6e948a57422a762a6a22, type: 3}
+    warmCount: 1
+    weight: 0.13533528
+    difficultyLevel: 1
+    debugOnly: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: 757ffdf93f777364cbf84983c7fea4cd, type: 3}
+    warmCount: 1
+    weight: 0.13533528
+    difficultyLevel: 1
+    debugOnly: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: 295bf4cbf5187f54596a52f0ff508c02, type: 3}
+    warmCount: 1
+    weight: 0.13533528
+    difficultyLevel: 1
+    debugOnly: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: 82525c9f53941294f8188f0b9b5cff45, type: 3}
+    warmCount: 1
+    weight: 1
+    difficultyLevel: 1
+    debugOnly: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: 4bda527a060513241899ffc8f8400b9b, type: 3}
+    warmCount: 1
+    weight: 1
+    difficultyLevel: 1
+    debugOnly: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: e5f0cf00a78b899488d054e70127cbe7, type: 3}
+    warmCount: 1
+    weight: 1
+    difficultyLevel: 1
+    debugOnly: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: 5af759d6008fc9844844c7b41f44d17a, type: 3}
+    warmCount: 1
+    weight: 0.13533528
+    difficultyLevel: 2
+    debugOnly: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: 58669a4bad31cad4192fde8c3f417178, type: 3}
+    warmCount: 1
     weight: 0.60653067
     difficultyLevel: 2
     debugOnly: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: 74366648d1835964c937613ccda5fbaf, type: 3}
+    warmCount: 1
+    weight: 1
+    difficultyLevel: 2
+    debugOnly: 0
   - segmentPrefab: {fileID: 1126375026918509926, guid: e3475bd4542599e47ae15b48acf7a085, type: 3}
-    warmCount: 3
+    warmCount: 1
+    weight: 0.60653067
+    difficultyLevel: 2
+    debugOnly: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: fca0654382f71459bab0bf3e5aa4ce96, type: 3}
+    warmCount: 1
+    weight: 1
+    difficultyLevel: 2
+    debugOnly: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: 16d9987d0c7d1a84e829ed13d7ffc411, type: 3}
+    warmCount: 1
     weight: 0.60653067
     difficultyLevel: 2
     debugOnly: 0
   - segmentPrefab: {fileID: 1126375026918509926, guid: addcb1bce608b0143846ad9049e1b95d, type: 3}
-    warmCount: 3
+    warmCount: 1
     weight: 0.60653067
     difficultyLevel: 2
+    debugOnly: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: b3b7bd358c46a1440bfeb038a8ba3533, type: 3}
+    warmCount: 1
+    weight: 1
+    difficultyLevel: 2
+    debugOnly: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: 5a1024963500b704189e6063edcd6093, type: 3}
+    warmCount: 1
+    weight: 1
+    difficultyLevel: 2
+    debugOnly: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: 4a02e6367c5b28942b50380bd8706820, type: 3}
+    warmCount: 1
+    weight: 1
+    difficultyLevel: 2
+    debugOnly: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: c68ea4dd352e2b747abc0fdfec631c2a, type: 3}
+    warmCount: 1
+    weight: 1
+    difficultyLevel: 3
+    debugOnly: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: 5e03fd2752ab0be41a53ff819a5c7862, type: 3}
+    warmCount: 1
+    weight: 1
+    difficultyLevel: 3
+    debugOnly: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: c68ea4dd352e2b747abc0fdfec631c2a, type: 3}
+    warmCount: 1
+    weight: 1
+    difficultyLevel: 3
+    debugOnly: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: bcd99d178c1b731419997bd5faad0aec, type: 3}
+    warmCount: 1
+    weight: 1
+    difficultyLevel: 3
+    debugOnly: 0
+  - segmentPrefab: {fileID: 1126375026918509926, guid: ec0624ec3ea0d8f4c859be7461ec530e, type: 3}
+    warmCount: 1
+    weight: 1
+    difficultyLevel: 3
     debugOnly: 0
   avoidSameAsLast: 1
   debugMode: 0
@@ -196,6 +262,34 @@ MonoBehaviour:
   player: {fileID: 0}
   roadPool: {fileID: 3309138622086827466}
   itemPlacer: {fileID: 7054258023032897551}
+  tutorialSegmentPrefabs:
+  - {fileID: 1126375026918509926, guid: c3ba8b03b85a7f9469c3e5b488c1d98f, type: 3}
+  - {fileID: 1126375026918509926, guid: e80bb9f7bb3ca3d43b5525b22d02e264, type: 3}
+  - {fileID: 1126375026918509926, guid: c3ba8b03b85a7f9469c3e5b488c1d98f, type: 3}
+  - {fileID: 1126375026918509926, guid: 6b79720a2c482a14db9c188d3ef78412, type: 3}
+  - {fileID: 1126375026918509926, guid: c3ba8b03b85a7f9469c3e5b488c1d98f, type: 3}
+  - {fileID: 1126375026918509926, guid: b7d8889dc6ac03247bc1379289beb095, type: 3}
+  - {fileID: 1126375026918509926, guid: c3ba8b03b85a7f9469c3e5b488c1d98f, type: 3}
+  - {fileID: 1126375026918509926, guid: 24bf3e956a7692845a217f1f38166bdf, type: 3}
+  - {fileID: 1126375026918509926, guid: 044ae68622b268b45b33038c020c1c83, type: 3}
+  - {fileID: 1126375026918509926, guid: 35275ec01198b7a4f82569cd8709b46c, type: 3}
+  - {fileID: 1126375026918509926, guid: f0c965081f3428d40b0845945f59ad8a, type: 3}
+  - {fileID: 1126375026918509926, guid: 21e4b795a62610d4b94a1a0a9f720d95, type: 3}
+  - {fileID: 1126375026918509926, guid: 21e4b795a62610d4b94a1a0a9f720d95, type: 3}
+  - {fileID: 1126375026918509926, guid: 9f12b0138452b1f43970c6ca60b8bc35, type: 3}
+  - {fileID: 1126375026918509926, guid: 9f12b0138452b1f43970c6ca60b8bc35, type: 3}
+  - {fileID: 1126375026918509926, guid: 519c7e0bbeaa71142b754cd2dedb9b1c, type: 3}
+  - {fileID: 1126375026918509926, guid: 519c7e0bbeaa71142b754cd2dedb9b1c, type: 3}
+  - {fileID: 1126375026918509926, guid: 9f12b0138452b1f43970c6ca60b8bc35, type: 3}
+  - {fileID: 1126375026918509926, guid: 9f12b0138452b1f43970c6ca60b8bc35, type: 3}
+  - {fileID: 1126375026918509926, guid: bcb6969ea13a9544789ed02905574e79, type: 3}
+  - {fileID: 1126375026918509926, guid: bcb6969ea13a9544789ed02905574e79, type: 3}
+  - {fileID: 1126375026918509926, guid: 9f12b0138452b1f43970c6ca60b8bc35, type: 3}
+  - {fileID: 1126375026918509926, guid: 9f12b0138452b1f43970c6ca60b8bc35, type: 3}
+  - {fileID: 1126375026918509926, guid: 519c7e0bbeaa71142b754cd2dedb9b1c, type: 3}
+  - {fileID: 1126375026918509926, guid: 519c7e0bbeaa71142b754cd2dedb9b1c, type: 3}
+  - {fileID: 1126375026918509926, guid: 9f12b0138452b1f43970c6ca60b8bc35, type: 3}
+  - {fileID: 1126375026918509926, guid: 21e4b795a62610d4b94a1a0a9f720d95, type: 3}
   roadInitialAheadOffset: 39
   aheadDistance: 120
   roadInitialSegments: 4
