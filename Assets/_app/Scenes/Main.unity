@@ -550,6 +550,10 @@ PrefabInstance:
       propertyPath: introControlPoint
       value: 
       objectReference: {fileID: 498450071}
+    - target: {fileID: 2458544629887663451, guid: 00c7ab1440b1e9c47ae0ac3a3356b356, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6153968398815867375, guid: 00c7ab1440b1e9c47ae0ac3a3356b356, type: 3}
       propertyPath: m_Name
       value: Main Camera
