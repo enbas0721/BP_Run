@@ -13,6 +13,12 @@ public class BoneRotation : MonoBehaviour
     public float randomSpeedMin = -180f;
     public float randomSpeedMax = 180f;
 
+    [Header("Position Phase Offset (optional)")]
+    [Tooltip("ONにするとZ座標をもとに初期回転位相をずらす。列配置アイテムのばらつきに使用")]
+    public bool usePositionPhase = false;
+    [Tooltip("Z座標1単位あたりの位相オフセット（度）")]
+    public float positionPhaseDegrees = 45f;
+
     [Header("Pulse (optional)")]
     public bool usePulse = false;
     public float pulseFrequency = 1f;   // Hz
@@ -31,6 +37,12 @@ public class BoneRotation : MonoBehaviour
         }
 
         baseSpeed = new Vector3(speedX, speedY, speedZ);
+
+        if (usePositionPhase)
+        {
+            float phase = transform.position.z * positionPhaseDegrees;
+            transform.Rotate(baseSpeed.normalized * phase, rotationSpace);
+        }
     }
 
     void Update()

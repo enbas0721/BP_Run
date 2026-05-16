@@ -179,7 +179,7 @@ public class SegmentSpawner : MonoBehaviour
                 if (tutorialSegments.Remove(head))
                 {
                     releasedTutorialCount++;
-                    int triggerAt = Mathf.Max(1, tutorialSegmentPrefabs.Length - 2);
+                    int triggerAt = Mathf.Max(1, tutorialSegmentPrefabs.Length - 4);
                     if (releasedTutorialCount == triggerAt)
                         OnTutorialCompleted?.Invoke();
                     Destroy(head.gameObject);

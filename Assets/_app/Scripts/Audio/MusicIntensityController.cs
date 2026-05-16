@@ -19,7 +19,9 @@ public class MusicIntensityController : MonoBehaviour
         [Tooltip("Phase_Selectorに設定するラベル（例: phase_0〜phase_4）")]
         public string phaseLabel = "phase_0";
 
-        [Header("Bass/Chord Mode")]
+        [Header("Bass/Chord/Kick Mode")]
+        [Tooltip("Kick_Selectorに設定するラベル（例: kick_1〜kick_5）")]
+        public string kickLabel = "kick_1";
         [Tooltip("Bass_Selectorに設定するラベル（例: bass_silent, bass_1〜bass_4）")]
         public string bassLabel = "bass_silent";
         [Tooltip("Chord_Selectorに設定するラベル（例: chord_silent, chord_1〜chord_4）")]
@@ -37,11 +39,12 @@ public class MusicIntensityController : MonoBehaviour
     [SerializeField] private IntensityTrack[] tracks;
 
     [Header("切り替えモード")]
-    [Tooltip("trueの場合はPhaseセレクタ1つで切り替え、falseの場合はBass/Chord2つで切り替える")]
-    [SerializeField] private bool usePhaseMode = true;
+    [Tooltip("trueの場合はPhaseセレクタ1つで切り替え、falseの場合はKick/Bass/Chord3つで切り替える")]
+    [SerializeField] private bool usePhaseMode = false;
 
     [Header("セレクタ名")]
     [SerializeField] private string phaseSelectorName = "Phase_Selector";
+    [SerializeField] private string kickSelectorName = "Kick_Selector";
     [SerializeField] private string bassSelectorName = "Bass_Selector";
     [SerializeField] private string chordSelectorName = "Chord_Selector";
 
@@ -121,6 +124,7 @@ public class MusicIntensityController : MonoBehaviour
         }
         else
         {
+            bgmSource.player.SetSelectorLabel(kickSelectorName, track.kickLabel);
             bgmSource.player.SetSelectorLabel(bassSelectorName, track.bassLabel);
             bgmSource.player.SetSelectorLabel(chordSelectorName, track.chordLabel);
         }
@@ -144,6 +148,7 @@ public class MusicIntensityController : MonoBehaviour
         }
         else
         {
+            bgmSource.player.SetSelectorLabel(kickSelectorName, tracks[0].kickLabel);
             bgmSource.player.SetSelectorLabel(bassSelectorName, tracks[0].bassLabel);
             bgmSource.player.SetSelectorLabel(chordSelectorName, tracks[0].chordLabel);
         }

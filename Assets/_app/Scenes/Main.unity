@@ -1759,6 +1759,10 @@ PrefabInstance:
       propertyPath: 'tutorialSegmentPrefabs.Array.data[27]'
       value: 
       objectReference: {fileID: 1126375026918509926, guid: 21e4b795a62610d4b94a1a0a9f720d95, type: 3}
+    - target: {fileID: 7054258023032897551, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
+      propertyPath: itemPrefab
+      value: 
+      objectReference: {fileID: 8297096771445548097, guid: c91e0ce3c196026428fb39974a9d5090, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1785,43 +1789,235 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1918077086323192867, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
       propertyPath: cue.cueId
-      value: 4
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2105085109285890497, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: _volume
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: usePhaseMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
       propertyPath: phaseSelectorName
       value: BGM_Selector
       objectReference: {fileID: 0}
     - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[0].bassLabel
+      value: bass_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[2].bassLabel
+      value: bass_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[2].kickLabel
+      value: kick_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[3].bassLabel
+      value: bass_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[3].kickLabel
+      value: kick_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[4].bassLabel
+      value: bass_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[4].kickLabel
+      value: kick_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[5].bassLabel
+      value: bass_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[5].kickLabel
+      value: kick_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[6].bassLabel
+      value: bass_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[6].kickLabel
+      value: kick_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[7].bassLabel
+      value: bass_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[7].kickLabel
+      value: kick_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[8].bassLabel
+      value: bass_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[8].kickLabel
+      value: kick_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[9].bassLabel
+      value: bass_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[9].kickLabel
+      value: kick_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[10].bassLabel
+      value: bass_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[10].kickLabel
+      value: kick_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[11].bassLabel
+      value: bass_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[11].kickLabel
+      value: kick_5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
       propertyPath: tracks.Array.data[1].phaseLabel
-      value: phase_1
+      value: tutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[2].chordLabel
+      value: chord_1
       objectReference: {fileID: 0}
     - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
       propertyPath: tracks.Array.data[2].phaseLabel
       value: phase_2
       objectReference: {fileID: 0}
     - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[3].chordLabel
+      value: chord_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
       propertyPath: tracks.Array.data[3].phaseLabel
       value: phase_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[4].chordLabel
+      value: chord_2
       objectReference: {fileID: 0}
     - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
       propertyPath: tracks.Array.data[4].phaseLabel
       value: phase_4
       objectReference: {fileID: 0}
     - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[5].chordLabel
+      value: chord_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[5].phaseLabel
+      value: phase_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[6].chordLabel
+      value: chord_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[6].phaseLabel
+      value: phase_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[7].chordLabel
+      value: chord_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[7].phaseLabel
+      value: phase_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[8].chordLabel
+      value: chord_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[8].phaseLabel
+      value: phase_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[9].chordLabel
+      value: chord_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[9].phaseLabel
+      value: phase_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[10].chordLabel
+      value: chord_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[10].phaseLabel
+      value: phase_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[11].chordLabel
+      value: chord_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[11].phaseLabel
+      value: phase_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
       propertyPath: tracks.Array.data[1].scoreThreshold
-      value: 10
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
       propertyPath: tracks.Array.data[2].scoreThreshold
-      value: 8000
+      value: 7000
       objectReference: {fileID: 0}
     - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
       propertyPath: tracks.Array.data[3].scoreThreshold
-      value: 14000
+      value: 9000
       objectReference: {fileID: 0}
     - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
       propertyPath: tracks.Array.data[4].scoreThreshold
-      value: 18000
+      value: 11000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[5].scoreThreshold
+      value: 14000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[6].scoreThreshold
+      value: 17000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[7].scoreThreshold
+      value: 20000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[8].scoreThreshold
+      value: 24000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[9].scoreThreshold
+      value: 28000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[10].scoreThreshold
+      value: 32000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[11].scoreThreshold
+      value: 36000
       objectReference: {fileID: 0}
     - target: {fileID: 7833376187364668709, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
       propertyPath: m_Name
