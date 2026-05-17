@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
@@ -19,15 +21,39 @@ public class GameFlowUI : MonoBehaviour
     [Header("Buttons")]
     [SerializeField] private Button startButton;
     [SerializeField] private Button retryButton;
+    [SerializeField] private Button shareButton;
     [SerializeField] private Button pauseButton;
     [SerializeField] private Button resumeButton;
 
+    [Header("Confirm Button Settings")]
+    [Tooltip("確認状態に切り替わるときのスプライト（retry）")]
+    [SerializeField] private Sprite retryConfirmSprite;
+    [Tooltip("確認状態に切り替わるときのスプライト（share）")]
+    [SerializeField] private Sprite shareConfirmSprite;
+    [Tooltip("確認待ちがリセットされるまでの秒数")]
+    [SerializeField] private float confirmTimeout = 2f;
+
+    private Sprite retryNormalSprite;
+    private Sprite shareNormalSprite;
+    private Button pendingButton;
+    private Coroutine confirmCoroutine;
+
     private void Awake()
     {
-        if (startButton) startButton.onClick.AddListener(OnStartClicked);
-        if (retryButton) retryButton.onClick.AddListener(OnRetryClicked);
-        if (pauseButton) pauseButton.onClick.AddListener(OnPauseClicked);
+        if (startButton)  startButton.onClick.AddListener(OnStartClicked);
+        if (pauseButton)  pauseButton.onClick.AddListener(OnPauseClicked);
         if (resumeButton) resumeButton.onClick.AddListener(OnResumeClicked);
+
+        if (retryButton)
+        {
+            retryNormalSprite = retryButton.GetComponent<Image>()?.sprite;
+            retryButton.onClick.AddListener(() => OnConfirmClicked(retryButton, retryConfirmSprite, () => GameManager.Instance.ResetRun()));
+        }
+        if (shareButton)
+        {
+            shareNormalSprite = shareButton.GetComponent<Image>()?.sprite;
+            shareButton.onClick.AddListener(() => OnConfirmClicked(shareButton, shareConfirmSprite, OnShareConfirmed));
+        }
     }
 
     private void OnEnable()
@@ -60,9 +86,54 @@ public class GameFlowUI : MonoBehaviour
         GameManager.Instance.StartRun();
     }
 
-    private void OnRetryClicked()
+    private void OnConfirmClicked(Button btn, Sprite confirmSprite, Action onConfirmed)
     {
-        GameManager.Instance.ResetRun();
+        if (pendingButton == btn)
+        {
+            // 2度目：確定
+            ResetConfirmState();
+            onConfirmed?.Invoke();
+            return;
+        }
+
+        // 別ボタンが確認中なら先にリセット
+        if (pendingButton != null)
+            ResetConfirmState();
+
+        // 1度目：確認状態へ
+        pendingButton = btn;
+        var img = btn.GetComponent<Image>();
+        if (img && confirmSprite) img.sprite = confirmSprite;
+
+        if (confirmCoroutine != null) StopCoroutine(confirmCoroutine);
+        confirmCoroutine = StartCoroutine(ConfirmTimeoutRoutine());
+    }
+
+    private IEnumerator ConfirmTimeoutRoutine()
+    {
+        yield return new WaitForSecondsRealtime(confirmTimeout);
+        ResetConfirmState();
+    }
+
+    private void ResetConfirmState()
+    {
+        if (pendingButton == retryButton)
+        {
+            var img = retryButton.GetComponent<Image>();
+            if (img && retryNormalSprite) img.sprite = retryNormalSprite;
+        }
+        else if (pendingButton == shareButton)
+        {
+            var img = shareButton.GetComponent<Image>();
+            if (img && shareNormalSprite) img.sprite = shareNormalSprite;
+        }
+        pendingButton = null;
+        if (confirmCoroutine != null) { StopCoroutine(confirmCoroutine); confirmCoroutine = null; }
+    }
+
+    private void OnShareConfirmed()
+    {
+        shareButton?.GetComponent<ShareButton>()?.ExecuteShare();
     }
 
     private void OnPauseClicked()

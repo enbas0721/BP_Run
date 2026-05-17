@@ -126,8 +126,12 @@ MonoBehaviour:
   gameBestScoreText: {fileID: 7910623137883439362}
   startButton: {fileID: 4584488321896790285}
   retryButton: {fileID: 7168838717094943393}
+  shareButton: {fileID: 310181383733751123}
   pauseButton: {fileID: 84986979143771848}
   resumeButton: {fileID: 8435411803245135146}
+  retryConfirmSprite: {fileID: 21300000, guid: 5c9cbb23c98ed12438f74ab7a82aa977, type: 3}
+  shareConfirmSprite: {fileID: 21300000, guid: e51ffe1ca803919449116555f4a14cd7, type: 3}
+  confirmTimeout: 3
 --- !u!1 &185844724676098161
 GameObject:
   m_ObjectHideFlags: 0

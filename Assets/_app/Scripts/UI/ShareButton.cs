@@ -28,11 +28,10 @@ public class ShareButton : MonoBehaviour
 
     private void Awake()
     {
-        if (button) button.onClick.AddListener(OnShareClicked);
         if (shareUI) shareUI.SetActive(false);
     }
 
-    private void OnShareClicked()
+    public void ExecuteShare()
     {
         StartCoroutine(ShareCoroutine());
     }
