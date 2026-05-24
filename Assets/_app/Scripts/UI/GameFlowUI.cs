@@ -92,6 +92,7 @@ public class GameFlowUI : MonoBehaviour
         {
             // 2度目：確定
             ResetConfirmState();
+            GameManager.Instance.NotifyResultUIDecided();
             onConfirmed?.Invoke();
             return;
         }
@@ -104,6 +105,7 @@ public class GameFlowUI : MonoBehaviour
         pendingButton = btn;
         var img = btn.GetComponent<Image>();
         if (img && confirmSprite) img.sprite = confirmSprite;
+        GameManager.Instance.NotifyResultUISelected();
 
         if (confirmCoroutine != null) StopCoroutine(confirmCoroutine);
         confirmCoroutine = StartCoroutine(ConfirmTimeoutRoutine());

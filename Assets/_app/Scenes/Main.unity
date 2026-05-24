@@ -397,6 +397,72 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5091ecc639c2e8240b88f303cc1ce6c9, type: 3}
+--- !u!1 &496308848
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 496308849}
+  - component: {fileID: 496308850}
+  m_Layer: 0
+  m_Name: Select(CriAtomSource)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &496308849
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496308848}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.28356, y: -0.125, z: -8.5774}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7369882633048164290}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &496308850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496308848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1406b3e082f8497eb73ee9f4c314365, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CriMw.CriWare.Assets.Runtime::CriWare.Assets.CriAtomSourceForAsset
+  _playOnStart: 0
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _freezeOrientation: 0
+  _loop: 0
+  _volume: 0.5
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
+  _use3dRandomization: 0
+  _randomPositionListMaxLength: 0
+  randomize3dConfig:
+    followsOriginalSource: 0
+    calculationType: 0
+    calculationParameters:
+    - 0
+    - 0
+    - 0
+  cue:
+    acbAsset: {fileID: -6750239444755058063, guid: 1e040d2dd49c48c4082f9954b6b08fbd, type: 3}
+    cueId: 5
 --- !u!4 &498450071 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 24846727540971837, guid: b0629385ab71d524f95157719c77b00b, type: 3}
@@ -901,6 +967,72 @@ MonoBehaviour:
   musicIntensityController: {fileID: 7369882633048164289}
   debugInvincible: 0
   scorePerSecond: 10
+--- !u!1 &1815756338
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1815756339}
+  - component: {fileID: 1815756340}
+  m_Layer: 0
+  m_Name: Decide(CriAtomSource)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1815756339
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815756338}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.28356, y: -0.125, z: -8.5774}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7369882633048164290}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1815756340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815756338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1406b3e082f8497eb73ee9f4c314365, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CriMw.CriWare.Assets.Runtime::CriWare.Assets.CriAtomSourceForAsset
+  _playOnStart: 0
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _freezeOrientation: 0
+  _loop: 0
+  _volume: 0.5
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
+  _use3dRandomization: 0
+  _randomPositionListMaxLength: 0
+  randomize3dConfig:
+    followsOriginalSource: 0
+    calculationType: 0
+    calculationParameters:
+    - 0
+    - 0
+    - 0
+  cue:
+    acbAsset: {fileID: -6750239444755058063, guid: 1e040d2dd49c48c4082f9954b6b08fbd, type: 3}
+    cueId: 6
 --- !u!4 &2063335651 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6356198970324697906, guid: 64bbcfa7a588d4d45a0d8721188cd07e, type: 3}
@@ -1005,6 +1137,14 @@ PrefabInstance:
     - target: {fileID: 2240180532842686055, guid: 7274a0ccbf2abf24bae5608c457f76c6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3738015135453922519, guid: 7274a0ccbf2abf24bae5608c457f76c6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4973438659859608586, guid: 7274a0ccbf2abf24bae5608c457f76c6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6678067853584699342, guid: 7274a0ccbf2abf24bae5608c457f76c6, type: 3}
       propertyPath: adrenaline
@@ -1795,238 +1935,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1918077086323192867, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: cue.cueId
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2105085109285890497, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+    - target: {fileID: 2925179589113455157, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
       propertyPath: _volume
-      value: 0.2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: usePhaseMode
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: decideSource
+      value: 
+      objectReference: {fileID: 1815756340}
     - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: phaseSelectorName
-      value: BGM_Selector
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.size
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[0].bassLabel
-      value: bass_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[2].bassLabel
-      value: bass_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[2].kickLabel
-      value: kick_2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[3].bassLabel
-      value: bass_2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[3].kickLabel
-      value: kick_2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[4].bassLabel
-      value: bass_2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[4].kickLabel
-      value: kick_2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[5].bassLabel
-      value: bass_2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[5].kickLabel
-      value: kick_3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[6].bassLabel
-      value: bass_3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[6].kickLabel
-      value: kick_3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[7].bassLabel
-      value: bass_3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[7].kickLabel
-      value: kick_3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[8].bassLabel
-      value: bass_3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[8].kickLabel
-      value: kick_4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[9].bassLabel
-      value: bass_4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[9].kickLabel
-      value: kick_4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[10].bassLabel
-      value: bass_4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[10].kickLabel
-      value: kick_4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[11].bassLabel
-      value: bass_4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[11].kickLabel
-      value: kick_5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[1].phaseLabel
-      value: tutorial
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[2].chordLabel
-      value: chord_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[2].phaseLabel
-      value: phase_2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[3].chordLabel
-      value: chord_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[3].phaseLabel
-      value: phase_3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[4].chordLabel
-      value: chord_2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[4].phaseLabel
-      value: phase_4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[5].chordLabel
-      value: chord_2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[5].phaseLabel
-      value: phase_4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[6].chordLabel
-      value: chord_2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[6].phaseLabel
-      value: phase_4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[7].chordLabel
-      value: chord_3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[7].phaseLabel
-      value: phase_4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[8].chordLabel
-      value: chord_3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[8].phaseLabel
-      value: phase_4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[9].chordLabel
-      value: chord_3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[9].phaseLabel
-      value: phase_4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[10].chordLabel
-      value: chord_4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[10].phaseLabel
-      value: phase_4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[11].chordLabel
-      value: chord_4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[11].phaseLabel
-      value: phase_4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[1].scoreThreshold
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[2].scoreThreshold
-      value: 7000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[3].scoreThreshold
-      value: 9000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[4].scoreThreshold
-      value: 11000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[5].scoreThreshold
-      value: 14000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[6].scoreThreshold
-      value: 17000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[7].scoreThreshold
-      value: 20000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[8].scoreThreshold
-      value: 24000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[9].scoreThreshold
-      value: 28000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[10].scoreThreshold
-      value: 32000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
-      propertyPath: tracks.Array.data[11].scoreThreshold
-      value: 36000
-      objectReference: {fileID: 0}
+      propertyPath: selectSource
+      value: 
+      objectReference: {fileID: 496308850}
     - target: {fileID: 7833376187364668709, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
       propertyPath: m_Name
       value: BGMManager
@@ -2073,7 +1993,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8173949033503702204, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1815756339}
+    - targetCorrespondingSourceObject: {fileID: 8173949033503702204, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 496308849}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
 --- !u!114 &7369882633048164289 stripped
@@ -2087,6 +2013,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7af098eb09953ef408acb94e28cfa79c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MusicIntensityController
+--- !u!4 &7369882633048164290 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8173949033503702204, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+  m_PrefabInstance: {fileID: 7369882633048164288}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8617307938249857634
 PrefabInstance:
   m_ObjectHideFlags: 0

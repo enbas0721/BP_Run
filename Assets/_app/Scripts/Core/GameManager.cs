@@ -61,6 +61,9 @@ public class GameManager : MonoBehaviour
     public event Action OnFirstGaugeFull;
     public event Action OnItemCollected;
     public event Action OnTutorialEnded;
+    public event Action OnBlasted;
+    public event Action OnResultUISelected;
+    public event Action OnResultUIDecided;
 
     private bool firstGaugeFilled = false;
 
@@ -239,6 +242,21 @@ public class GameManager : MonoBehaviour
     public void NotifyItemCollected()
     {
         OnItemCollected?.Invoke();
+    }
+
+    public void NotifyBlasted()
+    {
+        OnBlasted?.Invoke();
+    }
+
+    public void NotifyResultUISelected()
+    {
+        OnResultUISelected?.Invoke();
+    }
+
+    public void NotifyResultUIDecided()
+    {
+        OnResultUIDecided?.Invoke();
     }
 
     public bool IsFirstGaugeFilled => firstGaugeFilled;

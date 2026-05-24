@@ -58,6 +58,7 @@ public class Blastable : MonoBehaviour
     {
         blasted = true;
         OnBlasted?.Invoke();
+        GameManager.Instance.NotifyBlasted();
 
         if (rb != null)
         {

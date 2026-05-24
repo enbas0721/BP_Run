@@ -33,6 +33,12 @@ public class MusicIntensityController : MonoBehaviour
     [SerializeField] private CriAtomSourceForAsset bgmSource;
     [Tooltip("Bell再生用のCriAtomSourceコンポーネント（BGMと別インスタンス）")]
     [SerializeField] private CriAtomSourceForAsset bellSource;
+    [Tooltip("Blast SE再生用のCriAtomSourceコンポーネント")]
+    [SerializeField] private CriAtomSourceForAsset blastSource;
+    [Tooltip("Decide SE再生用のCriAtomSourceコンポーネント")]
+    [SerializeField] private CriAtomSourceForAsset decideSource;
+    [Tooltip("Select SE再生用のCriAtomSourceコンポーネント")]
+    [SerializeField] private CriAtomSourceForAsset selectSource;
 
     [Header("Intensity Tracks")]
     [Tooltip("スコア閾値とセレクタラベルのマッピング（スコア昇順で設定する）")]
@@ -60,8 +66,11 @@ public class MusicIntensityController : MonoBehaviour
         {
             GameManager.Instance.OnScoreChanged += OnScoreChanged;
             GameManager.Instance.OnItemCollected += PlayBell;
+            GameManager.Instance.OnBlasted += PlayBlast;
             GameManager.Instance.OnTutorialEnded += OnTutorialEnded;
             GameManager.Instance.OnStateChanged += OnStateChanged;
+            GameManager.Instance.OnResultUISelected += PlaySelect;
+            GameManager.Instance.OnResultUIDecided += PlayDecide;
         }
     }
 
@@ -71,8 +80,11 @@ public class MusicIntensityController : MonoBehaviour
         {
             GameManager.Instance.OnScoreChanged -= OnScoreChanged;
             GameManager.Instance.OnItemCollected -= PlayBell;
+            GameManager.Instance.OnBlasted -= PlayBlast;
             GameManager.Instance.OnTutorialEnded -= OnTutorialEnded;
             GameManager.Instance.OnStateChanged -= OnStateChanged;
+            GameManager.Instance.OnResultUISelected -= PlaySelect;
+            GameManager.Instance.OnResultUIDecided -= PlayDecide;
         }
     }
 
@@ -172,5 +184,32 @@ public class MusicIntensityController : MonoBehaviour
     {
         if (bellSource == null) return;
         bellSource.Play();
+    }
+
+    /// <summary>
+    /// Blast SEをワンショット再生する（Blast発生時に呼ぶ）
+    /// </summary>
+    public void PlayBlast()
+    {
+        if (blastSource == null) return;
+        blastSource.Play();
+    }
+
+    /// <summary>
+    /// Select SEをワンショット再生する
+    /// </summary>
+    public void PlaySelect()
+    {
+        if (selectSource == null) return;
+        selectSource.Play();
+    }
+
+    /// <summary>
+    /// Decide SEをワンショット再生する
+    /// </summary>
+    public void PlayDecide()
+    {
+        if (decideSource == null) return;
+        decideSource.Play();
     }
 }
