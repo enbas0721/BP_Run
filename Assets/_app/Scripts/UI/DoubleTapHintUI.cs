@@ -41,7 +41,7 @@ public class DoubleTapHintUI : MonoBehaviour
 
     private void OnStateChanged(GameState state)
     {
-        if (state == GameState.Playing)
+        if (state == GameState.Playing || state == GameState.GameOver)
         {
             isShowing = false;
             hintGroup.alpha = 0f;

@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
     public event Action OnItemCollected;
     public event Action OnTutorialEnded;
     public event Action OnBlasted;
+    public event Action OnNearMissStarted;
     public event Action OnResultUISelected;
     public event Action OnResultUIDecided;
 
@@ -247,6 +248,11 @@ public class GameManager : MonoBehaviour
     public void NotifyBlasted()
     {
         OnBlasted?.Invoke();
+    }
+
+    public void NotifyNearMissStarted()
+    {
+        OnNearMissStarted?.Invoke();
     }
 
     public void NotifyResultUISelected()

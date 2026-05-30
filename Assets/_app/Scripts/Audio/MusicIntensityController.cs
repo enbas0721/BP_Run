@@ -35,6 +35,8 @@ public class MusicIntensityController : MonoBehaviour
     [SerializeField] private CriAtomSourceForAsset bellSource;
     [Tooltip("Blast SE再生用のCriAtomSourceコンポーネント")]
     [SerializeField] private CriAtomSourceForAsset blastSource;
+    [Tooltip("NearMiss SE再生用のCriAtomSourceコンポーネント")]
+    [SerializeField] private CriAtomSourceForAsset nearMissSource;
     [Tooltip("Decide SE再生用のCriAtomSourceコンポーネント")]
     [SerializeField] private CriAtomSourceForAsset decideSource;
     [Tooltip("Select SE再生用のCriAtomSourceコンポーネント")]
@@ -67,6 +69,7 @@ public class MusicIntensityController : MonoBehaviour
             GameManager.Instance.OnScoreChanged += OnScoreChanged;
             GameManager.Instance.OnItemCollected += PlayBell;
             GameManager.Instance.OnBlasted += PlayBlast;
+            GameManager.Instance.OnNearMissStarted += PlayNearMiss;
             GameManager.Instance.OnTutorialEnded += OnTutorialEnded;
             GameManager.Instance.OnStateChanged += OnStateChanged;
             GameManager.Instance.OnResultUISelected += PlaySelect;
@@ -81,6 +84,7 @@ public class MusicIntensityController : MonoBehaviour
             GameManager.Instance.OnScoreChanged -= OnScoreChanged;
             GameManager.Instance.OnItemCollected -= PlayBell;
             GameManager.Instance.OnBlasted -= PlayBlast;
+            GameManager.Instance.OnNearMissStarted -= PlayNearMiss;
             GameManager.Instance.OnTutorialEnded -= OnTutorialEnded;
             GameManager.Instance.OnStateChanged -= OnStateChanged;
             GameManager.Instance.OnResultUISelected -= PlaySelect;
@@ -184,6 +188,15 @@ public class MusicIntensityController : MonoBehaviour
     {
         if (bellSource == null) return;
         bellSource.Play();
+    }
+
+    /// <summary>
+    /// NearMiss SEをワンショット再生する
+    /// </summary>
+    public void PlayNearMiss()
+    {
+        if (nearMissSource == null) return;
+        nearMissSource.Play();
     }
 
     /// <summary>

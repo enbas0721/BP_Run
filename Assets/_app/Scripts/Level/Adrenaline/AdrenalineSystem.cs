@@ -182,6 +182,7 @@ public class AdrenalineSystem : MonoBehaviour
         Time.fixedDeltaTime = originalFixedDeltaTime * nearMissTimeScale;
 
         OnNearMissStarted?.Invoke(direction);
+        GameManager.Instance?.NotifyNearMissStarted();
     }
 
     private void EndNearMiss()
