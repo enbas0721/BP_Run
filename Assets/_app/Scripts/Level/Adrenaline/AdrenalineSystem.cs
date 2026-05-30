@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(RunnerController))]
@@ -46,6 +46,7 @@ public class AdrenalineSystem : MonoBehaviour
     private float rushPausedRemaining = 0f;
 
     private bool gaugeFillNotified = false;
+    private bool adrenalineMaxnotified = false;
 
     public bool IsRushActive => rushActive;
     public bool IsNearMissActive => nearMissActive;
@@ -110,6 +111,7 @@ public class AdrenalineSystem : MonoBehaviour
         overlappedZones.Clear();
 
         gaugeFillNotified = false;
+        adrenalineMaxnotified = false;
     }
 
     private void Update()
@@ -130,6 +132,12 @@ public class AdrenalineSystem : MonoBehaviour
         {
             gaugeFillNotified = true;
             GameManager.Instance?.NotifyFirstGaugeFull();
+        }
+
+        if (!adrenalineMaxnotified && gauge >= gaugeMax)
+        {
+            adrenalineMaxnotified = true;
+            GameManager.Instance?.NotifyAdrenalineMax();
         }
 
         if (rushActive)
@@ -201,6 +209,7 @@ public class AdrenalineSystem : MonoBehaviour
         if (!CanActivateRush) return;
 
         gauge = 0f;
+        adrenalineMaxnotified = false;
 
         rushActive = true;
         rushEndTime = Time.unscaledTime + rushDuration;

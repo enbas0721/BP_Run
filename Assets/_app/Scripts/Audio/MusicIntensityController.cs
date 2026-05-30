@@ -41,6 +41,8 @@ public class MusicIntensityController : MonoBehaviour
     [SerializeField] private CriAtomSourceForAsset decideSource;
     [Tooltip("Select SE再生用のCriAtomSourceコンポーネント")]
     [SerializeField] private CriAtomSourceForAsset selectSource;
+    [Tooltip("AdrenalineMax SE再生用のCriAtomSourceコンポーネント")]
+    [SerializeField] private CriAtomSourceForAsset adrenalineMaxSource;
 
     [Header("Intensity Tracks")]
     [Tooltip("スコア閾値とセレクタラベルのマッピング（スコア昇順で設定する）")]
@@ -74,6 +76,7 @@ public class MusicIntensityController : MonoBehaviour
             GameManager.Instance.OnStateChanged += OnStateChanged;
             GameManager.Instance.OnResultUISelected += PlaySelect;
             GameManager.Instance.OnResultUIDecided += PlayDecide;
+            GameManager.Instance.OnAdrenalineMax += PlayAdrenalineMax;
         }
     }
 
@@ -89,6 +92,7 @@ public class MusicIntensityController : MonoBehaviour
             GameManager.Instance.OnStateChanged -= OnStateChanged;
             GameManager.Instance.OnResultUISelected -= PlaySelect;
             GameManager.Instance.OnResultUIDecided -= PlayDecide;
+            GameManager.Instance.OnAdrenalineMax -= PlayAdrenalineMax;
         }
     }
 
@@ -224,5 +228,14 @@ public class MusicIntensityController : MonoBehaviour
     {
         if (decideSource == null) return;
         decideSource.Play();
+    }
+
+    /// <summary>
+    /// AdrenalineMax SEをワンショット再生する（ゲージ満タン時に呼ぶ）
+    /// </summary>
+    public void PlayAdrenalineMax()
+    {
+        if (adrenalineMaxSource == null) return;
+        adrenalineMaxSource.Play();
     }
 }

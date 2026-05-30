@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 public enum GameState
@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
     public event Action OnNearMissStarted;
     public event Action OnResultUISelected;
     public event Action OnResultUIDecided;
+    public event Action OnAdrenalineMax;
 
     private bool firstGaugeFilled = false;
 
@@ -272,6 +273,11 @@ public class GameManager : MonoBehaviour
         if (firstGaugeFilled) return;
         firstGaugeFilled = true;
         OnFirstGaugeFull?.Invoke();
+    }
+
+    public void NotifyAdrenalineMax()
+    {
+        OnAdrenalineMax?.Invoke();
     }
 
     private void HandleScoreChanged(int newScore)
