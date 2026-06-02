@@ -1652,6 +1652,14 @@ PrefabInstance:
       value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
+      propertyPath: rushSegInsertIndex
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
+      propertyPath: tutorialRushSegPrefab
+      value: 
+      objectReference: {fileID: 1126375026918509926, guid: ab8c7d40740b31c40bd04ec66195bbc5, type: 3}
+    - target: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
       propertyPath: tutorialSegmentPrefabs.Array.size
       value: 27
       objectReference: {fileID: 0}

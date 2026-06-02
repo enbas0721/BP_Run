@@ -68,6 +68,8 @@ public class GameManager : MonoBehaviour
     public event Action OnAdrenalineMax;
 
     private bool firstGaugeFilled = false;
+    public bool RushTutorialDone { get; private set; } = false;
+    public void SetRushTutorialDone() => RushTutorialDone = true;
 
     public ScoreSystem ScoreSystem { get; private set; }
 

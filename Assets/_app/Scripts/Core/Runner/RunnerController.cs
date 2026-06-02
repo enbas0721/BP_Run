@@ -47,6 +47,8 @@ public class RunnerController : MonoBehaviour
 
     private float baseForwardMultiplier = 1f;
     private float rushForwardMultiplier = 1f;
+    private float forceStopMultiplier = 1f;
+    public void SetForceStopMultiplier(float mul) => forceStopMultiplier = Mathf.Clamp01(mul);
 
     private float lastGroundedTime = -999f;
     private float lastJumpPressedTime = -999f;
@@ -70,6 +72,7 @@ public class RunnerController : MonoBehaviour
         laneSpeedMultiplier = 1f;
         baseForwardMultiplier = 1f;
         rushForwardMultiplier = 1f;
+        forceStopMultiplier = 1f;
 
         lastGroundedTime = -999f;
         lastJumpPressedTime = -999f;
@@ -136,7 +139,7 @@ public class RunnerController : MonoBehaviour
 
         Vector3 pos = rb.position;
 
-        float finalMul = baseForwardMultiplier * rushForwardMultiplier;
+        float finalMul = baseForwardMultiplier * rushForwardMultiplier * forceStopMultiplier;
         pos.z += (forwardSpeed * finalMul) * Time.fixedDeltaTime;
 
         float targetX = currentLane * laneWidth;
@@ -209,7 +212,7 @@ public class RunnerController : MonoBehaviour
 
         // 速度スケール：jumpSpeedScaleStrength=1で完全追従、0で固定
         float k = Mathf.Lerp(1f, baseForwardMultiplier, jumpSpeedScaleStrength);
-        rb.AddForce(Vector3.up * jumpVelocity * Mathf.Sqrt(k), ForceMode.VelocityChange);
+        rb.AddForce(Vector3.up * jumpVelocity * Mathf.Sqrt(k) * forceStopMultiplier, ForceMode.VelocityChange);
 
         OnJumped?.Invoke();
     }

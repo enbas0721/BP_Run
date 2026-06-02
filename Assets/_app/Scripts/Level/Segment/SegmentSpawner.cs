@@ -18,6 +18,10 @@ public class SegmentSpawner : MonoBehaviour
     [Header("Tutorial Segments")]
     [Tooltip("ゲーム開始時に順番通りに生成するセグメントPrefab。空なら通常のプールを使用する。")]
     [SerializeField] private RoadSegmentBase[] tutorialSegmentPrefabs;
+    [Tooltip("Rush未習得時のみ差し込むブロック区間セグメントPrefab")]
+    [SerializeField] private RoadSegmentBase tutorialRushSegPrefab;
+    [Tooltip("tutorialSegmentPrefabs の何番目の前に差し込むか（0-indexed）")]
+    [SerializeField] private int rushSegInsertIndex = 2;
     [Tooltip("開始時点の前方オフセット（スタートセグメントの長さ分）")]
     [SerializeField] private float roadInitialAheadOffset = 20f;
     [Tooltip("プレイヤーの前方に確保したい床の距離")]
@@ -38,6 +42,7 @@ public class SegmentSpawner : MonoBehaviour
     private float envSpawnZ = 0f;
     private int tutorialIndex = 0;
     private int releasedTutorialCount = 0;
+    private bool rushSegSpawned = false;
 
     private readonly Queue<RoadSegmentBase> activeRoadSegments = new Queue<RoadSegmentBase>();
     private readonly Queue<EnvSegmentBase> activeEnvSegments = new Queue<EnvSegmentBase>();
@@ -99,6 +104,7 @@ public class SegmentSpawner : MonoBehaviour
         envSpawnZ = envInitialAheadOffset;
         tutorialIndex = 0;
         releasedTutorialCount = 0;
+        rushSegSpawned = false;
 
         // 初期セグメントの生成
         for (int i = 0; i < roadInitialSegments; i++ )
@@ -114,6 +120,22 @@ public class SegmentSpawner : MonoBehaviour
     private bool SpawnRoadSegment()
     {
         RoadSegmentBase seg;
+
+        // Rush未習得時、指定インデックスにブロック区間セグメントを差し込む
+        if (!rushSegSpawned
+            && tutorialRushSegPrefab != null
+            && tutorialIndex == rushSegInsertIndex
+            && (GameManager.Instance == null || !GameManager.Instance.RushTutorialDone))
+        {
+            rushSegSpawned = true;
+            seg = Instantiate(tutorialRushSegPrefab);
+            tutorialSegments.Add(seg);
+            seg.transform.position = new Vector3(0, 0, roadSpawnZ);
+            seg.RebuildItems(itemPlacer);
+            activeRoadSegments.Enqueue(seg);
+            roadSpawnZ += seg.SegmentLength;
+            return true;
+        }
 
         // チュートリアルセグメントが残っている間はそちらを順番に使用する
         if (tutorialSegmentPrefabs != null && tutorialIndex < tutorialSegmentPrefabs.Length)

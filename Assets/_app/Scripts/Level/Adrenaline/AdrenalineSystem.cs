@@ -204,6 +204,16 @@ public class AdrenalineSystem : MonoBehaviour
         OnNearMissEnded?.Invoke();
     }
 
+    public void ForceFullGauge()
+    {
+        gauge = gaugeMax;
+        if (!gaugeFillNotified)
+        {
+            gaugeFillNotified = true;
+            GameManager.Instance?.NotifyFirstGaugeFull();
+        }
+    }
+
     public void ActivateRush()
     {
         if (!CanActivateRush) return;
