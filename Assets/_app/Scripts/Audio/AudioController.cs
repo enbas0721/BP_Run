@@ -7,7 +7,7 @@ using CriWare.Assets;
 /// ADXのバーティカルリミックス（セレクタ切り替え）を制御する。
 /// usePhaseMode=trueの場合はPhaseセレクタ1つで切り替え、falseの場合はBass/Chord2つで切り替える。
 /// </summary>
-public class MusicIntensityController : MonoBehaviour
+public class AudioController : MonoBehaviour
 {
     [System.Serializable]
     public class IntensityTrack
@@ -77,6 +77,8 @@ public class MusicIntensityController : MonoBehaviour
             GameManager.Instance.OnResultUISelected += PlaySelect;
             GameManager.Instance.OnResultUIDecided += PlayDecide;
             GameManager.Instance.OnAdrenalineMax += PlayAdrenalineMax;
+            GameManager.Instance.OnForceStopChanged += OnForceStopChanged;
+            GameManager.Instance.OnGateEntered += OnGateEntered;
         }
     }
 
@@ -93,6 +95,8 @@ public class MusicIntensityController : MonoBehaviour
             GameManager.Instance.OnResultUISelected -= PlaySelect;
             GameManager.Instance.OnResultUIDecided -= PlayDecide;
             GameManager.Instance.OnAdrenalineMax -= PlayAdrenalineMax;
+            GameManager.Instance.OnForceStopChanged -= OnForceStopChanged;
+            GameManager.Instance.OnGateEntered -= OnGateEntered;
         }
     }
 
@@ -104,12 +108,28 @@ public class MusicIntensityController : MonoBehaviour
 
     private void OnTutorialEnded()
     {
+        if (!tutorialActive) return;
         tutorialActive = false;
         int newTrackIndex = ResolveTrack(GameManager.Instance.ScoreSystem.Score);
         if (newTrackIndex == currentTrackIndex) return;
 
         currentTrackIndex = newTrackIndex;
         ApplyTrack(tracks[currentTrackIndex]);
+    }
+
+    private void OnGateEntered()
+    {
+        bgmSource?.Stop();
+    }
+
+    private void OnForceStopChanged(bool stopped)
+    {
+        if (stopped || bgmSource == null) return;
+
+        tutorialActive = false;
+        currentTrackIndex = ResolveTrack(GameManager.Instance.ScoreSystem.Score);
+        ApplyTrack(tracks[currentTrackIndex]);
+        bgmPlayback = bgmSource.Play();
     }
 
     private void OnScoreChanged(int score)

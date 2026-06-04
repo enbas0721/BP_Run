@@ -547,6 +547,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1160277030}
     - target: {fileID: 1562982397846802941, guid: 00c7ab1440b1e9c47ae0ac3a3356b356, type: 3}
+      propertyPath: zoomDuration
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1562982397846802941, guid: 00c7ab1440b1e9c47ae0ac3a3356b356, type: 3}
+      propertyPath: zoomOffset.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1562982397846802941, guid: 00c7ab1440b1e9c47ae0ac3a3356b356, type: 3}
+      propertyPath: zoomOffset.z
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1562982397846802941, guid: 00c7ab1440b1e9c47ae0ac3a3356b356, type: 3}
       propertyPath: introControlPoint
       value: 
       objectReference: {fileID: 498450071}
@@ -851,7 +863,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   runner: {fileID: 1160277035}
-  timeToMaxSpeed: 480
+  timeToMaxSpeed: 540
   maxBaseSpeedMultiplier: 2.5
   speedCurve:
     serializedVersion: 2
@@ -866,8 +878,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.050724637
     - serializedVersion: 3
-      time: 0.39709747
-      value: 0.36052737
+      time: 0.29706085
+      value: 0.3176807
       inSlope: 0.05255516
       outSlope: 0.05255516
       tangentMode: 0
@@ -875,14 +887,14 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.16015147
     - serializedVersion: 3
-      time: 0.7940343
-      value: 0.73840344
-      inSlope: 0.02966534
-      outSlope: 0.02966534
+      time: 0.74908864
+      value: 0.62173605
+      inSlope: -0.025366217
+      outSlope: -0.025366217
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.19864215
+      outWeight: 0.35477242
     - serializedVersion: 3
       time: 1
       value: 1
@@ -898,7 +910,7 @@ MonoBehaviour:
   segmentSpawner: {fileID: 271468663}
   adrenalineSystem: {fileID: 1160277031}
   swipeInput: {fileID: 1160277038}
-  musicIntensityController: {fileID: 7369882633048164289}
+  audioController: {fileID: 7369882633048164289}
   debugInvincible: 0
   scorePerSecond: 10
 --- !u!4 &2063335651 stripped
@@ -1653,7 +1665,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
       propertyPath: rushSegInsertIndex
-      value: 13
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
       propertyPath: tutorialRushSegPrefab
@@ -1661,7 +1673,7 @@ PrefabInstance:
       objectReference: {fileID: 1126375026918509926, guid: ab8c7d40740b31c40bd04ec66195bbc5, type: 3}
     - target: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
       propertyPath: tutorialSegmentPrefabs.Array.size
-      value: 27
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
       propertyPath: 'tutorialSegmentPrefabs.Array.data[0]'
@@ -1710,63 +1722,63 @@ PrefabInstance:
     - target: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
       propertyPath: 'tutorialSegmentPrefabs.Array.data[11]'
       value: 
-      objectReference: {fileID: 1126375026918509926, guid: 21e4b795a62610d4b94a1a0a9f720d95, type: 3}
+      objectReference: {fileID: 1126375026918509926, guid: 9f12b0138452b1f43970c6ca60b8bc35, type: 3}
     - target: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
       propertyPath: 'tutorialSegmentPrefabs.Array.data[12]'
       value: 
-      objectReference: {fileID: 1126375026918509926, guid: 21e4b795a62610d4b94a1a0a9f720d95, type: 3}
+      objectReference: {fileID: 1126375026918509926, guid: 9f12b0138452b1f43970c6ca60b8bc35, type: 3}
     - target: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
       propertyPath: 'tutorialSegmentPrefabs.Array.data[13]'
       value: 
-      objectReference: {fileID: 1126375026918509926, guid: 9f12b0138452b1f43970c6ca60b8bc35, type: 3}
+      objectReference: {fileID: 1126375026918509926, guid: 519c7e0bbeaa71142b754cd2dedb9b1c, type: 3}
     - target: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
       propertyPath: 'tutorialSegmentPrefabs.Array.data[14]'
       value: 
-      objectReference: {fileID: 1126375026918509926, guid: 9f12b0138452b1f43970c6ca60b8bc35, type: 3}
+      objectReference: {fileID: 1126375026918509926, guid: 519c7e0bbeaa71142b754cd2dedb9b1c, type: 3}
     - target: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
       propertyPath: 'tutorialSegmentPrefabs.Array.data[15]'
       value: 
-      objectReference: {fileID: 1126375026918509926, guid: 519c7e0bbeaa71142b754cd2dedb9b1c, type: 3}
+      objectReference: {fileID: 1126375026918509926, guid: 9f12b0138452b1f43970c6ca60b8bc35, type: 3}
     - target: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
       propertyPath: 'tutorialSegmentPrefabs.Array.data[16]'
       value: 
-      objectReference: {fileID: 1126375026918509926, guid: 519c7e0bbeaa71142b754cd2dedb9b1c, type: 3}
+      objectReference: {fileID: 1126375026918509926, guid: 9f12b0138452b1f43970c6ca60b8bc35, type: 3}
     - target: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
       propertyPath: 'tutorialSegmentPrefabs.Array.data[17]'
       value: 
-      objectReference: {fileID: 1126375026918509926, guid: 9f12b0138452b1f43970c6ca60b8bc35, type: 3}
+      objectReference: {fileID: 1126375026918509926, guid: bcb6969ea13a9544789ed02905574e79, type: 3}
     - target: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
       propertyPath: 'tutorialSegmentPrefabs.Array.data[18]'
       value: 
-      objectReference: {fileID: 1126375026918509926, guid: 9f12b0138452b1f43970c6ca60b8bc35, type: 3}
+      objectReference: {fileID: 1126375026918509926, guid: bcb6969ea13a9544789ed02905574e79, type: 3}
     - target: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
       propertyPath: 'tutorialSegmentPrefabs.Array.data[19]'
       value: 
-      objectReference: {fileID: 1126375026918509926, guid: bcb6969ea13a9544789ed02905574e79, type: 3}
+      objectReference: {fileID: 1126375026918509926, guid: 9f12b0138452b1f43970c6ca60b8bc35, type: 3}
     - target: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
       propertyPath: 'tutorialSegmentPrefabs.Array.data[20]'
       value: 
-      objectReference: {fileID: 1126375026918509926, guid: bcb6969ea13a9544789ed02905574e79, type: 3}
+      objectReference: {fileID: 1126375026918509926, guid: 9f12b0138452b1f43970c6ca60b8bc35, type: 3}
     - target: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
       propertyPath: 'tutorialSegmentPrefabs.Array.data[21]'
       value: 
-      objectReference: {fileID: 1126375026918509926, guid: 9f12b0138452b1f43970c6ca60b8bc35, type: 3}
+      objectReference: {fileID: 1126375026918509926, guid: 519c7e0bbeaa71142b754cd2dedb9b1c, type: 3}
     - target: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
       propertyPath: 'tutorialSegmentPrefabs.Array.data[22]'
       value: 
-      objectReference: {fileID: 1126375026918509926, guid: 9f12b0138452b1f43970c6ca60b8bc35, type: 3}
+      objectReference: {fileID: 1126375026918509926, guid: 519c7e0bbeaa71142b754cd2dedb9b1c, type: 3}
     - target: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
       propertyPath: 'tutorialSegmentPrefabs.Array.data[23]'
       value: 
-      objectReference: {fileID: 1126375026918509926, guid: 519c7e0bbeaa71142b754cd2dedb9b1c, type: 3}
+      objectReference: {fileID: 1126375026918509926, guid: 9f12b0138452b1f43970c6ca60b8bc35, type: 3}
     - target: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
       propertyPath: 'tutorialSegmentPrefabs.Array.data[24]'
       value: 
-      objectReference: {fileID: 1126375026918509926, guid: 519c7e0bbeaa71142b754cd2dedb9b1c, type: 3}
+      objectReference: {fileID: 1126375026918509926, guid: 21e4b795a62610d4b94a1a0a9f720d95, type: 3}
     - target: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
       propertyPath: 'tutorialSegmentPrefabs.Array.data[25]'
       value: 
-      objectReference: {fileID: 1126375026918509926, guid: 9f12b0138452b1f43970c6ca60b8bc35, type: 3}
+      objectReference: {fileID: 1126375026918509926, guid: 21e4b795a62610d4b94a1a0a9f720d95, type: 3}
     - target: {fileID: 5923924726750574902, guid: 238f6b2d5a9734f4a8ca39ebc8510021, type: 3}
       propertyPath: 'tutorialSegmentPrefabs.Array.data[26]'
       value: 
@@ -1806,6 +1818,10 @@ PrefabInstance:
     - target: {fileID: 456280559069227182, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
       propertyPath: _volume
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721223089530469857, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
+      propertyPath: tracks.Array.data[1].scoreThreshold
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 7833376187364668709, guid: 4b7d5711806aa2141a07974a29d97405, type: 3}
       propertyPath: m_Name

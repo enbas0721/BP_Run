@@ -35,6 +35,8 @@ public class TutorialRushGate : MonoBehaviour
 
     private IEnumerator GateSequence()
     {
+        GameManager.Instance?.NotifyGateEntered();
+
         // 1. decelerationTime かけて前進を 0 に減速
         float elapsed = 0f;
         while (elapsed < decelerationTime)
@@ -44,6 +46,7 @@ public class TutorialRushGate : MonoBehaviour
             yield return null;
         }
         runner.SetForceStopMultiplier(0f);
+        GameManager.Instance?.SetForceStopped(true);
 
         // 2. ゲージが未満タンなら強制チャージ（DoubleTapHintUI が自動表示される）
         if (adrenaline.Gauge < adrenaline.GaugeMax)
@@ -54,6 +57,7 @@ public class TutorialRushGate : MonoBehaviour
             yield return null;
 
         // 4. 前進再開・フラグ保存
+        GameManager.Instance?.SetForceStopped(false);
         runner.SetForceStopMultiplier(1f);
         GameManager.Instance?.SetRushTutorialDone();
         enabled = false;

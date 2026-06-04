@@ -143,10 +143,10 @@ public class RunnerController : MonoBehaviour
         pos.z += (forwardSpeed * finalMul) * Time.fixedDeltaTime;
 
         float targetX = currentLane * laneWidth;
-        pos.x = Mathf.Lerp(pos.x, targetX, (laneMoveSpeed * laneSpeedMultiplier )* Time.fixedDeltaTime);
+        pos.x = Mathf.Lerp(pos.x, targetX, laneMoveSpeed * laneSpeedMultiplier * Time.fixedDeltaTime);
 
         // 下り階段・スロープ対応：落下中でなければ地面にスナップ
-        if (rb.linearVelocity.y <= 0.01f && groundCheck != null)
+        if (forceStopMultiplier > 0f && rb.linearVelocity.y <= 0.01f && groundCheck != null)
         {
             float feetOffset = rb.position.y - groundCheck.position.y;
             if (Physics.Raycast(pos, Vector3.down, out RaycastHit hit, feetOffset + stepDownDistance, groundMask, QueryTriggerInteraction.Ignore))
@@ -169,6 +169,7 @@ public class RunnerController : MonoBehaviour
     public void MoveLane(int direction)
     {
         if (!IsPlaying()) return;
+        if (forceStopMultiplier <= 0f) return;
 
         int from = currentLane;
 
@@ -236,6 +237,8 @@ public class RunnerController : MonoBehaviour
 
     private void ApplyExtraGravity()
     {
+        if (IsGrounded()) return;
+
         var v = rb.linearVelocity;
 
         // 速度スケール：同じ比率で重力も強くすることで高さを維持しつつ滞空時間を短縮

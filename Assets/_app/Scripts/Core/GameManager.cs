@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SegmentSpawner segmentSpawner;
     [SerializeField] private AdrenalineSystem adrenalineSystem;
     [SerializeField] private SwipeInput swipeInput;
-    [SerializeField] private MusicIntensityController musicIntensityController;
+    [SerializeField] private AudioController audioController;
 
     private float playTime = 0f;
 
@@ -66,10 +66,20 @@ public class GameManager : MonoBehaviour
     public event Action OnResultUISelected;
     public event Action OnResultUIDecided;
     public event Action OnAdrenalineMax;
+    public event Action OnGateEntered;
 
     private bool firstGaugeFilled = false;
     public bool RushTutorialDone { get; private set; } = false;
     public void SetRushTutorialDone() => RushTutorialDone = true;
+
+    public bool IsForceStopped { get; private set; } = false;
+    public event Action<bool> OnForceStopChanged;
+    public void SetForceStopped(bool stop)
+    {
+        if (IsForceStopped == stop) return;
+        IsForceStopped = stop;
+        OnForceStopChanged?.Invoke(stop);
+    }
 
     public ScoreSystem ScoreSystem { get; private set; }
 
@@ -108,7 +118,8 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (State != GameState.Playing) return;
-        
+        if (IsForceStopped) return;
+
         ScoreSystem.Tick(Time.deltaTime);
 
         playTime += Time.deltaTime;
@@ -212,14 +223,15 @@ public class GameManager : MonoBehaviour
 
         // 初回ゲージ満タンフラグをリセット
         firstGaugeFilled = false;
+        SetForceStopped(false);
 
         // スコアリセット
         ScoreSystem.Reset();
         OnScoreChanged?.Invoke(ScoreSystem.Score);
 
         // BGMリセット
-        if (musicIntensityController)
-            musicIntensityController.ResetIntensity();
+        if (audioController)
+            audioController.ResetIntensity();
 
         SetState(GameState.Ready);
     }
@@ -280,6 +292,11 @@ public class GameManager : MonoBehaviour
     public void NotifyAdrenalineMax()
     {
         OnAdrenalineMax?.Invoke();
+    }
+
+    public void NotifyGateEntered()
+    {
+        OnGateEntered?.Invoke();
     }
 
     private void HandleScoreChanged(int newScore)

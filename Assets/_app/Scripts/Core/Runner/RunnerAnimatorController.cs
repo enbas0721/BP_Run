@@ -52,7 +52,10 @@ public class RunnerAnimatorController : MonoBehaviour
         }
 
         if (GameManager.Instance)
+        {
             GameManager.Instance.OnStateChanged += HandleGameStateChanged;
+            GameManager.Instance.OnForceStopChanged += HandleForceStopChanged;
+        }
 
         SyncInitialState();
     }
@@ -71,7 +74,10 @@ public class RunnerAnimatorController : MonoBehaviour
         }
 
         if (GameManager.Instance)
+        {
             GameManager.Instance.OnStateChanged -= HandleGameStateChanged;
+            GameManager.Instance.OnForceStopChanged -= HandleForceStopChanged;
+        }
     }
 
     private void HandleJumped()
@@ -102,6 +108,11 @@ public class RunnerAnimatorController : MonoBehaviour
                 StartCoroutine(WaitForDeathAnim());
                 break;
         }
+    }
+
+    private void HandleForceStopChanged(bool stopped)
+    {
+        animator.speed = stopped ? 0f : 1f;
     }
 
     private void HandleNearMissStarted(int direction)
