@@ -248,7 +248,7 @@ MonoBehaviour:
   _use3dPositioning: 1
   _freezeOrientation: 0
   _loop: 0
-  _volume: 0.6
+  _volume: 0.3
   _pitch: 0
   _androidUseLowLatencyVoicePool: 0
   need_to_player_update_all: 1
@@ -460,7 +460,7 @@ MonoBehaviour:
     kickLabel: kick_1
     bassLabel: bass_1
     chordLabel: chord_silent
-  - scoreThreshold: 5000
+  - scoreThreshold: 500
     phaseLabel: tutorial
     kickLabel: kick_1
     bassLabel: bass_1

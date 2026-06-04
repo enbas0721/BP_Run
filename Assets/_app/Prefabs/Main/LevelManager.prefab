@@ -274,8 +274,6 @@ MonoBehaviour:
   - {fileID: 1126375026918509926, guid: 044ae68622b268b45b33038c020c1c83, type: 3}
   - {fileID: 1126375026918509926, guid: 35275ec01198b7a4f82569cd8709b46c, type: 3}
   - {fileID: 1126375026918509926, guid: f0c965081f3428d40b0845945f59ad8a, type: 3}
-  - {fileID: 1126375026918509926, guid: 21e4b795a62610d4b94a1a0a9f720d95, type: 3}
-  - {fileID: 1126375026918509926, guid: 21e4b795a62610d4b94a1a0a9f720d95, type: 3}
   - {fileID: 1126375026918509926, guid: 9f12b0138452b1f43970c6ca60b8bc35, type: 3}
   - {fileID: 1126375026918509926, guid: 9f12b0138452b1f43970c6ca60b8bc35, type: 3}
   - {fileID: 1126375026918509926, guid: 519c7e0bbeaa71142b754cd2dedb9b1c, type: 3}
@@ -290,6 +288,8 @@ MonoBehaviour:
   - {fileID: 1126375026918509926, guid: 519c7e0bbeaa71142b754cd2dedb9b1c, type: 3}
   - {fileID: 1126375026918509926, guid: 9f12b0138452b1f43970c6ca60b8bc35, type: 3}
   - {fileID: 1126375026918509926, guid: 21e4b795a62610d4b94a1a0a9f720d95, type: 3}
+  tutorialRushSegPrefab: {fileID: 1126375026918509926, guid: ab8c7d40740b31c40bd04ec66195bbc5, type: 3}
+  rushSegInsertIndex: 11
   roadInitialAheadOffset: 39
   aheadDistance: 120
   roadInitialSegments: 4
@@ -311,5 +311,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3fb87b2f3eb8bd44a8dd9b425222297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemLanePlacer
-  itemPrefab: {fileID: 2539922263149783706, guid: 2cbf7b01e0a2cb14787b8255ff06667b, type: 3}
+  itemPrefab: {fileID: 8297096771445548097, guid: c91e0ce3c196026428fb39974a9d5090, type: 3}
   settings: {fileID: 11400000, guid: 35fe69be750142a4c9f57839d6591879, type: 2}

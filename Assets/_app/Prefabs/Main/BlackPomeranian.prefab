@@ -4597,6 +4597,7 @@ MonoBehaviour:
   nearMissCooldown: 0.05
   nearMissTimeScale: 0.7
   nearMissAdrenalinePerSecond: 100
+  tutorialNearMissAdrenalinePerSecond: 300
   rushDuration: 7
   rushForwardSpeedMultiplier: 3
   rushWindDownDuration: 1.5

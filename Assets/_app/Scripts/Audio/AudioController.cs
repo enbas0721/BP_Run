@@ -104,6 +104,10 @@ public class AudioController : MonoBehaviour
     {
         if (state == GameState.GameOver)
             bgmSource?.Stop();
+        else if (state == GameState.Paused)
+            bgmSource?.Pause(true);
+        else if (state == GameState.Playing)
+            bgmSource?.Pause(false);
     }
 
     private void OnTutorialEnded()
